@@ -1,0 +1,133 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{dsfont}
+\usepackage{amssymb}
+\usepackage{amsmath,mathrsfs}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{stmaryrd}
+\usepackage{fullpage}
+\usepackage{ifthen}
+\usepackage{subfigure}
+\usepackage{epic}
+\usepackage{authblk}
+\usepackage{textcomp}
+\usepackage[small]{caption}
+%\usepackage{mathtools}
+
+
+\usepackage[hypertexnames=false,colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage[numbers,comma,square,sort&compress]{natbib}
+\usepackage[letterpaper,text={7in,9in},centering]{geometry}
+
+
+\usepackage{color}
+\usepackage{titlesec}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{1.0ex plus0.2ex minus0.2ex}
+\renewcommand{\baselinestretch}{1.1}
+\graphicspath{{eps/}{pdf/}}
+%\setcaptionmargin{0.25in}
+\def\captionfont{\itshape\small}
+\def\captionlabelfont{\upshape\small}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\newcommand{\bqq}{\begin{equation}}
+\newcommand{\eqq}{\end{equation}}
+\newcommand{\bqs}{\begin{equation*}}
+\newcommand{\eqs}{\end{equation*}}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}} 
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\rme}{\mathrm{e}}
+\newcommand{\rmi}{\mathrm{i}}
+\newcommand{\rmd}{\mathrm{d}}
+\newcommand{\rmo}{{\scriptstyle\mathcal{O}}}
+\newcommand{\rmO}{\mathcal{O}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Rm}{\mathcal{R}}
+\newcommand{\Nl}{\mathcal{N}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cL}{\mathcal{L}}
+
+\newcommand{\diag}{\operatorname{diag}}
+
+
+\numberwithin{equation}{section}
+
+\newenvironment{Hypothesis}[1]%
+  {\begin{trivlist}\item[]{\bf Hypothesis #1 }\em}{\end{trivlist}}
+
+\renewcommand{\arraystretch}{1.25}
+
+
+% Define Theorem Styles ----------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{main}[theorem]{Main Result}
+\newtheorem{rmk}[theorem]{rmk}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\etal}{\textit{et al.}\ }
+
+\newcommand{\greg}[1]{%
+  {\color{blue}\textbf{Greg:} #1}%
+ }
+ 
+\newcommand{\arnd}[1]{%
+  {\color{red}\textbf{Arnd:} #1}%
+ }
+
+\newenvironment{Proof}[1][.]%
+ {\begin{trivlist}\item[]\textbf{Proof#1 }}%
+ {\hspace*{\fill}$\rule{0.3\baselineskip}{0.35\baselineskip}$\end{trivlist}}
+
+\renewcommand\labelitemi{$\bullet$}
+
+
+\title{computations}
+\author{authors}
+\date{2017}
+\begin{document}
+\maketitle
+
+Let $b(\ell)$ be a bounded continuous function on $\R$, consider the multiplier operator $M_b$ defined through
+\[
+\widehat{M_b u}(\ell)  = b(\ell)\widehat{u}(\ell), 
+\]
+for $u \in L^2$.
+
+Let $b^\eps$ denote the function $b(\eps \ell)$. Take for example $b(\ell) = \frac{\ell^2}{\ell^2+1}$. 
+
+Given $\delta>0$, we have
+\begin{align*}
+\|M_{b^{\eps}} u - M_{b(0)} u \|_{L^2} &= \|(b(\eps\ell)-b(0))\widehat{u}(\ell)\|_{L^2} = \int |b(\eps\ell)-b(0)|^2|\widehat{u}(\ell)|^2 d\ell \\
+&= \int_{|\ell |\le R}(\cdots)+\int_{|\ell | > R} (\cdots):= I + II
+\end{align*}
+where $R$ is chosen so that $\int_{|\ell|>R} |\widehat{u}|^2 < \delta$.
+
+Now we can take $\eps$ small so that $|b(\eps \ell)-b(0)|<\delta$ for all $|\ell|\le R$ as $b$ is continuous at $0$. As a result, we have $I \le \delta^2 \int |\widehat{u}|^2$ and $II \le 2 \max_{\ell \in \R} b(\ell) \delta$. Therefore we conclude that $M_{b^\eps} u \to b(0) u$ in $L^2$. 
+
+But $\sup_{\ell\in \R} |b(\eps\ell)-b(0)|$ does not converge to $0$.
+
+ 
+\end{document}

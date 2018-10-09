@@ -1,0 +1,600 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{dsfont}
+\usepackage{amssymb}
+\usepackage{amsmath,mathrsfs}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{stmaryrd}
+\usepackage{fullpage}
+\usepackage{ifthen}
+\usepackage{subfigure}
+\usepackage{epic}
+\usepackage{authblk}
+\usepackage{textcomp}
+\usepackage[small]{caption}
+%\usepackage{mathtools}
+
+
+\usepackage[hypertexnames=false,colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage[numbers,comma,square,sort&compress]{natbib}
+\usepackage[letterpaper,text={7in,9in},centering]{geometry}
+
+
+\usepackage{color}
+\usepackage{titlesec}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{1.0ex plus0.2ex minus0.2ex}
+\renewcommand{\baselinestretch}{1.1}
+\graphicspath{{eps/}{pdf/}}
+%\setcaptionmargin{0.25in}
+\def\captionfont{\itshape\small}
+\def\captionlabelfont{\upshape\small}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\newcommand{\bqq}{\begin{equation}}
+\newcommand{\eqq}{\end{equation}}
+\newcommand{\bqs}{\begin{equation*}}
+\newcommand{\eqs}{\end{equation*}}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}} 
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\rme}{\mathrm{e}}
+\newcommand{\rmi}{\mathrm{i}}
+\newcommand{\rmd}{\mathrm{d}}
+\newcommand{\rmo}{{\scriptstyle\mathcal{O}}}
+\newcommand{\rmO}{\mathcal{O}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Rm}{\mathcal{R}}
+\newcommand{\Nl}{\mathcal{N}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\That}{\widehat{\mathcal{T}}}
+
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\spa}{\operatorname{span}}
+
+
+\numberwithin{equation}{section}
+
+\newenvironment{Hypothesis}[1]%
+  {\begin{trivlist}\item[]{\bf Hypothesis #1 }\em}{\end{trivlist}}
+
+\renewcommand{\arraystretch}{1.25}
+
+
+% Define Theorem Styles ----------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{main}[theorem]{Main Result}
+\newtheorem{rmk}[theorem]{rmk}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\etal}{\textit{et al.}\ }
+
+\newcommand{\greg}[1]{%
+  {\color{blue}\textbf{Greg:} #1}%
+ }
+ 
+\newcommand{\arnd}[1]{%
+  {\color{red}\textbf{Arnd:} #1}%
+ }
+
+\newenvironment{Proof}[1][.]%
+ {\begin{trivlist}\item[]\textbf{Proof#1 }}%
+ {\hspace*{\fill}$\rule{0.3\baselineskip}{0.35\baselineskip}$\end{trivlist}}
+
+\renewcommand\labelitemi{$\bullet$}
+
+
+\title{Possible Changes}
+\author{authors}
+\date{2017}
+\begin{document}
+
+
+\subsection{normal form}
+Equation
+\begin{equation} \label{system}
+U+\K\ast U = \Nl(U;\mu) ,
+\end{equation}
+Introduce $H^\ell_{\Gamma}$ in the notation section, this is the subsace of $H^\ell$ which respect the symmetry of $\Gamma$: $u\in H^\ell_{\Gamma}$ if $u(\gamma x) = u(x)$ for all $\gamma \in \Gamma$.
+
+Set $\mathcal{T} := I_k + \K \ast$ so $\widehat{\mathcal{T}}(\xi) = I_k+\widehat{\K}(\xi)$,
+
+
+First, let $T_0$ be the coordinate transformation which normalizes the second moment matrix $S_{ij}$, so that in the coordinate $y = T_0^{-1}x$, the kernel $\tilde{\K}(y) = |\det T_0|\K(T_0y)$ satisfies
+\[
+\int x_ix_j\langle \mathcal{E}_1^*, \tilde{\K}(x)\mathcal{E}\rangle dx = 2\delta_{ij}
+\]
+
+note in these coordinates $U(x)$ has been transfromed into $U(T_0 y):= \tilde{U}(y)$, the linear part is $\tilde{U}+ \tilde{\K}\ast \tilde{U}$, keep in mind $\widehat{\tilde{\K}}(\xi) = \widehat{\K}((T_0^{-1})^T\xi)$, so $I_k+\int \tilde{\K}$ is the same as $I_k + \int \K$, in particular we still choose $\mathcal{E}_1,\mathcal{E}_1^*$ to span the corresponding kernels.
+
+
+note also that the first moment of $\tilde{\K}$ vanishes, $\int y\tilde{\K}(y) = |\det T_0|T_0^{-1}\int  x\K(x) dx = 0$ if $x = T_0y$. 
+
+
+
+
+Hence for the rest of this outline we work with the coordinates $y = T_0x$ and the kernel $\tilde{\K}$, In which case we transform the operator $\widehat{\mathcal{T}}$ to a ``normal form'' via the following lemma. 
+
+
+
+(I drop tildes in order to write Fourier transform as hat..., so now $\That(\xi) = I_k+\widehat{\tilde{K}}(\xi)$, also identify $U$ with $\tilde{U}=U\circ T_0$)
+
+\begin{lemma}\label{Lem1} There exist invertible $k \times k$ matrices $P, Q$, and a multiplier operator $L$ whose symbol $\widehat{L}(\xi) \in L^\infty(\R^n, \R^{k\times k}) $ such that
+\[
+\widehat{L}(\xi)P[I_k+\widehat{\K}(\xi)]Q = \diag\{\dfrac{|\xi|^2}{1+|\xi|^2},I_{n-1} \}.
+\]
+\end{lemma}
+\begin{Proof}
+ we divide our construction in 2 steps.
+
+\paragraph{Step 1.}
+ When $\xi = 0$, the rank of $\widehat{\mathcal{T}}(0)=I_k+\widehat{\K}(0)$ is equal to $k-1$ since it has a one dimensional kernel spanned by $\mathcal{E}_0$, it is standard that there exist invertible matrices $P$ and $Q$ such that
+\[
+P\That(0)Q = \diag\{0,I_{k-1}\}.
+\]
+
+%In order to do computations later, we include here a construction of the matrices $P$ and $Q$. Let $\mathcal{E}_2,\ldots,\mathcal{E}_{k}$ be a set of vectors which span the complement of $\ker \mathcal{T}(0)$. Set $\mathcal{F}_i = \mathcal{T}(0)\mathcal{E}_i$ for $i=2,\ldots,k$. Define $Q$ to be the matrix whose column vectors are $\mathcal{E}_1,\ldots,\mathcal{E}_{k}$ (with respect to the standard basis in $\R^k$), and $P$ so that the columns of $P^{-1}$ are given by $\mathcal{E}_1^*,\mathcal{F}_2,\ldots,\mathcal{F}_{k}$. By the Fredholm alternative, we know that $\mathcal{E}_1^*$ is orthogonal to the subspace spanned by $\mathcal{F}_i$, that is $\langle\mathcal{E}_1^*,\mathcal{F}_i\rangle = 0$ for $i=2,\ldots,k$. 
+
+% Then we have 
+%\[
+%P\mathcal{T}(0)Q = P\mathcal{T}(0)[\mathcal{E}_1,\ldots,\mathcal{E}_{k}] = P[0,\mathcal{F}_2,\ldots,\mathcal{F}_{k}]=\diag\{0,I_{k-1}\},
+%\]
+%which is the desired diagonalization.
+
+By the assumption on finite second moment, $\widehat{\K}(\xi)_{i,j}$ are $\mathscr{C}^2$ functions. Taylor expand near $\xi = 0$, we find
+\[
+P\That(\xi)Q = \begin{pmatrix}
+A(\xi)& B(\xi)\\
+C(\xi)& D(\xi) 
+\end{pmatrix},
+\]
+where $A(\xi) = |\xi|^2+o(|\xi|^2)$ exactly due to the normalization condition $\int x_ix_j\langle \mathcal{E}_1^*, \tilde{\K}(x)\mathcal{E}\rangle dx = 2\delta_{ij}$. $B(\xi), C(\xi)$ are $k-1$ sized row, column vectors respectively, both satisfies $B(\xi),C(\xi) =\rmO(|\xi|^2)$, and $D(\xi) =I_{k-1}+\rmO(|\xi|^2)$. 
+
+
+%\left(
+%\begin{array}{c|c}
+% d\ell^2 +\rmO(\ell^4) & \cdots \rmO(\ell^2) \cdots\\ \hline
+% \vdots & \raisebox{-15pt}{{\large\mbox{{$I_{n-1}+\rmO(\ell^2)$}}}} \\[-4ex]
+%\rmO(\ell^2) & \\[-0.5ex]
+%  \vdots &
+%\end{array}
+%\right)
+
+%Next we claim that $d\neq 0$, recall that the determinant of a block diagonal matrix of the form $\begin{pmatrix}
+%A&B\\
+%C&D
+%\end{pmatrix}$ is given by the formula $\det(D)\det(A-BD^{-1}C)$ provided $D$ is invertible, which is the case for $s$ sufficiently close to $0$. We compute
+%\begin{align*}
+%\det P\mathcal{T}(s)Q &=\det (D(s))\det[A(s)-B(s)D(s)^{-1}C(s)] \\
+%& = \det(D(s)) (A(s)- B(s)D(s)^{-1}C(s)\\
+%& =(1+\rmO(s^2)) (ds^2 + o(s^2)) = ds^2 +o(s^2).
+%\end{align*}
+%By assumption, $\det P\mathcal{T}(s)Q = \det(PQ)\det(\mathcal{T}(s))=\det(PQ)(\mathcal{D}''(0) s^2/2+o(s^2))$ as $s \to 0$, hence $d = \mathcal{D}''(0)\det(PQ)/2$, which is nonzero as claimed.
+
+
+\paragraph{Step 2.} Set $
+H(\xi) = \diag\{\frac{1+|\xi|^2}{|\xi|^2}, I_{k-1}\}$ for $\xi \neq 0$. 
+We find
+\begin{align*}
+P\That(\xi)QH(\xi) &= \left(
+\begin{array}{c|c}
+  |\xi|^2+o(|\xi|^2) &  \cdots \rmO(|\xi|^2)\cdots \\ \hline
+  \vdots & \raisebox{-10pt}{{\large\mbox{{$I_{k-1}+\rmO(|\xi|^2)$}}}} \\[-4ex]
+  \rmO(|\xi|^2) & \\[-0.5ex]
+  \vdots &
+\end{array}\right)\left(
+\begin{array}{c|c}
+  \frac{1+|\xi|^2}{|\xi|^2} & 0 \cdots 0 \\ \hline
+  0 & \raisebox{-10pt}{{\large\mbox{{$I_{k-1}$}}}} \\[-4ex]
+  \vdots & \\[-0.5ex]
+  0 &
+\end{array}\right)\\
+&= \left(
+\begin{array}{c|c}
+  1+\frac{o(|\xi|^2)}{|\xi|^2} + |\xi|^2+o(|\xi|^2) &  \cdots \rmO(|\xi|^2)\cdots \\ \hline
+  \vdots & \raisebox{-10pt}{{\large\mbox{{$I_{n-1}+\rmO(|\xi|^2)$}}}} \\[-4ex]
+  \rmO(1) & \\[-0.5ex]
+  \vdots &
+\end{array}\right) .
+\end{align*} 
+
+Therefore, for $|\xi|\neq 0$ small, $P\That(\xi)QH(\xi)$ is invertible with uniform bounds on the inverse.
+
+ We then define $\widehat{L}(\xi)$ to be the inverse of $P\That(\xi)QH(\xi)$. Then $\widehat{L} (\xi) \in L^\infty$. Despite $\widehat{L}$ does not necessarily have a limit at $0$, it is still uniformly invertible on $\R^n\backslash\{0\}$, exactly by the invertiblity for the nonzero wavenumbers and the convergence $\That(\xi) \to I_k$ as $|\xi|\to \infty$.
+ 
+ Hence it follows
+ \[
+ L(\xi)P\That(\xi)Q = H(\xi)^{-1}[P\That(\xi)Q]^{-1}P\That(\xi)Q = H(\xi)^{-1}=\diag\{\dfrac{|\xi|^2}{1+|\xi|^2},I_{k-1}\},
+ \]
+ which is as stated in the lemma. 
+ \end{Proof}
+ 
+ 
+ Since $\widehat{L} \in L^\infty$, we know the multiplier $L$ maps $H^\ell$ in $H^\ell$ and is bounded. Denote by $M$ the multiplier operator with symbol $|\xi|^2/(1+|\xi|^2):= m(\xi)$, set $V(y)=Q^{-1}U(y)$, with standard coordinates $V(y)=(v_c(y),v_h(y))^T$. Then after precondition \eqref{system} with $LP$ we obtain an equivalent equation
+\begin{equation}\label{TranEq}
+\diag(M, I_{n-1})V(y)=LP\Nl(QV(y);\mu).
+\end{equation}
+
+
+\subsection{Change of coordinates and rescaling, Lyapunov on hyperbolic part }
+\iffalse
+%This part works without any changes. We rescale the variables 
+\[
+\mu=\frac{1}{\alpha}\tilde{\mu}, \hspace{0.1in} v_c(\cdot)=\frac{-1}{\beta}\tilde{\mu}\tilde{v}_c(\sqrt{\tilde{\mu}} \cdot), \hspace{0.1in} v_h(\cdot)=\tilde{\mu} \tilde{v}_h(\sqrt{\tilde{\mu}} \cdot),
+\] and we shall write $\eps := \sqrt{\tilde{\mu}}$.
+
+We then solve the equation in the hyperbolic part and get $\tilde{v}_h = \psi(\tilde{v}_c,\eps) = \rmO(\eps^2)=\rmO(\mu)$, this means $v_h$ is $\rmO(\mu^2)$.
+\fi
+
+\paragraph{Transformed equations.} 
+Write $v_h = (v_2,\ldots,v_{k})^T$ in the standard coordinate in $\R^{k-1}$. Set $\mathcal{H}(V;\mu) :=P\Nl(QV;\mu)$. Then with respect to the standard basis in $\R^k$, we denote by $\mathcal{H}_c(V;\mu)$ the first component of the nonlinearity $\mathcal{H}$ and $\mathcal{H}_h(V;\mu)$ the remaining $k-1$ components. Then, also with respect to the usual basis, we write the multiplier operator $L$ and its symbol in matrix form
+\[
+L  = \begin{pmatrix}
+L_{cc} & L_{ch} \\
+L_{hc} & L_{hh} 
+\end{pmatrix}, \hspace{0.2in}
+\widehat{L}(\xi)  = \begin{pmatrix}
+\widehat{L}_{cc}(\xi) & \widehat{L}_{ch}(\xi) \\
+\widehat{L}_{hc}(\xi) & \widehat{L}_{hh}(\xi) 
+\end{pmatrix}.
+\]
+Here terms with subscript $cc$ denote a scalar, terms with subscript $ch$ a $(k-1)$ dimensional row vector, terms with subscript $hc$ a $(k-1)$ dimensional column vector, terms with subscript $hh$ a $(k-1)\times (k-1)$ matrix.
+
+In this notation, system \eqref{system} becomes
+\begin{align}
+M v_c + L_{cc}\mathcal{H}_c(v_c,v_h;\mu) + L_{ch}\mathcal{H}_h(v_c,v_h;\mu)= 0\label{exeqnu0},\\
+v_h +  L_{hc}\mathcal{H}_c(v_c,v_h;\mu) + L_{hh}\mathcal{H}_h(v_c,v_h;\mu) = 0 \label{exeqnuh}.
+\end{align}
+
+
+By part $(i)$ of Hypothesis (TC), we may use Taylor's theorem to write $\mathcal{H}_j$ with $j=c,h$ as
+\begin{align*}
+\mathcal{H}_j(v_c,v_h;\mu) &=\left( a^j_{101} \mu v_c+a^j_{011}\mu v_h+a^j_{110}v_cv_h + a^j_{200}v_c^2+a^j_{020}[v_h,v_h] \right)+ \Rm_j(v_c,v_h;\mu)\\
+&:= \B_j(v_c,v_h;\mu)+\Rm_j(v_c,v_h;\mu),
+\end{align*}
+where for the multiindex $\omega=(l,m,n)$ with $|\omega|=2$, we denoted $a^j_{\omega} = \dfrac{1}{\omega !}D^{\omega} \mathcal{H}_j(0,0;0)$, and the remainder $R_j$ satisfies the pointwise estimate
+\begin{equation}\label{odR}
+|R_j(v_c,v_h;\mu)| = |R_j(V;\mu)| = \rmO(\mu^2|V|+\mu|V|^2+|V|^3)
+\end{equation} 
+
+
+%\rmO(v_c^2|v_h|,v_c|v_h|^2,v_c^3,|v_h|^3,\mu v_c^2, \mu |v_h|^2,\mu v_c|v_h|, \mu^2v_c, \mu^2|v_h|),
+for $(V;\mu)$ bounded.
+
+We are in particular interested in the terms $\mu v_c$ and $v_c^2$. In equation \eqref{exeqnu0}, the term $\mu v_c$ is preconditioned by $L_{cc}a_{101}^c+L_{ch}a_{101}^h$, and the coefficient of $v_c^2$ is preconditioned by $L_{cc}a_{200}^c+L_{ch}a_{200}^h$. Using Hypothesis (TC), we claim that
+\[
+\alpha = a_{101}^c =\widehat{L}_{cc}(0)a_{101}^c+\widehat{L}_{ch}(0)a_{101}^h , \hspace{0.1in}\text{ and }\hspace{0.1in}
+\beta =a_{200}^c =\widehat{L}_{cc}(0)a_{200}^c+\widehat{L}_{ch}(0)a_{200}^h .
+\]
+
+Indeed, to verify the first assertion, use the definition of $L$ in lemma \ref{Lem1}, we find $\widehat{L}_{cc}(0)=1$ and $\widehat{L}_{ch}(0)=(0,\ldots,0)$, thus verifying the second equality $a_{101}^c=\widehat{L}_{cc}(0)a_{101}^c+\widehat{L}_{ch}a_{101}^h$. 
+To verify the first equality, let $e_1$ denote the standard coordinate vector $(1,0,\ldots,0)^T \in \R^k$, then the derivative 
+$a_{101}^c=\dfrac{\partial^2}{\partial \mu \partial v_c}  \mathcal{H}_c(0,0;0)$ is given by
+\[
+\langle D_{\mu,V}\mathcal{H}(0;0)e_1,e_1\rangle=\langle D_{\mu,U} P\Nl(0;0)Q e_1,e_1\rangle = \langle PD_{\mu,U}\Nl(0;0) \mathcal{E}_1,e_1\rangle  = \langle D_{\mu,U}\Nl(0;0)\mathcal{E}_1,\mathcal{E}_1^*\rangle = \alpha,
+\]
+which verifies the first equality $\alpha=a_{101}^c$. The computations for $\beta$ is similar.
+
+In the next paragraph, we shall make a series of rescalings to simplify the equation.
+
+\paragraph{Rescaling.} Recall we have assumed $\alpha \mu > 0$, set now $\tilde{\mu} = \alpha \mu$ and write $\sqrt{\tilde{\mu}} = \eps$. We then rescale the functions $v_c, v_h$ to $\tilde{v}_c,\tilde{v}_h$ through 
+\[
+\hspace{0.1in} v_c(\cdot)=\frac{-1}{\beta}\eps^2\tilde{v}_c(\eps \cdot), \hspace{0.1in} v_h(\cdot)=\eps^2 \tilde{v}_h(\eps \cdot).
+\]
+
+
+We substitute these variables in equation \eqref{exeqnu0} and \eqref{exeqnuh}, divide the first equation by $(-1/\beta)\eps^4$, the second by $\eps^2$, and then obtain
+\begin{align}
+\eps^{-2}M^\eps \tilde{v}_c + \sum_{j=c,h} L_{cj}^{\eps}[\tilde{\B}_j(\tilde{v}_c,\tilde{v}_h)+\eps^{-4}\tilde{\Rm}_j(\tilde{v}_c,\tilde{v}_h;\eps)],\label{rseqnu0}\\
+\tilde{v}_h +\sum_{j=c,h} L_{hj}^{\eps}[\eps^2\tilde{\B}_j(\tilde{v}_c,\tilde{v}_h)+\eps^{-2}\tilde{\Rm}_j(\tilde{v}_c,\tilde{v}_h;\eps)] = 0. \label{rseqnuh}
+\end{align}
+Note that here equation \eqref{rseqnu0} and \eqref{rseqnuh} holds pointwise in $z = \sqrt{\tilde{\mu}} y$. Since $y$ is arbitrary, they hold for all $z \in \R^n$. We rather view them as functional equation in $\tilde{v}_c(\cdot)$ and $\tilde{v}_h(\cdot)$.
+
+The rescaled linear operators $M^\eps $ and $L^\eps_j$ for $j = cc,ch,hc,hh$ have symbols $m(\eps s)$, $\widehat{L}_j(\eps s)$ respectively. 
+
+The rescaled nonlinear terms $\tilde{\B_j}, \tilde{\Rm_j}$ for $j=c,h$ are defined through 
+\begin{align*}
+\tilde{\B}_j(u,v)&=\frac{a^j_{101}}{\alpha}  u+\frac{a^j_{011}}{\alpha} v+a^j_{110}uv + \frac{a^j_{200}}{-\beta}u^2+a^j_{020}(-\beta)v^2 ,\\
+\tilde{R}_j ( u,v;\eps)&=\Rm_j \left(\frac{\eps^2u}{-\beta},\eps^2v;\frac{\eps^2}{\alpha}\right).
+\end{align*}
+
+In particular, the coefficient of the term $\tilde{v}_c$ now equals $ a_{101}^c/\alpha=1$, and the coefficient of $\tilde{v}_c^2$ now equals $a_{200}^h/(-\beta)=\beta/(-\beta)=-1$ by the computation we have done in the previous step. As a consequence, we have 
+\[
+\tilde{B}_c(\tilde{v}_c,\tilde{v}_h) = \tilde{v}_c-\tilde{v}_c^2 + \rmO(|\tilde{v}_h|+|\tilde{v} _h|^2+\tilde{v}_c|\tilde{v} _h|).
+\] 
+
+
+
+From the multiplication algebra property and Sobolev embedding of $H^\ell(\R^n,\R^k)$ with $\ell>n/2$, for any $u\in H^\ell(\R^n), v\in H^\ell(\R^n,\R^{k-1})$, and $j=c,h$ we have the following estimates
+
+\begin{equation}\label{Blest}
+\|\tilde{\B}_j(u,v)\|_{H^\ell} \le C\left(\|u\|_{H^\ell}+\|v\|_{H^\ell}+\|u\|_{H^\ell}\|v\|_{H^\ell} +\|u\|_{H^\ell}^2+\|v\|^2_{H^\ell}\right),
+\end{equation}
+with some constant $C$. For the remainder terms $\tilde{\Rm}_j$, we have 
+\begin{equation}
+ \|\tilde{\Rm}_j(u,v;\eps)\|_{H^\ell} = \rmO(\eps^6)  \label{Nlest}
+\end{equation}
+as $\eps \to 0$ from \eqref{odR}.
+
+ For the rescaled linear operator $L^\eps$, using the definition of $L$ and the Fourier transform characterization of $H^\ell$, we find the following estimates hold
+\begin{equation}\label{Liest}
+\|(L^\eps_{cc} - 1)u \|_{H^\ell} \to 0, \hspace{0.2in}\|L^\eps_{ch}v \|_{H^\ell} \to 0, \hspace{0.2in}\|(L^\eps_{hh}-I_{k-1})w \|_{H^\ell} \to 0, \hspace{0.2in} \text{and }\|L^\eps_{hc}v \|_{H^\ell} \le C.
+\end{equation}
+for $u \in H^\ell(\R^n), v\in H^\ell(\R^n;\R^{k-1}), w\in H^\ell(\R^n;\R^k)$ and $C$ is some constant independent of $\eps$. 
+
+Now it remains to understand the behavior of the term $\eps^{-2}M^\eps v_c$ as $\eps \to 0$. But before that, we first reduce \eqref{rseqnu0} and \eqref{rseqnuh} to a scalar equation using a fixed point argument in the next subsection. The main result will be proved shortly after.
+
+To further ease notations, we drop the tildes, and still use $v_j,\B_j,\Rm_j$ ($j=c,h)$ for the same variables after the rescaling. 
+
+
+
+\subsection{Lyapunov-Schmidt reduction and proof of the main result}
+We first solve \eqref{rseqnuh} to obtain $v_h$ as a function of $v_c$ by a fixed point argument. We then substitute this function back into equation \eqref{rseqnu0} to obtain a scalar equation for $v_c$ and $\eps$, which will be solved again using a fixed point argument.
+
+We write the left hand side of \eqref{rseqnuh} as $\G(v_h; v_c,\eps)$ with $\G$ defined so that
+\[
+\G(v;u,\eps) = v+ \sum_{j=c,h} L_{hj}^{\eps}\left( \eps^2\B_j(u,v;\eps)+\eps^{-2}\Rm_j(u,v;\eps) \right), 
+\]
+using estimates \eqref{Blest} and \eqref{Nlest}, we have $\G : H^\ell(\R^n,\R^{k-1}) \times H^\ell(\R^n) \to H^\ell(\R^n,\R^{k-1})$ for each $\eps >0$.
+Note that we are treating $v_c$ as an additional (Banach space-valued) parameter. The following lemma accomplishes what we were planning to do.
+\begin{lemma}\label{Lemuh} Fix $r>0$ not necessarily small, let $B_r$ denote the ball centered at $0$ with radius $r$ in $H^\ell(\R^n)$, there then exist $\eps_0>0$ sufficiently small and a map $\psi(u,\eps): B_r \times (0,\eps_0) \to H^\ell(\R^n,\R^{k-1})$ such that $v = \psi(u, \eps)$ solves $\G(v;u,\eps) = 0$. Moreover, the map $u \mapsto \psi(u,\eps)$ is smooth for $u\in B_r$, and we have 
+\[
+\|\psi(u,\eps)\|_{H^\ell} = \rmO(\eps^2), \hspace{0.1in}\|D_u\psi(u,\eps)\|_{H^\ell \to H^\ell} = \rmO(\eps^2),
+\] as 
+$\eps \to 0$, uniformly for $u\in B_r$ where $D_u\psi(u,\eps)$ denotes the Frechet derivative of $\psi$ with respect to $u$ at the point $(u,\eps)$.  \end{lemma}
+\begin{Proof}We will solve $\G(v;u,\eps)=0$ using a Newton iteration scheme. For $u \in B_r$ and $\eps_0$ small, we claim the following properties hold for $\G$:
+\begin{enumerate}
+\item $\|\G(0;u,\eps)\|_{H^\ell} = \rmO(\eps^2),$ uniformly in $u\in B_r$ and $\eps < \eps_0$.
+\item $\G$ is smooth in $v$, and $D_v \G(0; u, \eps):H^\ell(\R^n,\R^{k-1}) \to H^\ell(\R^n,\R^{k-1})$ is bounded invertible with uniform bounds on the inverse for $|\eps|<\eps_0$ and $u \in B_r$. 
+\end{enumerate}
+
+For $(i)$, since $L^\eps$ is uniformly bounded in $\eps$, there exist a constant $C$ such that $\| L_{hc}^\eps\|_{H^\ell \to H^\ell}+\| L_{hh}^\eps \|_{H^\ell \to H^\ell } \le C$, we then have
+\begin{align*}
+\|\G(0,u;\eps)\|_{H^\ell} &\le \eps^2C(\|\mathcal{B}_c(u,0;\eps)\|_{H^\ell} +\|\mathcal{B}_h(u,0;\eps)\|_{H^\ell})\\
+&+\eps^{-4}C(\|\Rm_c(u,0;\eps)\|_{H^\ell}+\|\Rm_h(u,0;\eps)\|_{H^\ell}).
+\end{align*}
+Using estimates \eqref{Blest} and \eqref{Nlest}, we have $\|\G(0;u,\eps)\|_{H^\ell} \le C(r) \eps^2$ uniformly in $u\in B_r$ and $\eps$ small.
+
+For $(ii)$, we conclude the smoothness of $\mathcal{G}$ in $v$ using [Smoothness of sup operator] and the fact that $L^\eps_j$ are bounded linear operators. We compute the Frechet derivative of $\G$ to obtain
+\[ 
+D_v\G(v;u,\eps) w = w+ \sum_{j=c,h} L_{hj}^\eps (\eps^2 D_v \mathcal{B}_j (u,v;\eps)+ \eps^{-2} D_v\Rm_j(u,v;\eps) ) w
+\] 
+for $w \in H^\ell(\R^n,\R^{k-1})$. Using estimate \eqref{Nlest}, we see that $D_v\G(0; u, \eps)$ is an $\rmO(\eps^2)$ perturbation of the identity as an operator on $H^\ell(\R^n,\R^{k-1})$ uniformly for $u \in B_r$. Thus, if $\eps_0$ is small enough, then for all $\eps$ with $|\eps|<\eps_0$, we have that $D_v\G(0;u,\eps)$ is bounded invertible with uniform bounds in $\eps$.
+
+
+After establishing $(i)$ and $(ii)$, fix $\delta>0$ and $u \in B_r$. Let $N_\delta$ denote the closed ball of radius $\delta$ around $0$ in $H^\ell(\R^n,\R^{k-1})$, we introduce a map $\cS(\cdot; u,\eps): H^\ell(\R^n,\R^{k-1}) \to H^\ell(\R^n,\R^{k-1})$ as follows
+\[
+\cS(v; u,\eps) = v - D_v\G(0;u, \eps)^{-1}[\G(v;u,\eps)].
+\]
+We then find
+\[
+\|\cS(0;u,\eps) \|_{H^\ell} \le \|D_v\G(0;u,\eps)^{-1}\|_{H^\ell\to H^\ell} \|\G(0;u, \eps)\|_{H^\ell} = \rmO(\eps^2).
+\]
+
+Also, $D_v\cS(0;u,\eps) = 0$ by definition, and $\cS$ is smooth in $v$ by $(ii)$. Therefore, if $\delta$ is small and $v\in N_\delta$, it then follows that $\|D_vS(v;u,\eps)\|_{H^\ell \to H^\ell} \le C\delta$ for some constant $C$ independent of $\delta$.
+
+Then we start our iteration with $v_0 = 0$, $v_{n+1} = \cS(v_n;u,\eps)$, $n\ge 0$. Suppose by induction $v_k \in N_\delta$ for $1\le k \le n$, then
+\[
+\|v_{n+1}-v_n\|_{H^\ell} \le C\delta\|v_n-v_{n-1}\|_{H^\ell},
+\]
+by the mean value theorem. Therefore
+\[
+\|v_{n+1}\|_{H^\ell} \le \frac{C}{1-C\delta}\|v_1-v_0\|_{H^\ell} = \frac{C}{1-C\delta}\|\cS(0;u,\eps)\|_{H^\ell}.
+\]
+This implies that for $\eps$ small and $u \in B_r$, we have $v_{n+1} \in N_\delta$, and that $\cS$ is a contraction for $\delta$ sufficiently small. Then, as in the proof of Banach's fixed point theorem, we conclude that $v_n \to v = \psi(u,\eps)$ as $n\to \infty$ and $v$ is a fixed point of $\cS$. Note that we automatically get $\|\psi(u,\eps)\|_{H^\ell} = \rmO(\eps^2)$ uniformly in $u\in B_r$. 
+
+To show the smooth dependence of $\psi(u,\eps)$, we note that $\G(v;u,\eps)$ is also smooth in $u$ by [smoothness of superposition operators...]. By choosing $\eps$ small, the contraction constant for $\cS$ can be chosen uniformly in $u \in B_r$. Hence by adopting the proof of the uniform contraction principle (see [Chicone ODE], Theorem 1.244), we conclude that $\psi$ depends smoothly on $u$ as well.
+
+Finally, to get the estimate $\|D_u\psi\|_{H^\ell \to H^\ell} = \rmO(\eps^2)$, we differentiate the equation $0 = \G(\psi(u,\eps);u,\eps)$ in $u$ for $u\in B_r$ to see $D_u\psi$ satisfies the equation
+\[
+D_v\G(\psi(u,\eps); u,\eps)  D_u\psi(u,\eps) + D_u\G(\psi(u,\eps);u,\eps) = 0.
+\]
+
+Now, $D_u\G(v;u,\eps)$ is of the form
+\[
+D_u\G(v;u,\eps) w =  \sum_{j=c,h} L_{hj}^\eps (\eps^2 D_u \mathcal{B}_j(u,v;\eps) + \eps^{-2} D_u\Rm_j(u,v;\eps) ) w,
+\]
+hence, for $u \in B_r$ and $v=\psi(u,\eps) \in N_\delta$, we have $\|D_u\G(v;u,\eps)\|_{H^\ell \to H^\ell} = \rmO(\eps^2)$ again by estimate \eqref{Blest} and \eqref{Nlest}.
+
+On the other hand, $D_v\G(v;u,\eps)$ is uniformly invertible in $\eps$ for $v=\psi(u,\eps)\in N_\delta$ and $u\in B_r$ as calculated previously. Therefore we can write $D_u\psi(u,\eps) = -[D_v\G]^{-1} D_u\G $ and conclude that 
+\[
+\|D_u\psi(u,\eps)\|_{H^\ell \to H^\ell} \le C(r,\delta)\eps^2.
+\] This finishes the proof.
+\end{Proof}
+
+\begin{remark} Because of the dependence of the convolution operator $L_{hc}^\eps, L_{hh}^\eps$ on $\eps$ is not smooth at $\eps = 0$, we cannot use the usual implicit function theorem directly to solve the equation $\G(v;u,\eps) = 0$. We follow the Newton iteration scheme as in [Faye Scheel, advance paper] to circumvent this problem.
+\end{remark}
+
+Using lemma \ref{Lemuh}, we substitute $v_h = \psi(v_c,\eps)$ into equation \eqref{rseqnu0}. We obtain the following scalar equation
+
+
+
+\subsection{Precondition with \texorpdfstring{$\M^\eps $}{Lg} and solve the reduced scalar equation} 
+We get the scalar equation in $\tilde{v}_c$ after rescaling,
+\begin{equation} \label{1dnl}
+0 = \eps^{-2}M^\eps \tilde{v}_c + \sum_{j=c,h}L_{cj}^\eps\left[B_j(\tilde{v}_c,\psi(\tilde{v}_c,\eps))+\eps^{-4}\Rm_j(\tilde{v}_c,\psi(\tilde{v}_c,\eps);\eps)\right].
+\end{equation}
+
+
+It is now crucial to understand the behavior of the operator $M^\eps$ as $\eps \to 0$. Recall that by definition
+\[
+\widehat{M^\eps v}(\xi) = m(\eps \xi)\widehat{v}(\xi) = \frac{|\eps\xi|^2}{1+|\eps\xi|^2} \widehat{v}(\xi), 
+\]
+for any $v\in H^\ell(\R^n,\R^k)$. We then define a new operator $\mathcal{M}^\eps$ through 
+\[ 
+\widehat{\mathcal{M}^\eps v}(\xi) = \frac{m(\eps\xi)}{|\eps\xi|^2}\widehat{v}(\xi)=\frac{1}{1+|\eps\xi|^2} \widehat{v}(\xi). 
+\] 
+Since $1/(1+|\eps \xi|^2)$ is a bounded function on $\R^n$, $\M^\eps$ maps $H^\ell(\R^n,\R^k)$ into itself. 
+
+For $v\in H^\ell(\R^n,\R^k)$, $(\M^{\eps})^{-1}$ is defined through
+\[
+\widehat{(\M^{\eps})^{-1}v} (\xi) = \frac{|\eps\xi|^2}{m(\eps\xi)} \widehat{v}(\xi)= (1+|\eps \xi|^2)\widehat{v}(\xi),
+\]
+moreover we have:
+\begin{align*}
+\|((\M^\eps)^{-1}-1)v\|_{H^{\ell-2}} &=\left\| \left(1+|\eps\xi|^2-1\right)\widehat{v}(\xi)(1+|\xi|^2)^{\frac{\ell-2}{2}}\right\|_{L^2} 
+\\
+& \le \sup_{\ell} \left|\frac{|\eps\xi|^2}{1+|\xi|^2}\right| \|\widehat{v}(\xi)(1+\xi^2)^{\frac{\ell}{2}} \|_{L^{2}}\\ 
+&\le \eps^2 \|v\|_{H^\ell}.
+\end{align*}
+
+Therefore, considered as an operator from $H^\ell (\R^n,\R^k)$ to $H^{\ell-2}(\R^n,\R^k)$, $(\M^\eps)^{-1}$ is well-defined, and $\|(\M^{\eps})^{-1}v - v\|_{H^{\ell-2}} \to 0$ as $\eps \to 0$ for $v \in H^\ell (\R^n,\R^k)$. This simple observation is central to identifying the leading-order terms and  we state it as a lemma.
+
+\iffalse
+recall we defined \[ 
+\widehat{\mathcal{M}^\eps v}(\xi) = \frac{m(\eps\xi)}{|\eps\xi|^2}\widehat{v}(\xi)=\frac{1}{1+|\eps\xi|^2} \widehat{v}(\xi). 
+\] 
+Since $1/(1+|\eps \xi|^2)$ is a bounded function on $\R^n$, $\M^\eps$ maps $H^\ell(\R^n,\R^k)$ into itself. And we had
+\fi
+
+
+\begin{lemma}\label{estmult}The multiplier operator $(\M^\eps)^{-1}$ with symbol $\dfrac{|\eps\xi|^2}{m(\eps\ell)}=1+|\eps\xi|^2 $ is well defined, maps from $H^\ell  (\R^n,\R^k)$ into $H^{\ell-2} (\R^n,\R^k)$, and satisfies the estimate
+\[
+\|(\M^\eps)^{-1}-I\|_{H^\ell \to H^{\ell-2}} = \rmO(\eps^2).
+\]
+\end{lemma}
+
+
+Of course, $(M^\eps)^{-1}-I$ is just a rescaled version for the usual Laplacian. In particular, it respects the symmetry of $\Gamma$, that is $(\M^\eps)^{-1}$ takes  $H^\ell_{\Gamma}$ into $H^{\ell-2}_{\Gamma}$.
+
+
+Let now $v_*$ be the unique positive ground sate solution of the equation $\Delta v - v +v^2 = 0$, we have
+\begin{proposition}\label{prop}Assume $d>0, n<6$ and $\ell>n/2$. If $\eps_1>0$ is sufficiently small, then for $0<\eps <\eps_1$, there exist a family of solutions to \eqref{1dnl} of the form $v_c(\cdot;\eps) = v_*(\cdot)+w(\cdot; \eps)$. Here $w=w(\cdot,\eps) \in H^{\ell}_{\Gamma}(\R^n,\R^k)$ is a family of correctors parametrised by $\eps $ such that $\|w(\cdot,\eps)\|_{H^\ell} \to 0$ as $\eps \to 0$.
+\end{proposition}
+
+%First, by assumptions on $f$, the Taylor expansion for $f$ near $(u,\mu)=(0,0)$ is
+%\[
+%f(u,\mu) = A u\mu - B u^2 + O(\mu^2 u, \mu u^2, u^3)
+%\]
+%where $A = f_{u\mu}(0,0), B=-f_{uu}(0,0)$, for definiteness we assume here that $A,B>0$, then we rescale $u$ and $\mu$ by $u \mapsto su$ and $\mu \mapsto t\mu$, where $s,t$ are constants to be chosen, then we have
+%\[
+%-su + sK\ast u = Ast u\mu -Bs^2u^2 + O(\mu^2 u, \mu u^2,u^3)
+%\]
+%cancel out $s$, we see choose $s=1/B$ and $A=1/t$ lead to the following equation for $u$ %and $\mu$:
+%\[
+%-u+K\ast u=f(u; \mu) = \mu u - u^2 + O(\mu u^2,\mu^2u,u^3),
+%\] 
+%then we rescale $u(x) = \mu v(\sqrt{\mu}x)$, we have an equation in $v$: 
+%\begin{equation}  \label{scl nl}
+%-v(y) + K_\eps \ast v (y) = \eps^2(v-v^2)+O(\eps^4v)
+%where $\eps^2 = \mu$ and $K_\eps = \eps^{-1}K(\cdot/\eps)$, and $y =\eps x$. From this point we focus on $\eqref{scl nl}$.
+
+%Dividing by $\eps^2$, and take Fourier transform of both sides of the equation (we assume we are solving in $H^2(\R)$.)
+
+%\[
+%\frac{-1+\hat{K}_\eps(\ell)}{-\eps^2\ell^2}(-\ell^2)\hat{v}(\ell) = \widehat{v-v^2}(\ell) %+ O(\eps^2 \hat{v})
+%\] 
+
+%We define the operator $M_\eps$ so that the Fourier multiplier $\widehat{M}_\eps(\ell) = \frac{-1+\hat{K}_\eps(\ell)}{-\eps^2\ell^2}= \frac{-1+\hat{K}(\eps\ell)}{-\eps^2\ell^2}$, by assumptions on $K$, we 
+%know $M_\eps$ is bounded as an operator from $L^2$ to $L^2$, but $\sup |\widehat{M_\eps}(\ell)|$ does not necessarily go to zero as $\eps \to 0$.
+
+%We take inverse Fourier transform and get back the equation in physical space:
+%\begin{equation}\label{eq phy}
+%M_\eps v''(y) = v(y)-v^2(y) + O(\eps^2 v)
+%\end{equation}
+
+\begin{Proof}
+We substitute the ansatz $v_c = v_* + w$ into \eqref{1dnl}, where $v_*$ is as stated in the lemma and $w \in H^\ell_{\Gamma}$. We will determine an equation for $w$ and $\eps$ and show that it can be solved using Newton iteration scheme near $(w,\eps)=(0,0)$.
+First, for the term $\eps^{-2}M^\eps v_c$ with $v_c \in H^\ell$, we apply Fourier transform to obtain
+\[
+\eps^{-2}m(\eps\xi)\widehat{v}_c(\xi) = -\frac{m(\eps\xi)}{|\eps\xi|^2}(-|\xi|^2)\widehat{v}_c(\xi) = -\widehat{\M^\eps \Delta v_c},
+\]
+and equation \eqref{1dnl} becomes
+\[
+0 = -\M^\eps \Delta v_c + \left(L_{cc}^\eps +L_{ch}^\eps a_{101}^h\right)v_c+\left(L_{cc}^\eps a_{110}^c+L_{ch}^\eps a_{110}^h\right)v_c^2 + \Rm(v_c,\psi;\eps),
+\]
+where $\Rm(v_c,\psi;\eps)$ contains all the terms of order $\eps^2$ and higher,
+\[
+\Rm(v_c,\psi;\eps) =\sum_{j=c,h} L_{cj}^\eps\left[ \frac{a_{011}^j}{\alpha}\psi+a_{110}^j v_c\psi+a_{020}^j (-\beta)[\psi,\psi]+\eps^{-4}\Rm_j(v_c,\psi;\eps)\right].
+\]
+Indeed, for $w$ with $v_*+w \in B_r$, we claim that $\Rm$ satisfies the estimate $\|\Rm\|_{H^\ell} = \rmO(\eps^2)$.  To see this, we first apply Lemma \ref{Lemuh} with $r = 2\|v_*\|_{H^\ell}$ to obtain $\psi = \psi(v_*+w,\eps)$ which satisfies $\|\psi(v_*+w,\eps)\|_{H^\ell} = \rmO(\eps^2)$.
+
+The linear operators $L_{cc}^\eps, L_{ch}^\eps$ are uniformly bounded in $\eps$, so that we have
+\[
+\left\|\sum_{j=c,h} L_{cj}^\eps\left( \frac{a_{011}^j}{\alpha}\psi+a_{110}^j v_c\psi+a_{020}^j (-\beta)[\psi,\psi]\right)\right\|_{H^\ell} \le K(\|\psi\|_{H^\ell}+\|\psi\|_{H^\ell}^2) = \rmO(\eps^2),
+\]
+for some constant $K$ from Lemma \ref{Lemuh}.
+
+On the other hand, the remainders $\Rm_c$ and $\Rm_h$ satisfy $\|\Rm_c\|_{H^\ell}= \rmO(\eps^6), \|\Rm_h\|_{H^\ell} = \rmO(\eps^6)$ uniformly for $v_*$ and $w$ such that $v_* +w \in B_r$ as $\eps \to 0$ by  estimates \eqref{Blest} and \eqref{Nlest}. Therefore we conclude that $\|\Rm(v_c,\psi;\eps)\|_{H^\ell} = \rmO(\eps^2)$ for $v_c=v_*+w \in B_r$.
+ 
+Next, add the equation $d\Delta v_*-v_*+v_*^2 =0$ to the right hand side of \eqref{1dnl} and precondition with the operator $(\M^{\eps})^{-1}$. Set $\alpha^\eps = L_{cc}^\eps + \frac{a_{101}^h}{\alpha} L_{ch}^\eps , \beta^\eps=-L_{cc}^\eps +\frac{a_{200}^h}{-\beta} L_{ch}^\eps $ and we find
+\begin{eqnarray}
+0 &=(\M^\eps)^{-1}\left[ (d-\M^\eps)\Delta v_* -\M^\eps \Delta w+\alpha^\eps(v_*+w)-v_*+\beta^\eps(v_*+w)^2+v_*^2 + \Rm \right] \nonumber \\ 
+&= [(\M^{\eps})^{-1}-d^{-1}]\M^\eps d\Delta v_*+(\M^{\eps})^{-1}\left[ (\alpha^\eps-1)v_*+(\beta^\eps+1)v_*^2+\Rm \right]+ \nonumber \\
+&-\Delta w+(\M^{\eps})^{-1}\left[\alpha^\eps w+\beta^\eps(2v_*w+w^2)\right], \nonumber \\
+&:= F_1(w;\eps)+F_2(w;\eps):= F(w;\eps).  \label{splfynl}
+\end{eqnarray}
+
+By Lemma \ref{estmult}, we have that $F$ maps $H^\ell_{\Gamma}(\R^n)$ to $H_{\Gamma}^{\ell-2}(\R^n)$. Our goal is to set up a Newton iteration scheme to solve $ F(w,\eps) =0$ for $w$ in terms of $\eps$ as a fixed point problem.
+
+Following the strategy of Lemma \ref{Lemuh}, we shall show
+\begin{enumerate}
+\item $\|F(0,\eps)\|_{H^{\ell-2}} \to 0$ as $\eps \to 0$.
+\item $F(w,\eps)$ is continuously differentiable in $w$ and $D_wF(0,\eps): H^{\ell}_{\Gamma}(\R^n) \to H^{\ell-2}_{\Gamma}(\R^n)$ is uniformly invertible in $\eps$.
+\end{enumerate}
+For $(i)$, we note that
+\[
+F(0,\eps) = F_2(0;\eps) = [(\M^{\eps})^{-1}-d^{-1}]\M^\eps d \Delta v_*+(\M^\eps)^{-1}[(\alpha^\eps-1)v_*+(\beta^\eps+1)v_*^2+\Rm(v_*,\psi;\eps)].
+\]
+
+By [reference on ground state], $\Delta v_* \in H^\ell(\R^n)$ for all $\ell$, since $\M^\eps$ take $H^\ell(\R^n)$ into itself and is uniformly bounded in $\eps$, we conclude from Lemma \ref{estmult} that 
+$\|[(\M^{\eps})^{-1}-d^{-1}]\M^\eps d \Delta v_* \|_{H^\ell} \to 0$
+as $\eps \to 0$.
+
+Moreover, by  \eqref{Liest}, it holds that $\| \alpha^\eps v -v\|_{H^\ell} \to 0$ and $\| \beta^\eps v + v\|_{H^\ell} \to 0$ as $\eps \to 0$ for any $v \in H^\ell(\R^n)$, and the remainder $\Rm(v_*,\psi;\eps)$ satisfies $\|\Rm\|_{H^\ell} = \rmO(\eps^2)$ as proved earlier. Hence, we conclude that 
+\[
+\| F(0;\eps)\|_{H^\ell-2} = \| F_2(0;\eps)\|_{H^{\ell-2} }\to 0
+\]
+as $\eps \to 0$, which proves $(i)$.
+
+For $(ii)$, we first verify that $F$ is continuously differentiable in $w$ from $H^\ell (\R^n)$ to $H^{\ell-2}(\R^n)$. Indeed, take $h, w_0\in H^\ell(\R^n)$ with $w_0$ fixed. We observe that $D_wF(w_0;\eps)h:H^\ell (\R^n) \to H^{\ell-2}(\R^n)$ is given by
+\[
+D_wF(w_0;\eps)h = -\Delta h+(\M^\eps)^{-1}\left[(a^\eps h)+2v_*\beta^\eps h + 2w_0h)+D_w\Rm h\right].
+\]
+The smooth dependence on $w_0$ comes from Proposition [smoothness of superposition operator].
+
+Now, at $w_0 = 0$, we see that, $D_wF(0;\eps)h \to -\Delta h+h-2v_*h = \cL h$ in $H^{\ell-2}(\R^n)$ as $\eps \to 0$ for $h \in H^\ell$ because $\|D_w\Rm h\|_{H^\ell} = \rmO(\eps^2)$ as remarked earlier. By [the nondegenracy in $H^\ell_\Gamma$ lemma], the operator $\cL : H^\ell_{\Gamma}(\R^n) \to H^{\ell-2}_{\Gamma}(\R^n)$ is bounded invertible. We notice that $D_wF(0;\eps)$ respects the symmetry and is a small perturbation of $\cL$, therefore invertible with uniform bounds on the inverse for $\eps$ small enough. This shows $(ii)$.
+
+We now set up the Newton iteration scheme, define $\tilde{\cS}$ through
+\[\tilde{\cS}(w;\eps) = w-D_wF(0;\eps)^{-1}[F(w;\eps)].\]
+
+Note that $\tilde{\cS}$ respects the symmetry as well: $\tilde{\cS} : H^\ell_\Gamma(\R^n) \to H^{\ell-2}_\Gamma(\R^n)$. Therefore we can proceed as in Lemma \ref{Lemuh} to obtain $w=w(\eps)$ which solves $F(w(\eps);\eps) = 0$ for $\eps $ small enough and satisfies $\|w(\eps)\|_{H^\ell} \to 0$ as $\eps \to 0$.
+\end{Proof}
+
+Finally, we prove Theorem (main result).
+\begin{Proof}[ of Theorem.] We now write the tildes for the rescaled variables. From proposition \ref{prop}, we know that \eqref{1dnl} has a solution of the form $\tilde{v}_c(\cdot) = v_*(\cdot)+w(\cdot;\eps)$. Together with $\tilde{v}_h = \psi(\tilde{v}_c,\eps)$, reverting the rescaling, we obtain $v_c(\cdot) = -\frac{\alpha}{\beta}\mu \tilde{v}_c(\sqrt{\alpha\mu }\cdot)$ and $v_h(\cdot) = \alpha\mu \tilde{v}_h(\sqrt{\alpha\mu}\cdot)$ as solutions to \eqref{exeqnu0} and \eqref{exeqnuh}.
+
+ Now, recall that $V=(v_c,v_h)^T$ and the original variable $U$ are related by $U= QV$ where $Q$ is defined in the proof of Lemma \ref{Lem1}. We conclude that $U(\cdot)=v_c(\cdot)\mathcal{E}_0+v_{\perp}(\cdot)$, where $v_{\perp}$ takes values in the complement of $\mathcal{E}_0$. The behavior of $v_c,v_{\perp}$ as $\mu \to 0$ is a direct consequence of Lemma \ref{Lemuh} and Proposition \ref{prop}. Lastly, we restore to the original variable $x = T_0y$, thus getting the desired form of the solution.
+ 
+ 
+\citep{Bates1997}
+\end{Proof}
+
+\bibliographystyle{plain}
+\bibliography{nlBfCs}
+
+
+\end{document}

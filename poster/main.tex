@@ -1,0 +1,665 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Jacobs Landscape Poster
+% LaTeX Template
+% Version 1.1 (14/06/14)
+%
+% Created by:
+% Computational Physics and Biophysics Group, Jacobs University
+% https://teamwork.jacobs-university.de:8443/confluence/display/CoPandBiG/LaTeX+Poster
+% 
+% Further modified by:
+% Nathaniel Johnston (nathaniel@njohnston.ca)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[final]{beamer}
+\usepackage{grffile}
+% \setbeamertemplate{enumerate subitem}{\alph{enumii})}
+% \usepackage{ctable}
+% \usepackage{slashbox}   
+% \usepackage[margin=.9in]{geometry}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[dvips]{epsfig}
+\usepackage[small]{caption}
+\usepackage{graphicx}
+% \usepackage[all]{xy}
+\usepackage{chancery}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{colortbl}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\makeatletter\@addtoreset{figure}{section}\makeatother
+\renewcommand{\thefigure}{\arabic{section}.\arabic{figure}}
+
+
+\usepackage{lmodern} % get rid of warnings
+\usepackage{caption}
+% \usetikzlibrary{positioning}
+% \usepackage{enumitem}
+
+
+\renewcommand*{\thefigure}{\arabic{figure}}
+
+\usepackage[scale=1.24]{beamerposter} % Use the beamerposter package for laying out the poster
+
+\usetheme{confposter} % Use the confposter theme supplied with this template
+
+\setbeamercolor{block title}{fg=ngreen,bg=white} % Colors of the block titles
+\setbeamercolor{block body}{fg=black,bg=white} % Colors of the body of blocks
+\setbeamercolor{block alerted title}{fg=white,bg=dblue!70} % Colors of the highlighted block titles
+\setbeamercolor{block alerted body}{fg=black,bg=dblue!10} % Colors of the body of highlighted blocks
+% Many more colors are available for use in beamerthemeconfposter.sty
+
+%-----------------------------------------------------------
+% Define the column widths and overall poster size
+% To set effective sepwid, onecolwid and twocolwid values, first choose how many columns you want and how much separation you want between columns
+% In this template, the separation width chosen is 0.024 of the paper width and a 4-column layout
+% onecolwid should therefore be (1-(# of columns+1)*sepwid)/# of columns e.g. (1-(4+1)*0.024)/4 = 0.22
+% Set twocolwid to be (2*onecolwid)+sepwid = 0.464
+% Set threecolwid to be (3*onecolwid)+2*sepwid = 0.708
+
+\newlength{\sepwid}
+\newlength{\onecolwid}
+\newlength{\twocolwid}
+\newlength{\threecolwid}
+\setlength{\paperwidth}{48in} % A0 width: 46.8in
+\setlength{\paperheight}{36in} % A0 height: 33.1in
+\setlength{\sepwid}{0.024\paperwidth} % Separation width (white space) between columns
+\setlength{\onecolwid}{0.22\paperwidth} % Width of one column
+\setlength{\twocolwid}{0.464\paperwidth} % Width of two columns
+\setlength{\threecolwid}{0.708\paperwidth} % Width of three columns
+\setlength{\topmargin}{-0.5in} % Reduce the top margin size
+%-----------------------------------------------------------
+
+\usepackage{graphicx}  % Required for including images
+
+\usepackage{booktabs} % Top and bottom rules for tables
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION 
+%----------------------------------------------------------------------------------------
+
+\title{Phase separation from directional quenching} % Poster title
+
+\author{Rafael Monteiro and Arnd Scheel} % Author(s)
+
+\institute{University of Minnesota - School of Mathematics} % Institution(s)
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+
+\setbeamertemplate{caption}[numbered]{}
+\addtobeamertemplate{block end}{}{\vspace*{2ex}} % White space under blocks
+\addtobeamertemplate{block alerted end}{}{\vspace*{2ex}} % White space under highlighted (alert) blocks
+
+\setlength{\belowcaptionskip}{2ex} % White space under figures
+\setlength\belowdisplayshortskip{2ex} % White space under equations
+
+\begin{frame}[t] % The whole poster is enclosed in one beamer frame
+
+\begin{columns}[t] % The whole poster consists of three major columns, the second of which is split into two columns twice - the [t] option aligns each column's content to the top
+
+\begin{column}{\sepwid}\end{column} % Empty spacer column
+
+\begin{column}{\onecolwid} % The first column
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+% \begin{alertblock}{Outline}
+% % \begin{frame}
+% 
+% \begin{itemize}[leftmargin=1.5cm]
+% \item[i.] Directional quenching and pattern formation;
+% \item[ii.] Numerical and experimental results;
+% \item[iii.] Mathematical settings;
+% \item[iv.]  Description of our results.
+% \end{itemize}
+% % \end{frame}
+% 
+% \end{alertblock}
+
+\begin{block}{Directional quenching}
+The formation of patterns in nature is a universal phenomenon: stripes in zebras, hexagonal convection patterns in fluid dynamics, growth of colonies of bacteria, Liesegang rings,  etc. 
+%We are interested in phase separation patterns arising when systems parameters are varied across an interface moving with constant speed, such that
+Interestingly, when a system undergoes a phase separation process accross a moving interface, patterns arise in its wake. 
+
+
+ \begin{figure}
+ \includegraphics[width=\textwidth]{figs/Foard_Wagner_2}
+%\\ \includegraphics[width=\textwidth]{figs/liesegang1.png}
+\caption{Stripes in the wake of phase separation front (\cite{foard2012survey}).}  \end{figure}
+%
+
+\begin{alertblock}{}
+% \begin{frame}
+In a comoving frame $\tilde{x}=x-ct$ the $L^2$ and  the $H^{-1}$ gradient flows associated with the energy surface $\textrm{E}$ read, respectively
+\begin{equation}\label{Allen-Cahn}% \qquad \qquad  
+u_t  = \Delta u + \mu(x) u  - u^3 + c u_x\tag{\small{\mbox{Allen-Cahn}}},
+\end{equation}
+%
+\begin{equation}\label{Cahn-Hilliard}
+u_t = -\Delta(\Delta u + \mu(x) u - u^3) + c u_x\tag{\small{\mbox{Cahn-Hilliard}}}.
+\end{equation}
+% \end{frame}
+where $\mu(x)=-\mathrm{sign}(x)$, $\Delta = \Delta_{x,y}$.
+\end{alertblock}
+
+\begin{figure}
+\vspace{-2cm}
+\centering
+\includegraphics[width=\textwidth,height = 11cm]{energy_surface}
+%\\ \includegraphics[width=\textwidth]{figs/liesegang1.png}
+\caption{Directional quenching in the $x$-direction with speed $c$}
+\end{figure}
+% As a simple model for this phenomenon, consider a bistable, double-well energy and surface energy 
+% \[
+% \displaystyle{\mathscr{E}[u]}=\int_{x,y} \left(\frac{1}{2}|\nabla u|^2 + \frac{1}{4}(\mu-u^2)^2\right) dx dy,
+% \]
+% with preferred minima $u=\pm \sqrt{\mu}$. %In the simplest case, we think of $\mu=\mu(x)=-\mathrm{sign}\,(x)$, rendering the medium bistable in the half plane $x<0$, and monostable in $x>0$.
+% When $\mu=-\mathrm{sign}\,(x-ct)$ and  $c>0$ the medium is bistable in the growing region $\{(x,y)|\,x<ct\}$ and monostable in $\{(x,y)|\,x>ct\}$. %; our focus here is on slow quenching, $0\leq c\ll 1$. \\
+% We note that the case $c<0$ is mathematically perfectly valid but possibly not as interesting as $c>0$: phase separation patterns could be created for $c>0$ rather than annihilated at the interface for $c<0$. Indeed, critical points of the energy for $\mu\equiv 1$ include a plethora of phase separation patterns \cite{Fife_models}, that is, solutions with nodal lines separating regions with $u>0$ from regions where $u<0$, including simple straight interfaces $u=u(x)\to \pm 1$ as $x\to \pm\infty$, and 
+% periodic stripes $u=\bar{u}(x;\kappa)$,
+% \begin{equation}\label{e:per}
+% \bar{u}''+\bar{u}-\bar{u}^3=0, \qquad \bar{u}(x;\kappa)=-\bar{u}(x+\kappa;\kappa)=-\bar{u}(-x;\kappa)\not\equiv 0,\qquad \mbox{ for } x\in\R,
+% \end{equation}
+% with half-periods  $\pi<\kappa<\infty$, and normalization $\bar{u}'(0)>0$.
+%
+%
+
+ % $\Delta = \partial_x^2 + \partial_y^2$, $\mu(x)=-\mathrm{sign}\,(x)$, $c\geq 0$, and $(x,y)\in\mathbb{R}^2$. 
+ When $u_t=0$,  $c=0$, solutions to CH solve 
+\begin{equation*}%\label{ach}
+  \Delta u + \mu(x) u  - u^3 = 0,
+\end{equation*}
+ %where $\nu$ is a \textit{chemical potential}. 
+(assuming chemical potential $\nu =0$).  As a consequence,we can treat AC and CH simultaneously. 
+ 
+ 
+ %We note here that the unbalanced cases, $\nu\neq 0$, as well as more generally unbalanced or even non-odd nonlinearities pose significant obstacles to the analysis here and likely give rise to different phenomena.
+\end{block}
+
+%------------------------------------------------
+% 
+% \begin{figure}
+% \includegraphics[width=\textwidth]{figs/langmuir.jpeg}
+% %\\ \includegraphics[width=\textwidth]{figs/liesegang1.png}
+% \caption{ Shape and alignment of patterns arising in Langmuir-Blodgett transfer of  a homogeneous $L$-$\alpha$--dipalmitoylphosphatidylcholine Langmuir transfer; reproduced with permission from \cite{langmuir2}. Copyright 2007, ACS."
+% monolayer (right). Liesegang rings and helices formed through recurrent precipiation in tube-in-tube experiments  $Cu^{2+}(aq)+CrO^{2−}_4(aq)\to CuCrO_4(s)$ in 1\% agarose gel, schematic of relation to 2d-patterning, and numerical simuilations; reproduced with permission from \cite{lagziprl}, Copyright 2013, APS.
+% \label{f:exp}}
+% \end{figure}
+
+%----------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	OBJECTIVES
+%----------------------------------------------------------------------------------------
+% 
+% \begin{alertblock}{Objectives}
+% The main purposes of this poster is to show how we were able to 
+% \begin{itemize}
+% \item describe directional quenching and patterns formation.
+% \item describe phenomena seen in physical applications and in numerical simulations
+% \item Describe our results in \cite{Monteiro_Scheel}.
+% \item Describe future work.
+% \end{itemize}
+% 
+% \end{alertblock}
+
+\end{column} % End of the first column
+
+\begin{column}{\sepwid}\end{column} % Empty spacer column
+
+% \begin{column}{\twocolwid} % Begin a column which is two columns wide (column 2)
+
+% \begin{columns}[t,totalwidth=\twocolwid] % Split up the two columns wide column
+
+\begin{column}{\onecolwid}\vspace{-.6in} % The first column within column 2 (column 2.1)
+
+%----------------------------------------------------------------------------------------
+%	MATERIALS
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Striped patterns in simulations and in applications }
+Both experimentally and numerically, a plethora of patterns can be observed depending on initial conditions and parameter values.
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figs/langmuir.jpeg}
+%\\ \includegraphics[width=\textwidth]{figs/liesegang1.png}
+\caption{ Shape and alignment of patterns arising in Langmuir-Blodgett transfer of  a homogeneous $L$-$\alpha$--dipalmitoylphosphatidylcholine Langmuir transfer; picture from  \cite{langmuir2}.} 
+\end{figure}
+
+\end{block}
+
+
+\begin{block}{Stripe morphologies in the wake of the phase separation front}
+We are interested in the following morphologies.
+
+ %One particular question of interest there is the orientation of interfaces: depending on system parameters and initial conditions interfaces parallel, perpendicular, as well as slanted relative to the quenching boundary $\{x=0\}$ are observed. Our results can roughly be understood as establishing the existence of stripes perpendicular to the interface and ruling out slanted stripes. Stripes parallel to the interface were found in an asymptotic analysis in \cite{krekhov2009formation} for the Cahn-Hilliard equation. We rule out the creation of  stripes parallel to the interface in the Allen-Cahn equation. 
+\indent \textbf{Pure phase selection --- \textbf{$1\leadsto 0	$} fronts:}
+
+\begin{figure}[htb]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+          \centering
+        \includegraphics[height = 0.45in]{figs/1_leadsto_0_1D}
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+      %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth,height=0.45in]{figs/1_leadsto_0}
+        \end{subfigure}
+    \caption{Pure phase selection $1 \leadsto 0$, solution $u(x)$ (left) and contour plot for $(x,y)\in\R^2$ (right). \label{Figure_1-1_leadsto_0}}
+\end{figure}
+
+\indent \textbf{Vertical stripes ($\mathcal{V}$):}
+
+\begin{figure}[htb]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+          \centering
+          \includegraphics[height=0.45in]{figs/V_case_1D}
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+      %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth,height=0.45in]{figs/V_case}
+        \end{subfigure}
+    \caption{Vertical stripes $\mathcal{V}$, solution $u(x)$ (left) and contour plot  for $(x,y)\in\R^2$ (right). \label{Figure_1-vertical}}
+\end{figure}
+
+\indent  \textbf{Horizontal ($\mathcal{H}$,$\mathcal{H_\infty}$) and oblique stripes ($\mathcal{O}$):}
+
+\begin{figure}[htb]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+          \centering
+          \includegraphics[width=\textwidth,height=0.45in]{figs/H_infty}\\[0.2in]
+          \includegraphics[width=\textwidth,height=0.45in]{figs/H_case}
+              \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+      %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth,height=0.45in]{figs/O_case_almost_vertical}\\[0.2in]
+    \includegraphics[width=\textwidth,height=0.45in]{figs/O_case_almost_horizontal}
+        \end{subfigure}
+    \caption{Horizontal patterns,  $\mathcal{H_\infty}$ (top left) and  $\mathcal{H}$ (bottom left)  and  oblique stripes with small and large angles relative to $x=0$, respectively (right). \label{Figure_1-horizontal}}
+\end{figure}
+
+% 
+% \begin{figure}[htb]  
+% \centering
+%     \begin{subfigure}[b]{0.45\textwidth}
+%           \centering
+%           \includegraphics[width=\textwidth,height=0.45in]{figs/H_infty}          
+%               \end{subfigure}
+%     ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+%       %(or a blank line to force the subfigure onto a new line)
+%     \begin{subfigure}[b]{0.45\textwidth}
+%     \centering
+%     \includegraphics[width=\textwidth,height=0.45in]{figs/O_case_almost_vertical}
+%         \end{subfigure}
+%  \end{figure}
+%  
+% \begin{figure}[htb] 
+% \centering
+%     \begin{subfigure}[b]{0.45\textwidth}
+%           \centering
+%     \includegraphics[width=\textwidth,height=0.45in]{figs/H_case}
+%               \end{subfigure}
+%     ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+%       %(or a blank line to force the subfigure onto a new line)
+%     \begin{subfigure}[b]{0.45\textwidth}
+%     \centering
+%     \includegraphics[width=\textwidth,height=0.45in]{figs/O_case_almost_horizontal}
+%         \end{subfigure}
+% \caption{Horizontal patterns,  $\mathcal{H_\infty}$ (top left) and  $\mathcal{H}$ (bottom left)  and  oblique stripes with small and large angles relative to $x=0$, respectively (right). \label{Figure_1-horizontal}}
+% \end{figure}
+
+
+% \end{itemize}
+\end{block}
+
+%----------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	METHODS
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+
+
+
+\end{column} % End of column 2.2
+
+
+
+% \end{columns} % End of the split of column 2 - any content after this will now take up 2 columns width
+% 
+% %----------------------------------------------------------------------------------------
+% %	IMPORTANT RESULT
+% %----------------------------------------------------------------------------------------
+% 
+% \begin{alertblock}{Important Result}
+% 
+% Lorem ipsum dolor \textbf{sit amet}, consectetur adipiscing elit. Sed commodo molestie porta. Sed ultrices scelerisque sapien ac commodo. Donec ut volutpat elit.
+% 
+% \end{alertblock} 
+
+%----------------------------------------------------------------------------------------
+
+% \begin{columns}[t,totalwidth=\twocolwid] % Split up the two columns wide column again
+
+
+\begin{column}{\sepwid}\end{column} % Empty spacer column
+
+\begin{column}{\onecolwid}\vspace{-.6in} % The second column within column 2 (column 2.2)
+\begin{block}{Our results (\cite{Monteiro_Scheel})}
+Besides the existence results summarized below, we were able to study these solutions qualitatively, describing among others their monotonicity and asymptotic behavior.
+
+\begin{center}
+\begin{tabular}{cccccc  }
+& $1\leadsto 0$ &  $\mathcal{V}$ & $\mathcal{H}_\infty$ & $\mathcal{H}$ & $\mathcal{O}$ \\[0.03in]
+%%%%%%%%%%%%%%%%%%%%%%%%
+\hline\\
+%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{3.5cm}
+\begin{center}
+$c=0$\\[0.03in]
+AC/CH
+\end{center}
+\end{minipage}
+& 
+\begin{minipage}{3.5cm}
+\begin{center}
+yes\\[0.03in]
+
+\end{center}
+\end{minipage}
+&
+\begin{minipage}{3.5cm}
+\begin{center}
+yes\\[0.03in]
+
+\end{center}
+\end{minipage}
+&
+\begin{minipage}{3.5cm}
+\begin{center}
+yes\\[0.03in]
+
+\end{center}
+\end{minipage}
+&
+\begin{minipage}{3.5cm}
+\begin{center}
+yes\\[0.03in]
+
+\end{center}
+\end{minipage}
+&
+\begin{minipage}{3.5cm}
+\begin{center}
+no\\[0.03in]
+
+\end{center}
+\end{minipage}
+\\[0.03in]
+\\
+%%%%%%%%%%%%%%%%%%%%%%%%
+ \hline\\
+ %%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{3.5cm}
+\begin{center}
+$c\gtrsim0$\\[0.03in]
+AC
+\end{center}
+\end{minipage}
+& 
+\begin{minipage}{3.5cm}
+\begin{center}
+yes\\[0.03in]
+
+\end{center}
+\end{minipage}
+&
+\begin{minipage}{3.5cm}
+\begin{center}
+no\\[0.03in]
+
+\end{center}
+\end{minipage}
+&
+\begin{minipage}{3.5cm}
+\begin{center}
+yes\\[0.03in]
+
+\end{center}
+\end{minipage}
+&
+\begin{minipage}{3.5cm}
+\begin{center}
+yes\\[0.03in]
+
+\end{center}
+\end{minipage}
+&
+\begin{minipage}{3.5cm}
+\begin{center}
+no\\[0.03in]
+
+\end{center}
+\end{minipage}
+\\[0.03in]
+\\
+%%%%%%%%%%%%%%%%%%%%%%%%
+ \hline\\
+ %%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{3.5cm}
+\begin{center}
+$c\gtrsim0$\\[0.03in]
+CH
+\end{center}
+\end{minipage}
+& 
+\begin{minipage}{3.5cm}
+\begin{center}
+no\\[0.03in]
+
+\end{center}
+\end{minipage}
+&
+\begin{minipage}{3.5cm}
+\begin{center}
+(yes) \\[0.03in]
+\cite{krekhov2009formation}
+\end{center}
+\end{minipage}
+&
+\begin{minipage}{3.5cm}
+\begin{center}
+no\\[0.03in]
+
+\end{center}
+\end{minipage}
+&
+\begin{minipage}{3.5cm}
+\begin{center}
+yes\\[0.03in]
+
+\end{center}
+\end{minipage}
+&
+\begin{minipage}{3.5cm}
+\begin{center}
+not known
+\end{center}
+\end{minipage}
+\\[0.03in]
+\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+ \hline
+%%%%%%%%%%%%%%%%%%%%%%%%
+\end{tabular}
+\end{center}
+\end{block}
+
+
+
+%----------------------------------------------------------------------------------------
+%	MATHEMATICAL SECTION
+%----------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+
+
+\begin{block}{Conclusion and open problems}
+We expect many of our methods to be generalized, allowing for more general jump discontinuities $f(x,u)=f_\pm(u)$, $\pm x>0$, with $f_+(u)u>0$ and $f_-(u)=-f_-(-u)$ bistable, or even more general homotopies from monotone to bistable nonlinearities as $x$ varies from $+\infty$ to $-\infty$.% We expect many of our methods to allow for such extensions. %Possibly somewhat restrictive is our assumption on monotonicity of the period of periodic solutions in the amplitude of periodic patterns. 
+% 
+\newline
+
+\begin{alertblock}{Open problems}
+%  \begin{frame}
+\begin{enumerate}
+\item  Selection of an angle;
+\item Stability;
+\item  Other nonlinearities;
+\item  Spatial dynamics and completeness.
+ \end{enumerate}
+%  \end{frame}
+
+\end{alertblock}
+\begin{figure}
+\includegraphics[width=\textwidth]{figs/helices}
+%\\ \includegraphics[width=\textwidth]{figs/liesegang1.png}
+\caption{Helices in recurrent precipitation: a phenomenon related to oblique patterns in Cahn-Hilliard (see \cite{thomas2013helices}).}
+\label{helices}
+\end{figure}
+% \begin{enumerate}
+%  \item \textbf{Selection of an angle.}
+% % We view the present work as a first attempt to gain a better understanding of selection processes induced by directional quenching. It appears that the dynamic process, $c>0$, selects patterns to some extent: given a latteral $y$-period, one expects an angle selection. We showed here, that this angle tends to be $\pi/2$, that is, stripes align perpendicular to the interface. Recent work on the Swift-Hohenberg equation \cite{GS} shows that one expects a family of oblique stripes with $\phi\sim 0$ to accompany a time-periodic solution forming vertical stripes, that is existence of solutions as depicted in Figure \ref{Figure_1-horizontal}, top right. Given the results in \cite{krekhov2009formation}, one would therefore expect oblique stripes in Cahn-Hilliard as well. It is an interesting question to explore the angle in this family of oblique stripes as the lateral period is decreased.
+%  
+% \item \textbf{Stability.}
+% % We did not perform a stability analysis of these patterns. In the Allen-Cahn case, stripes are unstable and any stability result would need to be understood in a pointwise sense. One could for instance focus on the absence of singularities of the Green's function, that is, the absence of zeros of an analytic extension of the Evans function, first. On the other hand, restricting to the reduced domains, with Dirichlet boundary conditions at $y=0$ and $y=\kappa$, we would expect the solutions found here to be stable. In fact, interpreting our iteration schemes used in the proof as an implicit Euler time stepping for the parabolic flow, we recognize that, at least in the truncated problems, stability is a prerequisite for showing existence using our methods. An interesting marginal case is the $\mathcal{H}_\infty$ case, where a single interface is created. We suspect that this solution $\Theta$ is stable also as a solution in $\R^2$, although decay would be slow as the relaxation of an infinitely bent interface 
+% % happens on a diffusive time scale.  
+% 
+% \item \textbf{Other nonlinearities.}
+% % As pointed out before, our analysis should apply to a large class of odd nonlinearities. Dropping this symmetry, the problem is however wide open. One can readily suspect that for non-balanced nonlinearities, $\int_{u_-}^{u_+}f(u)\neq 0$, where $u_\pm$ are the two stable equilibria, interfaces created at the trigger would move, but establishing existence and selection laws for the angle, for single interfaces or periodic interface arrangements behind the trigger, appears to be challenging. 
+% 
+% \item \textbf{Spatial dynamics and completeness.}
+% % We intend to pursue a more detailed analysis of the existence and stability problem for $\kappa\gtrsim \pi$, studying the solutions near $u=0$ using spatial $x$-dynamics and center-manifold reduction. The hope is to reduce the existence problem to a geometric picture similar to the one-dimensional problem studied in Section \ref{s:pp}. This would allow for a more systematic study of angle selection, in particular also allowing for Cahn-Hilliard dynamics, at least in this limit of small lateral period. 
+% 
+% 
+% \end{enumerate}
+
+
+\end{block}
+
+%----------------------------------------------------------------------------------------
+%	RESULTS
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of column 2.2
+
+% \end{columns} % End of the split of column 2
+
+
+% \end{column} % End of the second column
+
+\begin{column}{\sepwid}\end{column} % Empty spacer column
+
+\begin{column}{\onecolwid} % The third column
+
+%----------------------------------------------------------------------------------------
+%	CONCLUSION
+%----------------------------------------------------------------------------------------
+
+% 
+% %----------------------------------------------------------------------------------------
+% %	ADDITIONAL INFORMATION
+% %----------------------------------------------------------------------------------------
+% 
+% \begin{block}{Additional Information}
+% 
+% \end{block}
+
+%----------------------------------------------------------------------------------------
+%	REFERENCES
+%----------------------------------------------------------------------------------------
+
+\begin{block}{References}
+
+% \nocite{*} % Insert publications even if they are not cited in the poster
+\small{\bibliographystyle{abbrv}%unsrt}
+\bibliography{sample}\vspace{0.6in}}
+
+\end{block}
+
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+\setbeamercolor{block title}{fg=red,bg=white} % Change the block title color
+
+\begin{block}{Acknowledgements}
+
+\small{\rmfamily{R. M. was supported by NSF grant DMS-1311740 and DAAD-feelowship 91593697. R.M. also thanks Istv\'an Lagzi, in whose's laboratory the photo in Fig. \ref{helices} was taken. A.S. was supported by grants NSF DMS-1612441 and  NSF DMS-1311740}} \\
+
+\end{block}
+
+%----------------------------------------------------------------------------------------
+%	CONTACT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\setbeamercolor{block alerted title}{fg=black,bg=norange} % Change the alert block title colors
+\setbeamercolor{block alerted body}{fg=black,bg=white} % Change the alert block body colors
+
+\begin{alertblock}{Contact Information}
+
+\begin{itemize}
+\item Web: \href{http://www.math.umn.edu/~rmonteir/}{http://www.math.umn.edu/\~{}rmonteir/}
+\item Email: \href{mailto:rmonteir@umn.edu}{rmonteir@umn.edu}
+\end{itemize}
+
+\end{alertblock}
+
+\begin{center}
+\begin{tabular}{c}
+\includegraphics[width=\linewidth]{smM-horiz-202C-eps-converted-to}% & \hfill & \includegraphics[width=0.4\linewidth]{logo.png}
+\end{tabular}
+\end{center}
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of the third column
+
+\end{columns} % End of all the columns in the poster
+
+\end{frame} % End of the enclosing frame
+
+\end{document}

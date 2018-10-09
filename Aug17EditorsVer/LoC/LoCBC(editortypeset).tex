@@ -1,0 +1,125 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{dsfont}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{stmaryrd}
+\usepackage{fullpage}
+\usepackage{ifthen}
+\usepackage{subfigure}
+\usepackage{epic}
+\usepackage{authblk}
+\usepackage{textcomp}
+\usepackage[small]{caption}
+
+
+\usepackage[hypertexnames=false,colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage[numbers,comma,square,sort&compress]{natbib}
+\usepackage[letterpaper,text={7in,9in},centering]{geometry}
+
+
+\usepackage{color}
+\usepackage{titlesec}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{1.0ex plus0.2ex minus0.2ex}
+\renewcommand{\baselinestretch}{1.1}
+\graphicspath{{eps/}{pdf/}}
+%\setcaptionmargin{0.25in}
+\def\captionfont{\itshape\small}
+\def\captionlabelfont{\upshape\small}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\newcommand{\bqq}{\begin{equation}}
+\newcommand{\eqq}{\end{equation}}
+\newcommand{\bqs}{\begin{equation*}}
+\newcommand{\eqs}{\end{equation*}}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}} 
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\rme}{\mathrm{e}}
+\newcommand{\rmi}{\mathrm{i}}
+\newcommand{\rmd}{\mathrm{d}}
+\newcommand{\rmo}{{\scriptstyle\mathcal{O}}}
+\newcommand{\rmO}{\mathcal{O}}
+\newcommand{\eps}{\varepsilon}
+
+\numberwithin{equation}{section}
+
+\newenvironment{Hypothesis}[1]%
+  {\begin{trivlist}\item[]{\bf Hypothesis #1 }\em}{\end{trivlist}}
+
+\renewcommand{\arraystretch}{1.25}
+
+
+% Define Theorem Styles ----------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{main}[theorem]{Main Result}
+\newtheorem{rmk}[theorem]{rmk}
+
+
+\newcommand{\etal}{\textit{et al.}\ }
+
+\newcommand{\greg}[1]{%
+  {\color{blue}\textbf{Greg:} #1}%
+ }
+ 
+\newcommand{\arnd}[1]{%
+  {\color{red}\textbf{Arnd:} #1}%
+ }
+
+\newenvironment{Proof}[1][.]%
+ {\begin{trivlist}\item[]\textbf{Proof#1 }}%
+ {\hspace*{\fill}$\rule{0.3\baselineskip}{0.35\baselineskip}$\end{trivlist}}
+
+\renewcommand\labelitemi{$\bullet$}
+
+
+\title{List of changes}
+\author{author}
+\begin{document}
+Response to the referee's report on 
+
+``Bifurcation to coherent structures in nonlocally coupled systems''
+
+We appreciate the careful reading of the referee and corrected the unfortunate typos that the referee pointed out. Below is a list of changes in reponse to those comments.
+
+\begin{itemize}
+
+\item ``Some smoothness of $K$ appears to be necessary ... On the other hand, exponential localization appears to be necessary" is awkward: what does "on the other hand" refer to if both conditions appear to be necessary?
+
+---On page $3$, Changed to \textcolor{red}{``Also,  exponential localization appears to be necessary''} 
+
+\item could you comment on the assumption $n<6$?
+
+---On page $6$, Added the following comments after the statement of theorem $1$. \textcolor{red} { ``The assumption n < 6 relates to subcriticality of the nonlinearity in the local, scalar version of our problem,
+ $\Delta w- w + w^p = 0$. Subcriticality of the nonlinearity implies existence of ground states and minimal critical spectrum, and  holds for $1 < p < \frac{n+2}{n-2}$
+ ([26, Lem13.3]), or in our case, $n<6$ for $p=2$. ''}
+
+\item Acknowledgment: hopefully "gratefully" and not "gatefully"
+
+---In the middle of page $7$, fixed.
+
+\item Lemma 2.1: The last sentence contains at least two typos: it should be $L_{hh}$ instead of $L_{hc}$ in the first part, and $L_{hc}$ has values in $R^{k-1}$.
+
+---At the bottom of page $7$, fixed.
+\end{itemize}
+
+
+Tyanyu Tao and Arnd Scheel
+\end{document}

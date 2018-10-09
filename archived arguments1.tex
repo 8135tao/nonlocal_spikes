@@ -1,0 +1,222 @@
+
+\begin{lemma}\label{estmult}$m^\eps$ defined above, 
+\begin{enumerate}
+\item $M^\eps : H^k \to H^{k-2}$ is bounded with $\|M^\eps\|_{H^k \to H^{k-2}}$ independent in $\eps$;
+
+\item $M^\eps : H^{k-2} \to H^k$ is invertible, with $(M^\eps)^{-1} : H^k \to H^{k-2}$ satisfies the estimate \[
+\|(M^\eps)^{-1} -d^{-1}\|_{H^k \to H^{k-2}} = O(\eps^2)
+\] as $\eps \to 0$, we denote the operator $(M^\eps)^{-1}-d^{-1}$ by $\mathcal{J}^\eps$;
+
+\item $L_{j}^{\eps} :H^k \to H^k$ ($j =h0,0h$) is bounded with $\|L_{j}^{\eps}\|_{H^k \to H^k}$ independent in $\eps$; and $L_j^{\eps} : H^k \to H^{k-2}$ is bounded with $\|L_{j}^{\eps}\|_{H^k \to H^{k-2}} = O(\eps^2)$ as $\eps \to 0$.
+
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}
+\item[(i).] The symbol for $L^\eps$ equals $\widehat{L}(\eps\ell)=\widehat{L}_{00}(\eps \ell)-\widehat{L}_{0h}(\eps\ell)(\widehat{L}_{hh}(\eps\ell))^{-1}\widehat{L}_{h0}(\eps\ell) = d(\eps\ell)^2 + O((\eps\ell)^4)$ by lemma \ref{Lem1} on the expansions about the symbols of $L_{00}, L_{0h},L_{h0}$ and $L_{hh}$. Hence $m_1(\eps\ell):=\widehat{L}(\eps\ell)/(\eps\ell)^2=d+O((\eps\ell)^2)$ is the symbol of $M_\eps$. Note we have $m_1(0) = d \neq 0$ by assumption.
+
+
+Then $\|M^\eps\|_{H^2 \to L^2} = \sup_{\ell} |m_1(\eps\ell)|$, which is independent of $\eps$ by change of variable $\eps\ell = \eta$.
+
+\item[(ii).] this is the key computation, we have: 
+\begin{align*}
+\| \mathcal{J}^{\eps} \|_{H^k \to H^{k-2}}=\sup_{\ell} \left|\frac{1}{1+\ell^2}\widehat{\mathcal{J}_\eps}(\ell)\right| &= \sup_{\ell} \left|\left( \frac{d-\widehat{M}_\eps(\ell)}{d\widehat{M}_\eps(\ell)}\right) \frac{1}{1+\ell^2}\right|\\
+&=\sup_{\ell}\left| \frac{\widehat{L}(\eps \ell)-d(\eps\ell)^2}{d\widehat{L}(\eps\ell)(\eps\ell)^2}\frac{(\eps\ell)^2}{1+\ell^2} \right| \\
+&= \sup_{\eta}\left| \eps^2 \frac{d^{-1}\eta^2}{\eta^2+\eps^2}\left(\eta^{-2}+d\widehat{L}(\eta)^{-1})\right)\right|
+\end{align*}
+
+where in the last step we changed variable by $\eta = \eps\ell$, we shall focus on the quantity
+\[
+I(\eta)= \eta^{-2} -d\widehat{L}(\eta)^{-1}.
+\]
+First, notice that $m_1(0) \neq 0$, hence $I(0) < \infty$.
+
+Second, if at some finite $\eta$, $m_1(\eta) = 0$, this can only happen if $\widehat{L}(\eta) = 0$ for some $0<|\eta|<\infty$, this is impossible, as a $0$ of $\widehat{L}(\eta)$ corresponds to a $\eta$ for which the matrix $\begin{pmatrix}
+\widehat{L}_{00}(\eta) &  \widehat{L}_{0h}(\eta) \\
+\widehat{L}_{h0}(\eta) & \widehat{L}_{hh}(\eta)
+\end{pmatrix}$ is singular, because of the formula  
+\[
+\det \begin{pmatrix}
+\widehat{L}_{00}(\eta) &  \widehat{L}_{0h}(\eta) \\
+\widehat{L}_{h0}(\eta) & \widehat{L}_{hh}(\eta)
+\end{pmatrix} = \det(\widehat{L}_{hh}(\eta))\det(\widehat{L}_{00}(\eta)-\widehat{L}_{0h}(\eta)L_{hh}(\eta)^{-1}\widehat{L}_{h0}(\eta)) = \det(\widehat{L}_{hh}(\eta)) \widehat{L}(\eta)
+\]
+holds, as $\widehat{L}_{hh}(\eta)$ is invertible for all $\eta$, but by our assumption, the point $\eta = 0$ is the only value this can happen, hence $\widehat{L}(\eta) \neq 0$ for all $\eta \neq 0$.
+
+Finally, the matrix $\begin{pmatrix}
+\widehat{L}_{00}(\eta) &  \widehat{L}_{0h}(\eta) \\
+\widehat{L}_{h0}(\eta) & \widehat{L}_{hh}(\eta)
+\end{pmatrix}$ converges to $M_1AM_2$ as $\eta \to \infty$, which is invertible by assumption and lemma \ref{Lem1}, so again by the determinant formula we conclude $\widehat{L}(\eta) \neq 0$ at $\eta  = \infty$.
+
+
+Therefore, the $I(\eta)$ is bounded on $\eta \in \R$, so
+\[
+\| \mathcal{J}^{\eps} \|_{H^k \to H^{k-2}} =  \sup_{\eta}\left| \eps^2 \frac{d^{-1}\eta^2}{\eta^2+\eps^2}I(\eta) \right| \le C \eps^2
+\]
+for some constant $C$, this shows $\|\mathcal{J}^{\eps}\|_{H^k \to H^{k-2}}$ is of order $\eps^2$.
+
+
+\item[(iii).] The first  claim is clear, since $\sup_{\ell}|L_{j}^{\eps}(\ell)|=\sup_{\ell}|L_j(\eps\ell)|$, the conclusion follows as in (i);
+
+The second claim follows from the straightforward computation:
+\[
+\|L_{j}^{\eps}\|_{H^2 \to L^{2}} \le \sup \left\|\frac{\widehat{L}_j(\eps\ell)}{1+\ell^2}\right\|=\sup_{\eta}\left\| \frac{\eps^2}{\eps^2+\eta^2}\widehat{L}_j(\eta)\right\| \le \eps^2 \sup_{\eta}\left\|\frac{\widehat{L}_j(\eta)}{\eta^2}\right\|
+\]
+and we know $\widehat{L}_j(\eta)= O(\eta^2)$ as $\eta \to 0$ and $\widehat{L}_j(\eta) \to A_j$ as $\eta \to \infty$, so the supremum is finite and $\|L_{j}^{\eps}\|_{H^k\to H^{k-2}}$ is of order $\eps^2$.
+
+\end{enumerate}
+
+To show the continuity condition $\|F(0,\eps)\|_{H^{k-2}} \to 0$ as $\eps \to 0$ holds, we plug in $w = 0$, and get:
+\[
+F(0,\eps) = (d^{-1}-(M^{\eps})^{-1})du_*^{''} + (M^{\eps})^{-1} \mathcal{R}(u_*,\psi(u_*,\eps);\eps)
+\] 
+
+since $\|d^{-1}-(M^{\eps})^{-1}\|_{H^k \to H^{k-2}}  = \|\mathcal{J}^{\eps}\|_{H^2 \to L^2} = O(\eps^2)$, we focus on the $H^{k-2}$ norm of
+\begin{align*}
+(M^{\eps})^{-1}\mathcal{R} (u_*,\psi(u_*,\eps);\eps)&= \eps^{-2}(M^{\eps})^{-1}L_{0h}^{\eps}\psi(u_*,\eps)+a_{011}(M^{\eps})^{-1}[-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}u_*+\psi(u_*,\eps)]\\
+&+a_{020}(M^{\eps})^{-1}[-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}u_*+\psi(u_*,\eps)]^2\\
+&+a_{110}(M^{\eps})^{-1}u_*[-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}u_*+\psi(u_*,\eps)]\\
+&+\eps^2(M^{\eps})^{-1}R_1(u_*,\psi(u_*,\eps);\eps)
+\end{align*}
+
+First, the remainder $\eps^2\| (M^{\eps})^{-1}R_1\|_{H^{k-2}}$ is of order $\eps^2$, just because $(M^{\eps})^{-1}$ is uniformly bounded from $H^k \to H^{k-2}$, and $\|R_1(u_*,\psi(u_*,\eps);\eps)\|_{H^k}$ is bounded by some constant independent of $\eps$, as the superposition operator is smooth, and $u_*$ is fixed.
+
+To estimate $\eps^{-2}(M^{\eps})^{-1}L_{0h}^{\eps}\psi(u_*,\eps)$, we write it as
+\[
+\eps^{-2}\mathcal{J}^{\eps} L_{0h}^{\eps}\psi(u_*,\eps)+ \eps^{-2}d^{-1}L_{0h}^{\eps}\psi(u_*,\eps) 
+\]
+for the first summand, we have
+\[
+\|\eps^{-2}\mathcal{J}^{\eps} L_{0h}^{\eps}\psi(u_*,\eps)\|_{H^{k-2}} \le \|\mathcal{J}^{\eps}\|_{H^k \to H^{k-2}}\|\|L_{0h}^\eps\|_{H^k \to H^k}\|\eps^{-2}\psi\|_{H^k} = O(\eps^2)
+\]
+since $\|\psi\|_{H^k}=O(\eps^2)$ by lemma \ref{Lemuh}, where we have $u_0 = u_*$ and $r = \|u_*\|$.
+
+For the second summand, use lemma \ref{estmult} (iii), we have
+\[
+\|d^{-1}\eps^{-2}L_{0h}^\eps \psi\|_{H^{k-2}} \le d^{-1}\|L_{0h}^{\eps}\|_{H^k \to H^{k-2}}\|\eps^{-2}\psi\|_{H^k} = O(\eps^2),
+\]
+hence we have $\|\eps^{-2}(M^{\eps})^{-1}L_{0h}^{\eps}\psi(u_*,\eps)\|_{H^{k-2}}=O(\eps^2)$.
+
+Next, we estimate the $H^{k-2}$ norm of the nonlinear term $(M^{\eps})^{-1}[-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}(u_*) +\psi(u_*,\eps)]^2$, denote the term $-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}(u_*) +\psi(u_*,\eps)$ by $A$, we again write it as $\mathcal{J}^\eps[A]^2+d^{-1}[A]^2$, the first summand satisfies
+\[
+\|\mathcal{J}^{\eps}[A]^2\|_{H^{k-2}} \le \|\mathcal{J}^\eps \|_{H^k \to H^{k-2}}
+\|A\|_{H^k}^2 = O(\eps^2),
+\]
+by using the property that for $k\ge 2$, $H^k(\R)$ is an algebra.
+
+
+For the second summand $d^{-1}[A]^2$, we need to estimate its $H^{k-2}$ norm directly, in the case $k=2$, use the fact that $H^k$ embedds into $L^\infty$ then
+\begin{align*}
+\|(M^{\eps})^{-1}[A]^2\|_{H^{k-2}} &\le \|(M^{\eps})^{-1}-d^{-1}\|_{H^k\to H^{k-2}}\|A^2\|_{H^k}+d^{-1}\|A^2\|_{H^{k-2}}\\
+&\le \|\mathcal{J}^{\eps}\|_{H^k\to H^{k-2}}\|A\|^2_{H^k}+d^{-1}\|A\|_{\infty}\|A\|_{H^{k-2}}
+\end{align*}
+and $\|A\|_{H^{k-2}}$ is $O(\eps^2)$ because since $\|\psi\|_{H^{k-2}}$ is $O(\eps^2)$ and 
+\[
+\|-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}u_* \|_{H^{k-2}}\le \|-(L_{hh}^{\eps})^{-1}\|_{H^{k-2}\to H^{k-2}}\|L_{h0}^{\eps}\|_{H^k \to H^{k-2}}\|u_*\|_{H^{k-2}}=O(\eps^2).
+\]
+
+Thus we see $\|(M^\eps)^{-1}[-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}(u_*) +\psi(u_*,\eps)]^2\|_{H^{k-2}} = O(\eps^2)$ as well.
+
+The other terms  in $\mathcal{R}$ are dealt similarly, that is:
+\[
+\|u_*[-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}u_* +\psi(u_*,\eps)]\|_{H^{k-2}} = O(\eps^2)\]
+and 
+\[
+\|-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}u_*+\psi(u_*,\eps)\|_{H^{k-2}} = O(\eps^2)
+\]
+holds, so we conclude $\|(M^{\eps})^{-1}\mathcal{R}\|_{H^{k-2}} = O(\eps^2)$, and therefore $\|F(0,\eps)\|_{H^{k-2}} = O(\eps^2)$ as claimed.
+
+ We check $F$ is continuously differentiable in $w$, first note the term 
+\[
+(M^\eps)^{-1}\mathcal{R}= (M^\eps)^{-1}\mathcal{R}(u_*,\psi(u_*+w,\eps);\eps)
+\] is smooth in $w$ simply because $R_1$ is smooth in all its variables, and $\psi(u_0,\eps)$ is smooth in $u_0$ by lemma \ref{Lemuh}, and $L_j^\eps$ are just linear operators.
+
+Then we only need to find the derivative of the term 
+\[
+\tilde{F}(w,\eps)= w'' - d^{-1}(w-2u_*w-w^2)+\mathcal{J}^{\eps}(w-2u_*w-w^2+du_*^{''})
+\]
+we compute the Frechet derivative, for $h \in H^k$, we find
+\[
+D_w\tilde{F}(w,\eps) h := h''-d^{-1}(h - 2(u_*+w)h)-2\mathcal{J}^{\eps}(u_*+w)h
+\]
+
+we have:
+\begin{align*}
+\|\tilde{F}(w+h,\eps)-\tilde{F}(w,\eps) - D_w\tilde{F}(w,\eps) h\| = O(\|h\|^2)
+\end{align*}
+
+So $D_wF(w,\eps) : H^k \to H^{k-2}$ is given by 
+\[
+D_wF(w,\eps) h = h''-d^{-1}(h - 2(u_*+w)h)-2\mathcal{J}^{\eps}(u_*+w)h + (M^\eps)^{-1}D_w\mathcal{R}
+\]
+
+
+The continuity of $D_wF(w,\eps)$ in $w$ follows from the following: Since $\mathcal{R}$ is smooth in $w$, we only need to check $\tilde{F}$ is continuously differentiable in $w$, for $h \in H^k$ with $\|h\|_{H^k}=1$, we have:
+\begin{align*}
+\| D_w\tilde{F}(w_1,\eps)h-D_w\tilde{F}(w_2,\eps)h\|_{H^{k-2}} &=\| 2d^{-1}h(w_1-w_2)-\mathcal{J}^{\eps} 2h(w_1-w_2)\|_{H^{k-2}} \\
+& \le \| 2d^{-1}h(w_1-w_2)\|_{H^{k-2}}+\|\mathcal{J}^{\eps}\|_{H^k \to H^{k-2}}\| 2h(w_1-w_2)\|_{H^k} \\
+& \le (d^{-1}+\|\mathcal{J}_\eps\|_{H^k\to H^{k-2}}) \|2h(w_1-w_2) \|_{H^k} \\
+& \le C \|h\|_{H^k} \|w_1-w_2\|_{H^k} = C\|w_1-w_2\|_{H^k}
+\end{align*}
+where again we used the fact that $H^k$ is an algebra.  We therefore conclude that $D_wF(w,\eps)$ is continuous in $w$.
+
+
+Finally we claim that the remainder term $\mathcal{R}$ satisfies 
+\[
+\|(M^{\eps})^{-1}D_w\mathcal{R}(u_*+w,\psi(u_*+w,\eps);\eps) \|_{H^k \to H^{k-2}}= O(\eps^2)
+\]
+as $\eps \to 0$.
+
+To see this, recall from lemma \ref{Lemuh} we have that 
+\[
+\| D_u\psi(u_*+w,\eps) \|_{H^k \to H^k}
+\] is $O(\eps^2)$ as well, hence, for the first term in $(M^{\eps})^{-1}D_w\mathcal{R}$, which is $\eps^{-2}(M^{\eps})^{-1}L_{0h}^{\eps}D_u\psi(u_*+w,\eps)$ we have
+\begin{align*}
+& \|(M^\eps)^{-1}L_{0h}^\eps \eps^{-2}D_u\psi(u_*+w,\eps) \|_{H^k \to H^{k-2}}  \\
+&\le \|\mathcal{J}^{\eps}\|_{H^k \to H^{k-2}}\| L_{0h}^{\eps}\|_{H^k\to H^k}\|\eps^{-2}D_u\psi\|_{H^k \to H^k}+d^{-1}\|L_{0h}^{\eps}\|_{H^k \to H^{k-2}}\|\eps^{-2}D_u\psi\|_{H^k \to H^k}\\
+& = O(\eps^2)
+\end{align*}
+this is essentially the same estimate we did to show $\|\mathcal{R}\|_{H^k} = O(\eps^2)$, the other terms in $\mathcal{R}$ is dealt similarly.
+
+We can then write
+\[
+DF(w,\eps)h = h''-d^{-1}(h-2(u_*+w)h)-2\mathcal{J}^\eps(u_*+w)h+O(\eps^2),
+\]
+thus $D_wF$ is continuous at $(w,\eps) = (0,0)$, and $D_wF(0,0) h = h''-d^{-1}(h-2u_* h) := L h$, but this is an invertible operator from $H^k_{even} \to H^{k-2}_{even}$, see appendix. Hence 
+ \[
+ D_wF(0,\eps) = L+\mathcal{J}^{\eps} u_*h+(M^{\eps})^{-1}D_w\mathcal{R} = L+O(\eps^2),
+ \] 
+ is invertible with inverse bounded uniformly in $\eps$ as $\eps \to 0$.
+
+
+
+\iffalse
+ The continuity of $F(w,\eps)$ in $\eps$ follows from the same estimate in item (iv), more precisely, we have
+\[
+\|F(w,\eps_1)-F(w,\eps_2) \|\le \|(\mathcal{J}_{\eps_1}-\mathcal{J}_{\eps_2})(w-2u_*w-w^2+du_*^{''})\| + O((\eps_1^2M_{\eps_1}^{-1}-\eps_2^2M_{\eps_2}^{-1})(w+u_*))
+\]
+but we have shown $(\mathcal{J}_{\eps_1}-\mathcal{J}_{\eps_2}) \to 0$ as an operator from $H^2$ to $L^2$ and as $\eps_1\to \eps_2$, and the same holds for the remainder term. So we have continuity in $\eps$.
+
+Hence, we have shown that $\|F(w,\epsilon)\|_{L^2} \to 0$ as $\eps \to 0$, and $\|D_wF(0,\eps)\|_{H^2_{even} \to L^2_{even}}$ is invertible with inverse uniformly bounded in $\eps$.
+\fi
+ Here we set up our Newton iteration scheme again, this is analogous to lemma \ref{Lemuh}, we introduce a map $S(\cdot; \eps) : H^k \to H^{k}$ as
+\[
+S(w;\eps) = w - D_wF(0; \eps)^{-1}[F(w;\eps)]
+\]
+
+based on previous calculation, we have 
+\[
+\|S(0;\eps)\|_{H^k} \le \|D_wF(0;\eps)^{-1}\|_{H^{k-2}_{even} \to H^k_{even}}\|F(0;\eps)\|_{H^{k-2}_{even}} = O(\eps^2)
+\]
+as $\eps \to 0$.
+
+Also, $S$ is continuously differentiable in $w$, and $D_wS(0;\eps) = 0$ by definition of $S$, hence, there exists $\tilde{\delta}$ and a constant $\tilde{C}$ such that if $\|w\|_{H^k} \le \tilde{\delta}$, then $\| D_wS(w;\eps) \| \le \tilde{C}\tilde{\delta}$, simply by continuity of $D_wS$ in $w$.
+
+Then, the iteration is:
+\[
+w_{n+1} = S(w_n;\eps)
+\]
+exactly as in lemma \ref{Lemuh}, again for $\eps$ small $S$ maps $B_{\tilde{\delta}}\subset H^k(\R)$ into itself and is a contraction, and we find $w=w(\eps) = \lim_{n\to \infty} w_n$ and $w(\eps) = S(w(\eps);\eps)$, so $F(w(\eps);\eps) = 0$ and $\|w(\eps)\| = O(\eps^2)$, which are the desired properties.
+
+
+\end{proof}

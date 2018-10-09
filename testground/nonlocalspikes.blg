@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: nonlocalspikes.aux
+The style file: abbrv.bst
+Database file #1: nonlocal_spikes_ref_msc.bib
+Warning--there's a number but no volume in batespleth
+You've used 28 entries,
+            2118 wiz_defined-function locations,
+            698 strings with 8293 characters,
+and the built_in function-call counts, 9074 in all, are:
+= -- 907
+> -- 371
+< -- 12
++ -- 148
+- -- 118
+* -- 664
+:= -- 1505
+add.period$ -- 91
+call.type$ -- 28
+change.case$ -- 137
+chr.to.int$ -- 0
+cite$ -- 29
+duplicate$ -- 359
+empty$ -- 741
+format.name$ -- 118
+if$ -- 1890
+int.to.chr$ -- 0
+int.to.str$ -- 28
+missing$ -- 36
+newline$ -- 146
+num.names$ -- 56
+pop$ -- 137
+preamble$ -- 1
+purify$ -- 115
+quote$ -- 0
+skip$ -- 224
+stack$ -- 0
+substring$ -- 589
+swap$ -- 69
+text.length$ -- 12
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 96
+warning$ -- 1
+while$ -- 94
+width$ -- 30
+write$ -- 322
+(There was 1 warning)

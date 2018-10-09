@@ -1,0 +1,127 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{dsfont}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{stmaryrd}
+\usepackage{fullpage}
+\usepackage{ifthen}
+\usepackage{subfigure}
+\usepackage{epic}
+\usepackage{authblk}
+\usepackage{textcomp}
+\usepackage[small]{caption}
+
+
+\usepackage[hypertexnames=false,colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage[numbers,comma,square,sort&compress]{natbib}
+\usepackage[letterpaper,text={7in,9in},centering]{geometry}
+
+
+\usepackage{color}
+\usepackage{titlesec}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{1.0ex plus0.2ex minus0.2ex}
+\renewcommand{\baselinestretch}{1.1}
+\graphicspath{{eps/}{pdf/}}
+%\setcaptionmargin{0.25in}
+\def\captionfont{\itshape\small}
+\def\captionlabelfont{\upshape\small}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\newcommand{\bqq}{\begin{equation}}
+\newcommand{\eqq}{\end{equation}}
+\newcommand{\bqs}{\begin{equation*}}
+\newcommand{\eqs}{\end{equation*}}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}} 
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\rme}{\mathrm{e}}
+\newcommand{\rmi}{\mathrm{i}}
+\newcommand{\rmd}{\mathrm{d}}
+\newcommand{\rmo}{{\scriptstyle\mathcal{O}}}
+\newcommand{\rmO}{\mathcal{O}}
+\newcommand{\eps}{\varepsilon}
+
+\numberwithin{equation}{section}
+
+\newenvironment{Hypothesis}[1]%
+  {\begin{trivlist}\item[]{\bf Hypothesis #1 }\em}{\end{trivlist}}
+
+\renewcommand{\arraystretch}{1.25}
+
+
+% Define Theorem Styles ----------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{main}[theorem]{Main Result}
+\newtheorem{rmk}[theorem]{rmk}
+
+
+\newcommand{\etal}{\textit{et al.}\ }
+
+\newcommand{\greg}[1]{%
+  {\color{blue}\textbf{Greg:} #1}%
+ }
+ 
+\newcommand{\arnd}[1]{%
+  {\color{red}\textbf{Arnd:} #1}%
+ }
+
+\newenvironment{Proof}[1][.]%
+ {\begin{trivlist}\item[]\textbf{Proof#1 }}%
+ {\hspace*{\fill}$\rule{0.3\baselineskip}{0.35\baselineskip}$\end{trivlist}}
+
+\renewcommand\labelitemi{$\bullet$}
+
+
+\title{List of changes}
+\author{author}
+\begin{document}
+List of changes 
+``Bifurcation to coherent structures in nonlocally coupled systems''
+
+I did not find any major changes that distorted the equations, formulas, etc. The changes are mainly in style:
+
+\begin{itemize}
+
+\item ``Sections '' are being changed to ``Sects''. Example: line 33, line 34. One place where I found a little bit incoherence is line 246, right after ``Sect 3.'' The sentence started with ``Section 4'', maybe it should be changed to ``Sects'' for consistency?
+
+\item In the title for a section or a paragraph, a dash has been changed into a colon, and the first letter of each word has been capitalized, also the period at the end of the title is deleted. Example: line 36: ``\textbf{ Local Coupling: Result}'', which originally in our submitted paper is ``\textbf{ Local coupling --- results.}''
+
+
+\item The paragraph for acknowledgment is deleted. (after line 262)
+
+\item The title for ``remark'' is now not in bold font (line 143, line 166, and line 453)
+
+\item The reference to ``equations'' has been changed to ``Eq.'' Example: line 244 ``See Eq.(3.2)'' which originally is ``See equation (3.2)'' .
+
+\item The proof environment is changed, now all the proof end with an empty box instead of a solid black one.
+
+\item The labeling for Theorem $1$ has been change to Theorem $1.3$ (line 213, line 568 and line 569)
+
+
+\item This one is a typo I found in our original paper, in line 148, we had $\tilde{M}(y) = \langle e^*, \tilde{K}(x)e\rangle$, the $x$ should be changed to $y$, same change should apply to the formula for $M(y)$ immediately behind.
+
+\item Reference 13. Now appears at Transactions AMS
+
+\item
+ \end{itemize}
+
+Tianyu Tao and Arnd Scheel
+\end{document}

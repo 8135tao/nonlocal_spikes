@@ -1,0 +1,604 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{dsfont}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{stmaryrd}
+\usepackage{fullpage}
+\usepackage{ifthen}
+\usepackage{subfigure}
+\usepackage{epic}
+\usepackage{authblk}
+\usepackage{textcomp}
+\usepackage[small]{caption}
+
+
+\usepackage[hypertexnames=false,colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage[numbers,comma,square,sort&compress]{natbib}
+\usepackage[letterpaper,text={7in,9in},centering]{geometry}
+
+
+\usepackage{color}
+\usepackage{titlesec}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{1.0ex plus0.2ex minus0.2ex}
+\renewcommand{\baselinestretch}{1.1}
+\graphicspath{{eps/}{pdf/}}
+%\setcaptionmargin{0.25in}
+\def\captionfont{\itshape\small}
+\def\captionlabelfont{\upshape\small}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\newcommand{\bqq}{\begin{equation}}
+\newcommand{\eqq}{\end{equation}}
+\newcommand{\bqs}{\begin{equation*}}
+\newcommand{\eqs}{\end{equation*}}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}} 
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\rme}{\mathrm{e}}
+\newcommand{\rmi}{\mathrm{i}}
+\newcommand{\rmd}{\mathrm{d}}
+\newcommand{\rmo}{{\scriptstyle\mathcal{O}}}
+\newcommand{\rmO}{\mathcal{O}}
+\newcommand{\eps}{\varepsilon}
+
+\numberwithin{equation}{section}
+
+\newenvironment{Hypothesis}[1]%
+  {\begin{trivlist}\item[]{\bf Hypothesis #1 }\em}{\end{trivlist}}
+
+\renewcommand{\arraystretch}{1.25}
+
+
+% Define Theorem Styles ----------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{main}[theorem]{Main Result}
+\newtheorem{rmk}[theorem]{rmk}
+
+
+\newcommand{\etal}{\textit{et al.}\ }
+
+\newcommand{\greg}[1]{%
+  {\color{blue}\textbf{Greg:} #1}%
+ }
+ 
+\newcommand{\arnd}[1]{%
+  {\color{red}\textbf{Arnd:} #1}%
+ }
+
+\newenvironment{Proof}[1][.]%
+ {\begin{trivlist}\item[]\textbf{Proof#1 }}%
+ {\hspace*{\fill}$\rule{0.3\baselineskip}{0.35\baselineskip}$\end{trivlist}}
+
+\renewcommand\labelitemi{$\bullet$}
+
+
+\title{Bifurcation of coherent structures in nonlocally coupled system}
+\author{author}
+\date{2016}
+\begin{document}
+\maketitle
+\begin{abstract}
+
+Motivated by models for neural fields, we study the existence of pulses  bifurcating from a spatially homogeneous state in nonlocally coupled systems of equations. More specifically, we look at equations of the form $AU + K*U = N(U;\mu)$, where $N$ encodes nonlinear terms, $A$ is an invertible matrix, and $K$ an even matrix convolution kernel. Assuming the presence of neutral modes, that is, solutions of the form $u\sim \exp(i \ell x)$ to the linear part, we show under appropriate assumptions on the nonlinearity and the unfolding in $\mu$ that pulses bifurcate. Such an anlysis is carried out using center manifold reduction, when coupling is local, say, $K=\delta''$. Here, we rely on functional analytic methods using predictors from formal expansions and correctors obtained after preconditioning the nonlinear system.
+\end{abstract}
+
+
+\section{Introduction}
+
+Nonlocal models describe a wealth of phenomena, neural field
+
+
+\section{Main Result}
+Our interest in this note concerning the equation
+\begin{equation} \label{system}
+AU+K\ast U = N(U;\mu) 
+\end{equation}
+where $U=U(x)$ is a vector valued $(\R^m)$ function defined on $\R$, $\mu > 0$ is a real parameter, $A$ is a $m$ by $m$ matrix and $K=K(x)$ is a matrix of convolution kernels, we assume the following on $A$ and $K$:
+
+\begin{Hypothesis}{(On linear operator $A+K\ast$)}
+\item (i).  We require $A$ is invertible, the entries of $K$ are even, $K(x)=K(-x)$, and belongs to $L^1(\R)$,  and is exponentially localized, i.e. there is  $\tau >0$ such that $\int_{\R}e^{\tau|x|}K(x)dx$ is finite. 
+\item [(ii).] if $\hat{K}(\ell)$ denotes the Fourier transform of the convolution kernel $K(x)$, which is a matrix depending on $\ell$, we assume that $\det(A+\widehat{K}(\ell)) = D\ell^2 + O(\ell^4)$ with $D \neq 0$ as $\ell \to 0$, more over we require for all $\ell\neq 0$, $A+\hat{K}(\ell)$ is invertible. 
+\end{Hypothesis}
+
+From $(ii)$, we know $A+\widehat{K}(\ell)$ is invertible for all $\ell$ close to $0$, while at $\ell = 0$, as a consequence of the determinant assumption, the kernel of $A + \widehat{K}(0)$ is spanned by a vector unique up to scalar multiplication, we denote $e_0 \in \R^m$ to be this kernel so that $\langle e_0, e_0\rangle =1$.
+
+
+\begin{Hypothesis} {(On nonlinearity $N$)}
+\item 
+We assume $N(u;\mu): \R^m \times \R \to \R^m$ is a smooth nonlinearity, with $N(0;\mu) = 0$ for all $\mu$, and if $e_0^*$ denotes the dual for $e_0$, we require: $\langle e_0^*, D_{u\mu} N(0;0)e_0 \rangle \neq 0$, $\langle e_0^*, D_{uu}N(0;0)[e_0,e_0] \rangle \neq 0$.
+\end{Hypothesis}
+
+
+We can prove the following lemma which ``diagonalize'' the operator $A+K\ast$ in the following sense:
+
+\begin{lemma}\label{Lem1} There exists $m$ by $m$ invertible matrix $M_1,M_2$ so that 
+\[
+M_1(A+\widehat{K}(\ell))M_2 = \begin{pmatrix}
+A_{00}+\widehat{K}_{00}(\ell)&  A_{0h}+\widehat{K}_{0h}(\ell) \\
+A_{h0}+\widehat{K}_{h0}(\ell)& A_{hh}+\widehat{K}_{hh}(\ell)
+\end{pmatrix}
+\]
+where $A_{00}+\widehat{K}_{00}(\ell)=d\ell^2 + O(\ell^4)$ ($d\neq 0$) is scalar valued, $A_{0h}+\widehat{K}_{0h}(\ell) = O(\ell^2)$ and $A_{h0}+\widehat{K}_{h0}(\ell) = O(\ell^2)$ are $1 \times (m-1)$ and $(m-1)\times 1$ matrix while $A_{hh}+\widehat{K}_{hh}(\ell)$ is an invertible $m-1$ by $m-1$ matrix for all $\ell$ with uniform bounds on the inverse in $\ell$.
+\end{lemma}
+\begin{proof}
+When $\ell = 0$, there exist $M_2$ so that 
+\[
+[A+\widehat{K}(0)]M_2 = \left(
+\begin{array}{c|c}
+  0 & \ast \cdots \ast \\ \hline
+  0 & \raisebox{-15pt}{{\huge\mbox{{$H$}}}} \\[-4ex]
+  \vdots & \\[-0.5ex]
+  0 &
+\end{array}
+\right)
+\]
+where $\ast$ denotes generic numbers, and $H$ is an invertible $m-1$ by $m-1$ matrix, now apply elementary matrix successively from the left reduce the first row to $(1,0\cdots0)$, let $M_1$ denote the product of all such elementary matrix. 
+
+For $\ell$ close to $0$, we expand $\widehat{K}(\ell)$ around $0$, the first component must be equal to $d\ell^2$ for some $d\neq 0$ due to the determinant requirement, the other entries are of order $\ell^2$ as the entries of $K$ are assumed to be even.
+
+Hence \[
+\begin{pmatrix}
+A_{00}&  A_{0h} \\
+A_{h0}& A_{hh}
+\end{pmatrix} = M_1AM_2 \text{ and }\begin{pmatrix}
+\widehat{K}_{00}(\ell)&  \widehat{K}_{0h}(\ell)\\
+\widehat{K}_{h0}(\ell)& \widehat{K}_{hh}(\ell)
+\end{pmatrix} = M_1\widehat{K}(\ell) M_2
+\]
+are the desired matrix,
+we remark that the Taylor expansion of the Fourier coefficients says that we have: $\int_{\R} K_{00}(x) + A_{00} =0$, $\int_{\R} K_{0h} + A_{0h} = (0,\cdots,0)$, $\int_\R K_{h0}+A_{h0} =(0,\cdots,0)^T$, and $\int_{\R} x^2K_{00}(x)=2d \neq 0$, moreover, by the integralbility assumption on $K$, we see the $M_1\widehat{K}(\ell)M_2 \to 0$ as $\ell \to \infty$. 
+
+\end{proof}
+
+
+With lemma above we introduce a new variable $V(x) = M_2^{-1}U(x)$, we may write $V(x) = (u_0(x), u_h(x))^T$ where $u_0(x)$ is scalar-valued and $u_h(x)$ is such that $\hat{u}_h(\ell) \perp e_0$ for all $\ell$.
+
+
+Put $\tilde{N}(V;\mu) = M_1N(M_2V ; \mu)$, in the new variable $V$, and write $\tilde{N}_0 = \langle \tilde{N}, e_0\rangle$ with $\tilde{N}_h$ similarly defined, equation \eqref{system} becomes
+\begin{align}
+(A_{00}+K_{00} \ast) u_0 + (A_{0h}+K_{0h}\ast)u_h + \tilde{N}_0(u_0,u_h;\mu) = 0\label{eqnu0}\\
+(A_{h0}+K_{h0} \ast) u_0 + (A_{hh}+K_{hh}\ast)u_h + \tilde{N}_h(u_0,u_h;\mu) = 0 \label{eqnuh}
+\end{align}
+
+Denote $L_{j} = A_{j}+K_{j}\ast$ ($j=00,0h,h0,hh$ respectively) for brevity, then write out the nonlinearity explicitly, we have
+\begin{align}
+&0=L_{00}u_0+L_{0h}u_h + a_{101}\mu u_0 +a_{200}u_0^2+a_{011}\mu u_h+a_{020}u_h^2+a_{110}u_0u_h + R_1(u_0,u_h;\mu)\label{exeqnu0} \\ 
+&0=L_{hh} u_h+L_{h0}u_0+ b_{101}\mu u_0+b_{011}\mu u_h +b_{200}u_0^2+b_{110}u_0u_h+b_{020}u_h^2+R_2(u_0,u_h;\mu) \label{exeqnuh}
+\end{align}
+where the remainder $R_1,R_2$ are of order $O(u_0^2u_h,u_0u_h^2,u_0^3,u_h^3,\mu u_0^2, \mu u_h^2,\mu u_0u_h, \mu^2u_0, \mu^2u_h)$ as $(u_0,u_h) \to 0$.
+
+We change variable from $u_h$ to $u_h^1$ where $u_h^1$ is defined to be satisfy the relation: 
+\[
+u_h = -L_{hh}^{-1} L_{h0} u_0 + u_h^1:= \phi(u_0, u_h^1),
+\]
+ the existence of $L_{hh}^{-1}$ follows from Lemma \ref{Lem1}, so in the variable $u_h^1$, \eqref{exeqnuh} is 
+ \[
+ 0 = L_{hh}u_h^1 + b_{101}\mu u_0+b_{011}\mu \phi +b_{200}u_0^2+b_{110}u_0\phi+b_{020}\phi^2+R_2(u_0,\phi;\mu)
+ \]
+
+
+
+We then rescale the variables according to $u_0(x) = \mu \tilde{u}_0(\sqrt{\mu}x)$ and $u_h^1(x) = \mu \tilde{u}_h^1(\sqrt{\mu}x)$, and put $\eps = \sqrt{\mu}$, $L_{j}^{\eps} = A + \eps^{-1}K_{j}(\eps^{-1}\cdot) \ast$ for the rescaled linear operator, note that $u_h$ has been rescaled to \[
+\eps^2 [-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}\tilde{u}_0+\tilde{u}_h^1] := \eps^2 \phi^{\eps}(\tilde{u}_0,\tilde{u}_h^1),
+\] 
+to ease notations, we still use $u_0,u_h^1$ for the same variables after the rescaling, and we abbreviate $u_h$ by $\phi^\eps$ whenever it is convenient to do so.
+
+We then get two rescaled equations, after dividing both sides of the equation by $\mu = \eps^2$, we have the equation for $u_0$: 
+\begin{align}
+0 &= L_{00}^{\eps}u_0+L_{0h}^{\eps}[\phi^\eps]+\eps^2(a_{101}u_0+a_{200}u_0^2+a_{011}[\phi^\eps]+a_{020}[\phi^\eps]^2+a_{110}u_0[\phi^\eps])+\eps^4R_1(u_0,u_h^1;\eps) \nonumber \\
+&=L^\eps u_0 + L_{0h}^\eps u_h^1+\eps^2 B_0(u_0,u_h^1;\eps) +\eps^4 R_1(u_0,u_h^1;\eps) \label{rseqnu0}
+\end{align}
+where we abbreviated $L = L_{00}-L_{0h}L_{hh}^{-1}L_{h0}$ so that $L^{\eps} = L_{00}^{\eps}-L_{0h}^{\eps}(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}$, and the term $B_0(u_0,u_h^1;\eps)$ is equal to $a_{101}u_0+a_{200}u_0^2+a_{011}[\phi^\eps]+a_{020}[\phi^\eps]^2+a_{110}u_0[\phi^\eps]$.
+
+and the equation for $u_h^1$: 
+
+\begin{equation}\label{rseqnuh}
+0 = L_{hh}^{\eps}u_h^1+\eps^2B_h(u_0,u_h^1;\eps)+\eps^4R_2(u_0,u_h^1;\eps),
+\end{equation}
+
+where $B_h(u_0,u_h^1;\eps) = b_{101}u_0+b_{200}u_0^2+b_{011}[\phi^\eps] + b_{020}[\phi^\eps]^2+b_{110}u_0[\phi^\eps]$.
+
+Now our plan is to first solve \eqref{rseqnuh} to get $u_h^1$ as a function of $u_0$, then plug in this function back to equation \eqref{rseqnu0}, and solve the resulting scalar equation in $u_0$ to get our main result.
+
+To do so, write the right hand of \eqref{rseqnuh} as $L_{hh}^{\eps}G(u_h^1;u_0,\eps)$, so that the function $G=G(v; u,\eps)$ is given by $G(v; u,\eps) = v+(L_{hh}^{\eps})^{-1}\eps^2(B_h(u,v;\eps)+\eps^2R_2(u,v;\eps))$,  we want to solve $G=0$ for $u_h^1$, viewing $u_0$ and $\eps$ as parameters, the following lemma gives the precise properties we want:
+
+\begin{lemma}\label{Lemuh} Fix $k$ and $r>0$, let $B_r \subset H^k(\R)$ denote the closed ball of radius $r$ in $H^k(\R)$, there is $\eps_0>0$ sufficiently small so that if $|\eps|<\eps_0$ and for any function $u_0$ in $B_r$, there exists a map $\psi(u,\eps): B_r \times (-\eps_0,\eps_0) \to [B_r]^{m-1}$ such that $u_h^1 = \psi(u_0, \eps)$ solves $G(\psi(u_0,\eps);u_0,\eps) = 0$, moreover, we have $\|\psi(u_0,\eps)\|_{[H^k]^{m-1}} = O(\eps^2)$ as 
+$\eps \to 0$, and $\psi$ is smoothly dependent on the parameter $u$, if $D_u\psi: H^k \to H^k$ denotes the Frechet derivative of $\psi$ with respect to $u$, then we also get $\|D_u\psi\| = O(\eps^2)$ as $\eps \to 0$. 
+\end{lemma}
+\begin{proof} We use a Newton iteration scheme: for $u_0 \in B_r$ and $\eps_0$ small to be chosen, We show the following properties holds for $G$:
+\begin{itemize}
+\item $\|G(0;u_0,\eps)\|_{[H^k(\R)]^{m-1}} = O(\eps^2)$
+\item $G$ is smooth in $v$, and $D_v G(0; u_0, \eps):[H^k(\R)]^{m-1} \to [H^k(\R)]^{m-1}$ is invertible with uniform bounds for the inverse for $|\eps|<\eps_0$ and $u_0 \in B_r$. 
+\end{itemize}
+
+To see the first bullet point, simply notice 
+\[
+G(0; u_0;\eps) = \eps^2(L_{hh}^{\eps})^{-1}\left(B_h(u_0,0;\eps)+\eps^2R_2(u_0,0;\eps)\right),
+\] 
+
+use $H^k(\R)$ is an algebra for $k\ge 2$ and the fact that $(L_{hh}^\eps)^{-1}, L_{h0}^\eps$ are uniformly bounded in $\eps$, as 
+\[
+B_h(u_0,0;\eps) = b_{101}u_0+b_{200}u_0^2+b_{011}\phi^\eps(u_0;0)+b_{020}[\phi^\eps(u_0;0)]^2 + b_{110}u_0[\phi^\eps(u_0;0)]
+\]
+where now $\phi^\eps(u_0;0) = -(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}u_0$, we have therefore
+\[
+\|B_h(u_0,0;\eps)\|_{[H^k]^{N-1}} \le C\|u_0\|_{[H^k]^{N-1}}^2 \le Cr^2,
+\]
+for some constant $C$ independent of $\eps$. We get a similar bound for the remainder term $R_2$, hence $\|G(0; u_0,\eps)\|_{[H^k]^{N-1}}$ is $O(\eps^2)$ as claimed.
+
+
+
+For the second bullet point, it is clear that $G$ is smooth in $v$, we compute the Frechet derivative of $G$ with respect to $v$, we get $D_vG(0;u_0,\eps)$ is of the form 
+\[ 
+I + \eps^2 (L_{hh}^{\eps})^{-1}\left(b_{011}+b_{020}[2L_{hh}^{\eps}L_{h0}^{\eps}u_0]+b_{110}u_0 +\eps^2D_vR_2(0;u_0,\eps)\right)
+\] 
+again use $(L_{hh}^\eps)^{-1}, L_{h0}^\eps$ are uniformly bounded in $\eps$ and $\|u_0\|_{H^k} \le r$, we conclude that $D_vG(0; u_0, \eps)$ is a $O(\eps^2)$ pertrubation of the identity as an operator from $[H^k(\R)]^{m-1}$ to itself, thus for $\eps$ small enough, we have $D_vG(0;u_0,\eps)$ is uniformly invertible in $\eps$.
+
+
+After establishing these two points, fix $\delta>0$, let $X$ be the ball of raidus $\delta$ around $0$ in $ [H^k(\R)]^{m-1}$, we introduce a map $S(\cdot; u_0,\eps): X \to X$ as follows:
+\[
+S(v; u_0,\eps) = v - D_vG(0;u_0, \eps)^{-1}[G(v;u_0,\eps)]
+\]
+then, we see
+\[
+\|S(0;u_0,\eps) \|_{[H^k]^{m-1}} \le \|D_vG(v;u_0, \eps)^{-1}\| \|G(v;u_0, \eps)\|_{[H^k]^{m-1}} = O(\eps^2).
+\]
+
+Also, $D_vS(0;u_0,\eps) = 0$ by definition, by continuity, if $\delta$ is small, then for $\|v\| \in X$ we have $\|D_vS\| \le C\delta$ for some constant $C$. 
+
+Then we start our iteration, with $v_0 = 0$, $v_{n+1} = S(v_n;u_0,\eps)$, $n\ge 0$. Suppose by induction $v_k \in X$ for $1\le k \le n$, then
+\[
+\|v_{n+1}-v_n\| \le C\delta\|v_n-v_{n-1}\|
+\]
+by the mean value theorem, so
+\[
+\|v_{n+1}\| \le \frac{C}{1-C\delta}\|v_1-v_0\| = \frac{C}{1-C\delta}\|S(0;u_0,\eps)\|
+\]
+so for $\eps$ small and $u_0 \in B_r$, we get $v_{n+1} \in X$, and we that $S$ is a contraction for $\delta$ sufficiently small, apply Banach fixed point theorem, we get $v = \psi(u_0,\eps)$ as a fixed point of $S$, so that $\psi(u_0,\eps)= S(\psi(u_0,\eps);u_0,\eps)$, and consequently $G(\psi(u_0,\eps); u_0,\eps) = 0$, note we get the estimate $\|\psi\|_{[H^k]^{m-1}} = O(\eps^2)$ from the iteration.
+
+The smooth dependence of $\psi(u_0,\eps)$ on $u_0$ is a consequence of the uniform contraction theorem: note $G(v;u,\eps)$, and therefore the map $S$ is smooth in $u$ by assumptions on the nonlinearity, by choosing $\eps$ small, the contraction constant for $S$ can be chosen uniformly in $u \in B_r$, hence we get $\psi$ depends smoothly on $u_0$ as well.
+
+To get the estimate on the derivative $\|D_u\psi\|_{H^k \to H^k}$, we differentiate the equation $0 = G(\psi(u_0,\eps);u_0,\eps)$ in $u_0$, we see $D_u\psi = -[D_vG]^{-1}D_uG$, but 
+\[
+D_u G (v;u_0,\eps)= O(\eps^2)
+\]
+for $u_0 \in B_r$, as can be computed directly, and $D_vG$ is uniformly invertible for $\eps$ small, hence $\|D_u\psi\|$ is $O(\eps^2)$ as claimed. 
+\end{proof}
+
+Use this lemma, we plug in $u_h^1 = \psi(u_0,\eps)$ into equation \eqref{rseqnu0}, after dividing both sides by $\eps^2$, we arrived at the following scalar equation in $u_0$:
+
+\begin{equation} \label{1dnl}
+0 = \eps^{-2}\left( L_{\eps} u_0 + L_{0h,\eps} \psi(u_0,\eps) \right)+B_0(u_0, \psi(u_0,\eps);\eps)+\eps^2 \tilde{R}_1(u_0, \psi(u_0,\eps);\eps)
+\end{equation}
+
+
+Therefore, we need to study the behaviors of the operators $L_{j}^{\eps}$  as $\eps \to 0$, let $M^{\eps},$ denote the operator whose Fourier symbol is $\widehat{L}^{\eps}(\ell)/(\eps\ell)^2$, 
+the next lemma summarizes the properties we need, 
+
+\begin{lemma}\label{estmult}Fix $k$, with $M^\eps$ defined above, and $L_j^{\eps}$ for $j =h0,0h$, we have the following:
+\begin{enumerate}
+\item $M^\eps : H^k \to H^{k-2}$ is bounded with $\|M^\eps\|_{H^k \to H^{k-2}}$ independent in $\eps$;
+
+\item $M^\eps : H^{k-2} \to H^k$ is invertible, with $(M^\eps)^{-1} : H^k \to H^{k-2}$ satisfies the estimate \[
+\|(M^\eps)^{-1} -d^{-1}\|_{H^k \to H^{k-2}} = O(\eps^2)
+\] as $\eps \to 0$, we denote the operator $(M^\eps)^{-1}-d^{-1}$ by $\mathcal{J}^\eps$;
+
+\item $L_{j}^{\eps} :H^k \to H^k$ ($j =h0,0h$) is bounded with $\|L_{j}^{\eps}\|_{H^k \to H^k}$ independent in $\eps$; and $L_j^{\eps} : H^k \to H^{k-2}$ is bounded with $\|L_{j}^{\eps}\|_{H^k \to H^{k-2}} = O(\eps^2)$ as $\eps \to 0$.
+
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+The symbol for $L_\eps$ equals $\widehat{L}(\eps\ell)=\widehat{L}_{00}(\eps \ell)-\widehat{L}_{0h}(\eps\ell)(\widehat{L}_{hh}(\eps\ell))^{-1}\widehat{L}_{h0}(\eps\ell) = d(\eps\ell)^2 + O((\eps\ell)^4)$ by lemma \ref{Lem1} on the expansions about the symbols of $L_{00}, L_{0h},L_{h0}$ and $L_{hh}$. Hence $m_1(\eps\ell):=\widehat{L}(\eps\ell)/(\eps\ell)^2=d+O((\eps\ell)^2)$ is the symbol of $M_\eps$. We then define $m_2(\eps\ell):= (\widehat{L}(\eps\ell)-d(\eps\ell)^2)/(\eps\ell)^4$, again by lemma \ref{Lem1} we know $m_1, m_2$ are analytic, in particular, $m_1(0) = d \neq 0$.
+
+
+Then $\|M^\eps\|_{H^2 \to L^2} = \sup_{\ell} |m_1(\eps\ell)|$, which is independent of $\eps$ by change of variable $\eps\ell = \eta$, this is (i).
+
+(ii), this is the key computation, we have: 
+\begin{align*}
+\| \mathcal{J}^{\eps} \|_{H^k \to H^{k-2}}=\sup_{\ell} \left|\frac{1}{1+\ell^2}\widehat{\mathcal{J}_\eps}(\ell)\right| &= \sup_{\ell} \left|\left( \frac{d-M_\eps(\ell)}{dM_\eps(\ell)}\right) \frac{1}{1+\ell^2}\right|\\
+&=\sup_{\ell} \left| \frac{d^{-1}(\eps \ell)^2m_2(\eps\ell)}{m_1(\eps\ell)}\frac{1}{1+\ell^2}\right| \\
+&= \sup_{\eta}\left| \eps^2 \frac{d^{-1}\eta^2}{\eta^2+\eps^2}\left(\eta^{-2}+d\widehat{L}(\eta)^{-1})\right)\right|
+\end{align*}
+
+where in the last step we changed variable by $\eta = \eps\ell$, we shall carefully study the quantity
+\[
+\frac{m_2(\eta)}{m_1(\eta)} = \frac{\widehat{L}(\eta)-d\eta^2}{\eta^2\widehat{L}(\eta)} = \eta^{-2} -d\widehat{L}(\eta)^{-1}.
+\]
+First, notice that $m_1(0) \neq 0$, hence at $\eta = 0$ this is a finite number.
+
+Further, if at some finite $\eta$, $m_1(\eta) = 0$, this can only happen if $\widehat{L}(\eta) = 0$ for some $0<|\eta|<\infty$, this is impossible, as a $0$ of $\widehat{L}(\eta)$ corresponds to a $\eta$ for which the matrix $\begin{pmatrix}
+\widehat{L}_{00}(\eta) &  \widehat{L}_{0h}(\eta) \\
+\widehat{L}_{h0}(\eta) & \widehat{L}_{hh}(\eta)
+\end{pmatrix}$ is singular, because of the formula  
+\[
+\det \begin{pmatrix}
+\widehat{L}_{00}(\eta) &  \widehat{L}_{0h}(\eta) \\
+\widehat{L}_{h0}(\eta) & \widehat{L}_{hh}(\eta)
+\end{pmatrix} = \det(\widehat{L}_{hh}(\eta))\det(\widehat{L}_{00}(\eta)-\widehat{L}_{0h}(\eta)L_{hh}(\eta)^{-1}\widehat{L}_{h0}(\eta)) = \det(\widehat{L}_{hh}(\eta)) \widehat{L}(\eta)
+\]
+holds, as $\widehat{L}_{hh}(\eta)$ is invertible for all $\eta$.
+
+But our assumption says the point $\eta = 0$ is the only value this can happen, hence $\widehat{L}(\eta) \neq 0$ for all finite $\eta$.
+
+Finally, the matrix $\begin{pmatrix}
+\widehat{L}_{00}(\eta) &  \widehat{L}_{0h}(\eta) \\
+\widehat{L}_{h0}(\eta) & \widehat{L}_{hh}(\eta)
+\end{pmatrix}$ converges to $M_1AM_2$ as $\eta \to \infty$, which invertible by assumption and lemma \ref{Lem1}, so again by the determinant formula we conclude $\widehat{L}(\eta) \neq 0$ at $\eta  = \infty$.
+
+
+Therefore, the quantity $\eta^{-2}-d\widehat{L}(\eta)^{-1}$ is bounded on $\eta \in \R$, so
+\[
+ \sup_{\eta}\left| \eps^2 \frac{d^{-1}\eta^2}{\eta^2+\eps^2}\left(\eta^{-2}+d\widehat{L}(\eta)^{-1})\right)\right| \le C \eps^2
+\]
+for some constant $C$, this shows $\|\mathcal{J}^{\eps}\|_{H^2 \to L^2}$ is of order $\eps^2$.
+
+
+(iii). The first  claim is clear, since $\sup_{\ell}|L_{j}^{\eps}(\ell)|=\sup_{\ell}|L_j(\eps\ell)|$, the conclusion follows as in (i);
+
+The second claim follows from the straightforward computation:
+\[
+\|L_{j}^{\eps}\|_{H^2 \to L^{2}} \le \sup \left\|\frac{\widehat{L}_j(\eps\ell)}{1+\ell^2}\right\|=\sup_{\eta}\left\| \frac{\eps^2}{\eps^2+\eta^2}\widehat{L}_j(\eta)\right\| \le \eps^2 \sup_{\eta}\left\|\frac{\widehat{L}_j(\eta)}{\eta^2}\right\|
+\]
+and we know $\widehat{L}_j(\eta)= O(\eta^2)$ as $\eta \to 0$ and $\widehat{L}_j(\eta) \to A_j$ as $\eta \to \infty$, so the supremum is finite and $\|L_{j}^{\eps}\|_{H^k\to H^{k-2}}$ is of order $\eps^2$.
+\end{proof}
+
+
+We are ready to state and prove our main results:
+\begin{theorem}Fix $k$ so that $k-2\ge 0$,
+then there exist $\eps_0$ small so that for $0<|\eps|<\eps_0$,  a solution of the form $u_0 = u_*(\cdot)+w$ to  \eqref{1dnl} exists, here $w=w(\eps) \in H^k_{even}(\R)$ is an $\eps$-dependent perturbation term such that $\|w(\eps)\|_{H^2} = O(\eps^2)$ as $\eps \to 0$, and $u_*$ is the unique solution to
+\[
+du_*^{''} - u_* +u_*^2 = 0
+\]
+which decays at both ends of the real line: $u_*(\pm \infty) = \lim_{x \to \pm \infty} u_*(x) = 0$.
+\end{theorem}
+
+%First, by assumptions on $f$, the Taylor expansion for $f$ near $(u,\mu)=(0,0)$ is
+%\[
+%f(u,\mu) = A u\mu - B u^2 + O(\mu^2 u, \mu u^2, u^3)
+%\]
+%where $A = f_{u\mu}(0,0), B=-f_{uu}(0,0)$, for definiteness we assume here that $A,B>0$, then we rescale $u$ and $\mu$ by $u \mapsto su$ and $\mu \mapsto t\mu$, where $s,t$ are constants to be chosen, then we have
+%\[
+%-su + sK\ast u = Ast u\mu -Bs^2u^2 + O(\mu^2 u, \mu u^2,u^3)
+%\]
+%cancel out $s$, we see choose $s=1/B$ and $A=1/t$ lead to the following equation for $u$ %and $\mu$:
+%\[
+%-u+K\ast u=f(u; \mu) = \mu u - u^2 + O(\mu u^2,\mu^2u,u^3),
+%\] 
+%then we rescale $u(x) = \mu v(\sqrt{\mu}x)$, we have an equation in $v$: 
+%\begin{equation}  \label{scl nl}
+%-v(y) + K_\eps \ast v (y) = \eps^2(v-v^2)+O(\eps^4v)
+%where $\eps^2 = \mu$ and $K_\eps = \eps^{-1}K(\cdot/\eps)$, and $y =\eps x$. From this point we focus on $\eqref{scl nl}$.
+
+%Dividing by $\eps^2$, and take Fourier transform of both sides of the equation (we assume we are solving in $H^2(\R)$.)
+
+%\[
+%\frac{-1+\hat{K}_\eps(\ell)}{-\eps^2\ell^2}(-\ell^2)\hat{v}(\ell) = \widehat{v-v^2}(\ell) %+ O(\eps^2 \hat{v})
+%\] 
+
+%We define the operator $M_\eps$ so that the Fourier multiplier $\widehat{M}_\eps(\ell) = \frac{-1+\hat{K}_\eps(\ell)}{-\eps^2\ell^2}= \frac{-1+\hat{K}(\eps\ell)}{-\eps^2\ell^2}$, by assumptions on $K$, we 
+%know $M_\eps$ is bounded as an operator from $L^2$ to $L^2$, but $\sup |\widehat{M_\eps}(\ell)|$ does not necessarily go to zero as $\eps \to 0$.
+
+%We take inverse Fourier transform and get back the equation in physical space:
+%\begin{equation}\label{eq phy}
+%M_\eps v''(y) = v(y)-v^2(y) + O(\eps^2 v)
+%\end{equation}
+
+\begin{proof}
+We assume $a_{101}=-1, a_{200}=1$ after possibly another rescaling 
+Let $u_0 = u_* + w$ where $u_*$ is the unique bounded solution of the equation $du''-u+u^2 = 0$ satisfies $u_*(\pm \infty) = 0$. We determine the equation satisfied by $w$:
+
+Substitute $u_0= u_* + w$, subtract the equation $0 =d u_*^{''} - u_*+u_*^2$ from equation \eqref{1dnl}, we have
+\[
+0 = (M^\eps -d)v^{''}_* + M^\eps w^{''} -w+2u_*w+w^2+\mathcal{R}
+\]
+where $\mathcal{R}$ contains all the ``$\eps^2$ term''
+\begin{align*}
+\mathcal{R} =\mathcal{R} (u_0,\psi(u_0,\eps);\eps)&= \eps^{-2}L_{0h}^{\eps}\psi(u_0,\eps)+a_{011}[-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}u_0+\psi(u_0,\eps)]\\
+&+a_{020}[-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}u_0+\psi(u_0,\eps)]^2+a_{110}u_0[-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}u_0+\psi(u_0,\eps)]\\
+&+\eps^2R_1(u_0,\psi(u_0,\eps);\eps)
+\end{align*}
+
+Now precondition the operator $(M^{\eps})^{-1}$ to both sides of this equation:
+\[
+0 = (1-d(M^{\eps})^{-1})u_*^{''} + w^{''} -(M^{\eps})^{-1}( w -2u_*w - w^2)+(M^{\eps})^{-1}\mathcal{R},
+\]
+
+
+We write the term $-(M^{\eps})^{-1}(w-2u_*w-w^2)$ as $(-d^{-1}+d^{-1}-(M^{\eps})^{-1})(w-2u_*w - w^2)$, and the equation becomes
+\begin{equation}\label{splfy nl}
+0 = w'' -d^{-1}(w -2u_* w - w^2) + (d^{-1}-(M^{\eps})^{-1})(w-2u_*w-w^2+du_*'')+(M^{\eps})^{-1}\mathcal{R}
+\end{equation}
+
+
+We denote the right hand side of \eqref{splfy nl} as $ F(w,\eps)$, and the plan is to set up an Newton iteration scheme to solve the equation $ F(w,\eps) =0$ for $w$ in terms of $\eps$ as a fixed point point problem.
+
+As in lemma \ref{Lemuh}, we plan to do the following:
+\begin{itemize}
+\item $\|F(0,\eps)\|_{H^{k-2}} \to 0$ as $\eps \to 0$.
+\item $D_wF(0,\eps): H^k_{even} \to H^{k-2}_{even}$ is invertible with uniform bounds in $\eps$ on the inverse.
+\end{itemize}
+\begin{enumerate}
+\item To show the continuity condition $\|F(0,\eps)\|_{H^{k-2}} \to 0$ as $\eps \to 0$ holds, we plug in $w = 0$, and get:
+\[
+F(0,\eps) = (d^{-1}-(M^{\eps})^{-1})du_*^{''} + (M^{\eps})^{-1} \mathcal{R}
+\] 
+
+since $\|d^{-1}-(M^{\eps})^{-1}\|_{H^k \to H^{k-2}}  = \|\mathcal{J}^{\eps}\|_{H^2 \to L^2} = O(\eps^2)$, we focus on $\mathcal{R}$,
+
+First, the remainder $\eps^2\| (M^{\eps})^{-1}R_1\|_{H^{k-2}}$ is of order $\eps^2$, just because $(M^{\eps})^{-1}$ is uniformly bounded from $H^k \to H^{k-2}$.
+
+To estimate $\eps^{-2}(M^{\eps})^{-1}L_{0h}^{\eps}\psi(u_*+w,\eps)$, we write it as
+\[
+\eps^{-2}\mathcal{J}^{\eps} L_{0h}^{\eps}\psi(u_*+w,\eps)+ \eps^{-2}d^{-1}L_{0h}^{\eps}\psi(u_*+w,\eps) 
+\]
+for the first summand, we have
+\[
+\|\eps^{-2}\mathcal{J}^{\eps} L_{0h}^{\eps}\psi(u_*+w,\eps)\|_{H^{k-2}} \le \|\mathcal{J}^{\eps}\|_{H^k \to H^{k-2}}\|\|L_{0h}^\eps\|_{H^k \to H^k}\|\eps^{-2}\psi\|_{H^k} = O(\eps^2)
+\]
+since $\|\psi\|_{H^k}=O(\eps^2)$ by lemma (\ref{Lemuh});
+
+while for the second summand, use lemma (\ref{estmult}) (iii), we have
+\[
+\|d^{-1}\eps^{-2}L_{0h}^\eps \psi\|_{H^{k-2}} \le d^{-1}\|L_{0h}^{\eps}\|_{H^k \to H^{k-2}}\|\eps^{-2}\psi\|_{H^k} = O(\eps^2)
+\]
+
+the other terms are dealt similarly, note when estimating the $H^{k-2}$ norm of the nonlinear term $\|-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}(u_*+w) +\psi(u_*+w,\eps)]^2\|_{H^{k-2}}$, we use the fact that $H^k$ embedds into $L^\infty$, if we denote the term $-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}(u_*+w) +\psi(u_*+w,\eps)$ by $A$, then
+\begin{align*}
+\|(M^{\eps})^{-1}[A]^2\|_{H^{k-2}} &\le \|(M^{\eps})^{-1}-d^{-1}\|_{H^k\to H^{k-2}}\|A^2\|_{H^k}+d^{-1}\|A^2\|_{H^{k-2}}\\
+&\le \|\mathcal{J}^{\eps}\|_{H^k\to H^{k-2}}\|A\|^2_{H^k}+d^{-1}\|A\|_{\infty}\|A\|_{H^{k-2}}
+\end{align*}
+and $\|A\|_{H^{k-2}}$ is $O(\eps^2)$ because since $\|\psi\|_{H^{k-2}}$ is $O(\eps^2)$ and 
+\[
+\|-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}(u_*+w) \|_{H^{k-2}}\le \|-(L_{hh}^{\eps})^{-1}\|_{H^{k-2}\to H^{k-2}}\|L_{h0}^{\eps}\|_{H^k \to H^{k-2}}\|u_*+w\|_{H^{k-2}}.
+\]
+
+Therefore we see $\|[-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}(u_*+w) +\psi(u_*+w,\eps)]^2\|_{H^{k-2}}$ is of $O(\eps^2)$ as well, similarly we have the same estimate for the term $u_0[-(L_{hh}^{\eps})^{-1}L_{h0}^{\eps}(u_*+w) +\psi(u_*+w,\eps)]$. 
+\item We check $F$ is continuously differentiable in $w$, first note the term 
+\[
+(M^\eps)^{-1}\mathcal{R}= (M^\eps)^{-1}\mathcal{R}(u_*,\psi(u_*+w,\eps);\eps)
+\] is smooth in $w$ simply because $R_1$ is smooth in all its variables, and $\psi(u_0,\eps)$ is smooth in $u_0$ by lemma \ref{Lemuh}, and $L_j^\eps$ are just linear operators.
+
+Then we only need to find the derivative of the term 
+\[
+\tilde{F}(w,\eps)= w'' - d^{-1}(w-2u_*w-w^2)+\mathcal{J}^{\eps}(w-2u_*w-w^2+du_*^{''})
+\]
+we compute the Frechet derivative, for $h \in H^k$, we find
+\[
+D_w\tilde{F}(w,\eps) h := h''-d^{-1}(h - 2(u_*+w)h)-2\mathcal{J}^{\eps}(u_*+w)h
+\]
+
+we have:
+\begin{align*}
+\|\tilde{F}(w+h,\eps)-\tilde{F}(w,\eps) - D_w\tilde{F}(w,\eps) h\| = O(\|h\|^2)
+\end{align*}
+
+So $D_wF(w,\eps) : H^k \to H^{k-2}$ is given by 
+\[
+D_wF(w,\eps) h = h''-d^{-1}(h - 2(u_*+w)h)-2\mathcal{J}^{\eps}(u_*+w)h + (M^\eps)^{-1}D_w\mathcal{R}
+\]
+
+
+The continuity of $D_wF(w,\eps)$ in $w$ follows from the following: Since $\mathcal{R}$ is smooth in $w$, we only need to check $\tilde{F}$ is continuously differentiable in $w$, for $h \in H^k$ with $\|h\|_{H^k}=1$, we have:
+\begin{align*}
+\| D_w\tilde{F}(w_1,\eps)h-D_w\tilde{F}(w_2,\eps)h\|_{H^{k-2}} &=\| 2d^{-1}h(w_1-w_2)-\mathcal{J}^{\eps} 2h(w_1-w_2)\|_{H^{k-2}} \\
+& \le \| 2d^{-1}h(w_1-w_2)\|_{H^{k-2}}+\|\mathcal{J}^{\eps}\|_{H^k \to H^{k-2}}\| 2h(w_1-w_2)\|_{H^k} \\
+& \le (d^{-1}+\|\mathcal{J}_\eps\|_{H^k\to H^{k-2}}) \|2h(w_1-w_2) \|_{H^k} \\
+& \le C \|h\|_{H^k} \|w_1-w_2\|_{H^k} = C\|w_1-w_2\|_{H^k}
+\end{align*}
+where again we used the fact that $H^k$ is an algebra.  We therefore conclude that $D_wF(w,\eps)$ is continuous in $w$.
+
+
+Finally we claim that the remainder term $\mathcal{R}$ satisfies 
+\[
+\|(M^{\eps})^{-1}D_w\mathcal{R}(u_*+w,\psi(u_*+w,\eps);\eps) \|_{H^k \to H^{k-2}}= O(\eps^2)
+\]
+as $\eps \to 0$.
+
+To see this, recall from lemma \ref{Lemuh} we have that 
+\[
+\| D_u\psi(u_*+w,\eps) \|_{H^k \to H^k}
+\] is $O(\eps^2)$ as well, hence, for the first term in $(M^{\eps})^{-1}D_w\mathcal{R}$, which is $\eps^{-2}(M^{\eps})^{-1}L_{0h}^{\eps}D_u\psi(u_*+w,\eps)$ we have
+\begin{align*}
+& \|(M^\eps)^{-1}L_{0h}^\eps \eps^{-2}D_u\psi(u_*+w,\eps) \|_{H^k \to H^{k-2}}  \\
+&\le \|\mathcal{J}^{\eps}\|_{H^k \to H^{k-2}}\| L_{0h}^{\eps}\|_{H^k\to H^k}\|\eps^{-2}D_u\psi\|_{H^k \to H^k}+d^{-1}\|L_{0h}^{\eps}\|_{H^k \to H^{k-2}}\|\eps^{-2}D_u\psi\|_{H^k \to H^k}\\
+& = O(\eps^2)
+\end{align*}
+this is essentially the same estimate we did to show $\|\mathcal{R}\|_{H^k} = O(\eps^2)$, the other terms in $\mathcal{R}$ is dealt similarly.
+
+\item  Now, by above estimate, we find $D_wF$ is continuous at $(w,\eps) = (0,0)$, therefore we have $D_wF(0,0) h = h''-d^{-1}(h-2u_* h) := L h$, we show this is an invertible operator from $H^k_{even} \to H^{k-2}_{even}$. This will show that $D_wF(0,\eps)$ is invertible with inverse bounded uniformly in $\eps$ as $\eps \to 0$.
+
+To show the invertiblity I show first that the kernel of $L$ consists of bounded solutions (since $H^k(\R)$ functions are bounded continuous by embedding) for the differential equation $dh'' - h +2u_* h = 0$.
+
+This equation is satisfied by the function $v'_*(x)$, and we claim that it is the unique element which spans the kernel of $L$, to see this, we rewrite the equation as a nonautonoumous linear first order system 
+
+\[
+\dot{Y}(x) = A(x)Y(x), \text{ wtih }Y(x) = \begin{pmatrix}
+h(x)\\
+h'(x)
+\end{pmatrix} \text{ and } A(x) = \begin{pmatrix}
+0&1\\
+d^{-1}(1-2u_*(x))&0
+\end{pmatrix}
+\]
+
+Now, as $A(x)$ converges to the hyperbolic matrix $A_{\infty}=\begin{pmatrix}
+0&1\\
+d^{-1}&0
+\end{pmatrix}$ as $x \to \pm \infty$, by the robustness of exponential dichotomy, we see $A(x)$ possess an exponential dichotomy on $\R^+$ and $\R-$, let $E_+^s$ denote the image of the stable projection of the exponential dichotomy on $\R^+$ and $E_-^u$ denote the unstable projection of the exponential dichotomy on $\R^-$. The kernel of $L$ is isomorphic to $E_+^s \cap E_-^u$, but $E_-^u$ and $E_+^s$ are one-dimensional since the stable and unstable eigenspace of $A_{\infty}$ are both $1$, hence the kernel is at most one-dimensional, since $u_*'$ already lies in the kernel, we see the dimension of the kernel is exactly one.
+
+We show that $L$ is Fredholm with index zero from $H^k_{even}$ to $H^{k-2}_{even}$, by writing it as the compact perturbation of an invertible operator:  write
+\[
+dL h = (dh''-h) + (2u_*)h := L_1h+L_2 h,
+\] 
+
+We need to show $L_2: h \mapsto (2u_*)h$ is compact: write $L_2 h$ as the limit of $2\chi_{(-L,L)}(x) u_*(x) h(x):= K_L h$ as $L\to \infty$, and show that $K_L$ is compact. Note first $H^k(\R)$ functions continuously differentiable by Sobolev embedding, so if $h_i$ is a bounded sequence in $H^k$, they are in particular a bounded sequence in $C^1$, then we need to show $K_L h_i$ possess a convergent subsequence, but $h_i$ has an convergence subsequence on $[-L,L]$ since it is a compact interval where $h_i$ has continuous hence bounded derivative, so by Arezela-Ascoli, we see $K_L$ is compact from $H^k$ to $H^k$, finally $K_L \to L_2$ in operator norm since
+\[
+\sup_{x \in \R} |2u_*(x)\chi_{(-L,L)}(x) -2u_*(x) | \to 0
+\]
+as $L \to \infty$ because $u_*(x) \to 0$ as $x \to \pm \infty$. Hence $L_2$ is the limit of the sequence of compact operators $K_L$ in the operator norm, we conclude that $L_2$ is compact.
+
+
+Then we need to show the second order differential operator $L_1 h = dh'' - h$ is invertible as an operator from the space $H^k_{even} \to H^{k-2}_{even}$, simply solve this equation in the Fourier side:
+\[
+-(1+d\ell^2)\hat{h}(\ell) = \hat{f}(\ell)
+\]
+we get $h = \mathcal{F}^{-1} \{-(1+d\ell^2)^{-1}\hat{f}\}$, this is clearly bounded from $H^{k-2}_{even}$ to $H^k_{even}$ and is an inverse for $L_2$.
+
+With these facts of $L_1$ and $L_2$, we conclude that $L$ is Fredholm with zero index from $H^k_{even}$ to $H^{k-2}_{even}$, since the kernel consists precisely of the odd function $u_*'$, it is invertible from $H^k_{even}$ to $H^{k-2}_{even}$.
+
+Finally we claim $D_wF(0,\eps)$ is continuous at $\eps = 0$, indeed, a simple calculation shows $D_wF(0,\eps) = L+\mathcal{J}^{\eps} u_*h+(M^{\eps})^{-1}D_w\mathcal{R}$, which is an $\eps^2$ perturbation of $L$, so for $\eps$ small, we conclude that $D_wF(0;\eps)^{-1}$ exists and is uniformly bounded by some constant independent of $\eps$.
+
+\iffalse
+\item The continuity of $F(w,\eps)$ in $\eps$ follows from the same estimate in item (iv), more precisely, we have
+\[
+\|F(w,\eps_1)-F(w,\eps_2) \|\le \|(\mathcal{J}_{\eps_1}-\mathcal{J}_{\eps_2})(w-2u_*w-w^2+du_*^{''})\| + O((\eps_1^2M_{\eps_1}^{-1}-\eps_2^2M_{\eps_2}^{-1})(w+u_*))
+\]
+but we have shown $(\mathcal{J}_{\eps_1}-\mathcal{J}_{\eps_2}) \to 0$ as an operator from $H^2$ to $L^2$ and as $\eps_1\to \eps_2$, and the same holds for the remainder term. So we have continuity in $\eps$.
+
+Hence, we have shown that $\|F(w,\epsilon)\|_{L^2} \to 0$ as $\eps \to 0$, and $\|D_wF(0,\eps)\|_{H^2_{even} \to L^2_{even}}$ is invertible with inverse uniformly bounded in $\eps$.
+\fi
+\item Here we set up our Newton iteration scheme again, this is analogous to lemma \ref{Lemuh}, we introduce a map $S(\cdot; \eps) : H^k \to H^{k}$ as
+\[
+S(w;\eps) = w - D_wF(0; \eps)^{-1}[F(w;\eps)]
+\]
+
+based on previous calculation, we have 
+\[
+\|S(0;\eps)\|_{H^k} \le \|D_wF(0;\eps)^{-1}\|_{H^{k-2}_{even} \to H^k_{even}}\|F(0;\eps)\|_{H^{k-2}_{even}} = O(\eps^2)
+\]
+as $\eps \to 0$.
+
+Also, $S$ is continuously differentiable in $w$, and $D_wS(0;\eps) = 0$ by definition of $S$, hence, there exists $\tilde{\delta}$ and a constant $\tilde{C}$ such that if $\|w\|_{H^k} \le \tilde{\delta}$, then $\| D_wS(w;\eps) \| \le \tilde{C}\tilde{\delta}$, simply by continuity of $D_wS$ in $w$.
+
+Then, we set up the iteration:
+\[
+w_{n+1} = S(w_n;\eps)
+\]
+exactly as in lemma \ref{Lemuh}, again for $\eps$ small $S$ maps $B_{\tilde{\delta}}\subset H^k(\R)$ into itself and is a contraction, and we find $w=w(\eps) = \lim_{n\to \infty} w_n$ and $w(\eps) = S(w(\eps);\eps)$, so $F(w(\eps);\eps) = 0$ and $\|w(\eps)\| = O(\eps^2)$, which is the desired properties.
+\end{enumerate}
+
+\end{proof}
+
+
+
+
+
+\end{document}

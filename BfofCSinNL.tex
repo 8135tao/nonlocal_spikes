@@ -1,0 +1,773 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{dsfont}
+\usepackage{amssymb}
+\usepackage{amsmath,mathrsfs}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{stmaryrd}
+\usepackage{fullpage}
+\usepackage{ifthen}
+\usepackage{subfigure}
+\usepackage{epic}
+\usepackage{authblk}
+\usepackage{textcomp}
+\usepackage[small]{caption}
+%\usepackage{mathtools}
+
+
+\usepackage[hypertexnames=false,colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage[numbers,comma,square,sort&compress]{natbib}
+\usepackage[letterpaper,text={7in,9in},centering]{geometry}
+
+
+\usepackage{color}
+\usepackage{titlesec}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{1.0ex plus0.2ex minus0.2ex}
+\renewcommand{\baselinestretch}{1.1}
+\graphicspath{{eps/}{pdf/}}
+%\setcaptionmargin{0.25in}
+\def\captionfont{\itshape\small}
+\def\captionlabelfont{\upshape\small}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\newcommand{\bqq}{\begin{equation}}
+\newcommand{\eqq}{\end{equation}}
+\newcommand{\bqs}{\begin{equation*}}
+\newcommand{\eqs}{\end{equation*}}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}} 
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\rme}{\mathrm{e}}
+\newcommand{\rmi}{\mathrm{i}}
+\newcommand{\rmd}{\mathrm{d}}
+\newcommand{\rmo}{{\scriptstyle\mathcal{O}}}
+\newcommand{\rmO}{\mathcal{O}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Rm}{\mathcal{R}}
+\newcommand{\Nl}{\mathcal{N}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cL}{\mathcal{L}}
+
+\newcommand{\diag}{\operatorname{diag}}
+
+
+\numberwithin{equation}{section}
+
+\newenvironment{Hypothesis}[1]%
+  {\begin{trivlist}\item[]{\bf Hypothesis #1 }\em}{\end{trivlist}}
+
+\renewcommand{\arraystretch}{1.25}
+
+
+% Define Theorem Styles ----------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{main}[theorem]{Main Result}
+\newtheorem{rmk}[theorem]{rmk}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\etal}{\textit{et al.}\ }
+
+\newcommand{\greg}[1]{%
+  {\color{blue}\textbf{Greg:} #1}%
+ }
+ 
+\newcommand{\arnd}[1]{%
+  {\color{red}\textbf{Arnd:} #1}%
+ }
+
+\newenvironment{Proof}[1][.]%
+ {\begin{trivlist}\item[]\textbf{Proof#1 }}%
+ {\hspace*{\fill}$\rule{0.3\baselineskip}{0.35\baselineskip}$\end{trivlist}}
+
+\renewcommand\labelitemi{$\bullet$}
+
+
+\title{Bifurcation of coherent structures in nonlocally coupled system}
+\author{Arnd Scheel and Tianyu Tao}
+\date{2017}
+\begin{document}
+\maketitle
+\begin{abstract}
+
+Motivated by models for neural fields, we study the existence of pulses  bifurcating from a spatially homogeneous state in nonlocally coupled systems of equations. More specifically, we look at equations of the form $U + \K\ast U = \Nl(U;\mu)$, where $\Nl$ encodes nonlinear terms, $\K$ is an even matrix convolution kernel. Assuming the presence of neutral modes, that is, solutions of the form $u\sim \exp(i \ell x)$ to the linear part, we show under appropriate assumptions on the nonlinearity and the unfolding in $\mu$ that pulses bifurcate. Such an analysis is carried out using center manifold reduction, when coupling is local, say, $\K=\delta''$. Here, we rely on functional analytic methods using predictors from formal expansions and correctors obtained after preconditioning the nonlinear system.
+\end{abstract}
+
+\section{Introduction}
+In this paper we study the equation
+\begin{equation} \label{system}
+U+\K\ast U = \Nl(U;\mu) ,
+\end{equation}
+where $U=U(x):\R \to \R^n$, and $\K\ast U$ stands for matrix convolution,
+\[
+(\K\ast U(x))_i = \sum_{j=1}^m \int_\R \K_{i,j}(x-y)U_j(y)dy, \hspace{0.2in} 1\le i\le m,
+\]
+
+and $\Nl(U;\mu)$ encodes nonlinear terms which depend on a parameter $\mu\ge 0$. We assume $\Nl(0;\mu) =0$, so $U\equiv 0$ is a trivial solution for all $\mu$.
+
+We are interested in possible solutions that bifurcate from the trivial solution $U\equiv 0$ as one increases the parameter $\mu$. The existence of such solutions bears important physical meaning and poses interesting mathematical questions.
+
+One of the examples arises when studying stationary or traveling-wave solutions to neural field equations which are typically modeled by equations of the form
+\begin{equation}\label{NFE}
+\frac{du}{dt} =- u+\K\ast S(u),
+\end{equation}
+where $u=u(t,x) \in \R$ represents the local activity of a population of neurons at position $x$ in the cortex, and $S$ is a firing rate function, the kernel $\K$ encodes the connectivity. Stationary solution to \eqref{NFE} are thought to be associated to short term memory, providing motivation for extensive studies of such solutions.
+
+Another area where nonlocal equations such as \eqref{system} appear is when studying phase transition. Examples include equation of the form
+\begin{equation}\label{PT}
+u_t = -u+J\ast u - f(u), 
+\end{equation}
+where now $u = u(x,t) \in \R$ is an order parameter describing the state of a solid material at position $x$ and time $t$, $J$ is a convolution kernel with $\int_\R J=1$ and $f$ is a bistable nonlinearity with zeros $-1,1$ and $\alpha \in (-1,1)$. As a consequence, $u = \pm 1$ are steady state solution to \eqref{PT}, they may represent two orientations of a perfect crystal. Any values between $u=\pm 1$ can represent intermediate states of the crystal. For example, a traveling wave solution $u(x)$ connecting $u=-1$ and $u=+1$ represents the process of ``invasion'' of one pure state into the other. The advantage of using the nonlocal dispersal term $-u+J\ast u$ instead of the diffusion term $u_{xx}$ is that more general types of interactions between states at nearby locations in the medium can be accounted for.
+
+In terms of techniques, one popular approach is to use a special form of the kernel $\K$ that has ``rational'' Fourier transforms: and reduces the nonlocal equation to a system of ordinary differential equation (ODE), where classical dynamical system methods are available.
+
+As a specific example, spatially localized solutions (referred to as ``bumps'' or ``homoclinics'') in equations of the form 
+\begin{equation}\label{Laing}
+\partial_t a(x,t) = -a(x,t)+\int_{-\infty}^{\infty} w(x-y)S(\mu a(y,t))dy,
+\end{equation}
+were investigated. Laing et al. \cite{laing2003pde} considered the case $S(\cdot) = 2\exp(-r/(\cdot-\theta)^2)H(\cdot-\theta)$, with $H$ the Heaviside function and $w(x) = \exp(-b|x|)(b\sin |x|+\cos x)$. 
+Faye et al. \citep{faye2013localized} studied the case $S(\cdot) = (1+e^{-\cdot+\theta})^{-1}$ and general $w$ such that $\widehat{w}(\xi) = R(\xi^2)/Q(\xi^2)$, where $R,Q$ are polynomials in $\xi^2$ satisfying $\deg R<\deg Q$. Using this approach, they are able to transform the nerual field intego-differential equation into a partial differential equation (PDE). Restricting to stationary solutions, the PDE reduces further into a system of ODE. Laing et al. \citep{laing2003pde} proceed with numerical investigations, whereas Faye et al. \citep{faye2013localized} used normal form theory and center manifold reduction (see for example \cite{haragus2010local}) to find the desired solution.
+
+Another example is in \cite{faye2013existence}, where Faye considered a variant of the FitzHugh–Nagumo equation of the form
+\begin{subequations}
+\begin{eqnarray}
+\tau u_t(x,t) &=& -u(x,t)+\int_\R J(x-y)q(y,t)S(u(y,t))dy, \\
+\eps^{-1} q_t(x,t) &=& 1-q(x,t)-\beta q(x,t) S(u(x,t)) ,
+\end{eqnarray}
+\end{subequations}
+with $S(u) = (1+e^{-\lambda(u-\kappa})^{-1}, J(x) = b/2\exp(-b|x|)$, and parameters $\lambda,\kappa,b$. Using the property $\widehat{J}(\ell) = b^2/(b^2+\ell^2)$ and looking for traveling wave solutions, Faye was able to reduce the neural field equation into a system of ODEs with a singular perturbation structure. He then used geometric singular perturbation theory (GSPT) to find the desired solution.
+
+Other important techniques for demonstrating the existence of travelling waves, not necessarily spatially localized (refered to as ``fronts'' and ``backs''), include homotopy arguments. In \cite{Bates1997}, Bates et al. established a homotopy between equation \eqref{PT} and the reaction-diffusion equation $u_t=u_{xx}+f(u)$, where the existence of travelling wave is well-known since the pioneering work of \cite{KPP}. Using comparison principles, in \cite{chen1997existence}, Chen showed the existence of traveling fronts that connect $0$ and $1$ for a very general class of nonlocal evolution equations of the form $u_t(x,t) = \mathcal{A}[u(\cdot,t)](x)$, with $\mathcal{A}$ a nonlinear operator that satisfies various assumptions, among which the most important is the comparison principle: if $u_t \ge \mathcal{A}[u],v_t \le \mathcal{A}[v]$ and $u(\cdot,0) \ge v(\cdot,0)$ but not equal to each other, then $u(\cdot,t)>v(\cdot,t)$ for all $t>0$. Chen constructed the solution by first choosing an appropriate initial data, then evolve it according to the equation, and show that the function of the form $u(\cdot+\xi(t),t)$ will converge to the profile of a traveling wave as $t\to \infty$, where $\xi(t)$ is chosen so that $u(\xi(t),t)=1/2$.
+
+
+Motivated by \cite{pulseNLFHN}, where the authors studied a nonlocal system of the form 
+\begin{subequations}
+\begin{eqnarray}
+u_t(x,t) &=& -u(x,t) + \int_{\R} \K(x-y)u(y,t)dy+f(u(x,t))-v(x,t),\\
+v_t(x,t) &=& \eps(u(x,t)-\gamma v(x,t)),
+\end{eqnarray}
+\end{subequations}
+and proved the existence of travelling front solutions using an extension of the singular-perturbation method. They constructed the slow manifold and the singular solution using cut-off functions and implicit-function theorem, replacing the more common geometric dynamical system methods. In the present paper we continue this functional-analytic approach, and focus on the simpler system \eqref{system}. We will use Fourier transform to rewrite equation \eqref{system} in a form that relates it to the ODE $u''=-\mu u+u^2$, and set up a Newton iteration scheme to continue the solution for $\mu>0$ sufficiently small.
+
+\paragraph{Outline.}The remainder of the paper is organized as follows: after introducing the notations we will use in this paper, in section $2$ we prove our main results, in section $3$ we discuss possible generalizations of our result and future directions. The appendix contains an elementary proof of the nondegeneracy of the operator $\partial_{xx}-d^{-1}(1-2u_*)$. 
+
+\paragraph{Notation.}
+We shall use the standard Sobolev spaces $W^{k,p}(\R; \R^n)$, or simply $W^{k,p}$ when $n=1$, for $k \ge 0$ and $1\le p \le \infty$
+\[
+W^{k,p}(\R;\R^n) := \{ u \in L^p(\R;\R^n): \partial_xu \in L^p(\R;\R^n), 1\le \alpha \le k \},
+\]
+with norm
+\[
+\|u\|_{W^{k,p}(\R;\R^n)}=
+\begin{cases}
+\left(\sum_{1\le \alpha\le k} \|\partial_xu \|_{L^p(\R;\R^n)}\right)^{1/p}, \text{ for }1\le p<\infty \\
+\max_{1\le \alpha\le k}\|\partial_x u\|_{L^\infty(\R;\R^n)}, \text{ for }p=\infty.
+\end{cases}
+\]
+We use $H^k(\R;\R^n)$ to denote the space $W^{k,2}(\R;\R^n)$, and $H^k_e(\R;\R^n)$ the subspace of $H^k(\R;\R^n)$ which consists of even functions in $H^k(\R;\R^n)$. We will also use $\mathscr{C}^k(\R;\R^n)$ to denote the space of $k-$times continuously differentiable functions for $k=0,1,\ldots,\infty$.
+
+Finally, we use the usual Fourier transform on $\R$, 
+\[
+\widehat{f} (\ell)= \int_{\R} f(x)e^{-2\pi i x\ell}dx
+\]
+ for a Schwartz function $f$. 
+
+
+
+
+\section{Hypothesis and the main result}
+
+We are interested in nontrivial solutions bifurcating from the homogeneous state $U = 0$ as one increases the parameter $\mu$. Before stating the main result, we introduce our hypothesis.
+
+\paragraph{Assumptions on the linear part.}We state our first main hypothesis.
+\begin{Hypothesis}{(H1).}Let $I_n$ denote the identity matrix of size $n$. We make the following assumptions on $\K$:
+\item (i)  The entries of $\K$ are even, $\K_{i,j}(x)=\K_{i,j}(-x)$, belongs to $W^{2,1}$, and satisfy the weight assumption $\int_{\mathbb{R}} x^{4}|\K_{i,j}(x)| dx<\infty$ for $1\le i,j\le n$.
+
+\item [(ii)] We define the characteristic equation $\mathcal{D}(\ell)$ as
+\[\mathcal{D}(\ell) := \det(I_n+\widehat{\K}(\ell)),\hspace{0.1in} \textit{ for } \ell \in \R.\] We then make the following assumptions on the characteristic equation.
+\begin{itemize}
+\item $\mathcal{D}(0)= 0$ with $\mathcal{D}''(0) := D \neq 0$;
+\item $\mathcal{D}(\ell) \neq 0$ for all $\ell \neq 0$.
+\end{itemize}
+\end{Hypothesis}
+
+
+By $(i)$ and properties of the Fourier transform, entries of $\widehat{\K}$, and hence $\mathcal{D}$ are even, $\mathscr{C}^4$ functions in $\ell$, which justifies the validity of taking the second derivative of $\mathcal{D}$ in $(ii)$. From $(ii)$ we conclude that $I_n+\widehat{\K}(\ell)$ is invertible for all $\ell$ except $0$. At $\ell = 0$, it readily follows from the above that the kernel of $I_n + \widehat{\K}(0)$ is one dimensional. Therefore there exist $\mathcal{E}_0\in \R^n$ and $\mathcal{E}_0^* \in \R^n$ such that
+\[
+\widehat{\mathcal{T}}(0)\mathcal{E}_0 = \mathcal{E}_0+\widehat{\K}(0) \mathcal{E}_0 = 0,  \hspace{0.1in} \widehat{\mathcal{T}}(0)^T\mathcal{E}_0^* = \mathcal{E}_0^*+\widehat{\K}(0)^T \mathcal{E}_0^* =0, \hspace{0.1in} \langle \mathcal{E}_0, \mathcal{E}_0\rangle = \langle \mathcal{E}_0^*, \mathcal{E}_0^*\rangle = 1,
+\]
+where $\widehat{\mathcal{T}}(0)^T$ is the transpose of $\widehat{\mathcal{T}}(0)$, and $\langle \cdot,\cdot \rangle$ denotes the standard inner product on $\R^n$ given by
+\[
+\langle u,v\rangle = \sum_{i=1}^{n} u_iv_i, \text{ for any }u=(u_i)_{i=1}^n\in \R^n, \text{ and }v=(v_i)_{i=1}^n \in \R^n.
+\]
+
+\paragraph{Assumptions on the nonlinear part.}
+
+We state our second main hypothesis.
+\begin{Hypothesis} {(H2).} We assume $\Nl=\Nl(U;\mu):\R^n \times \R^+ \to \R^n $ is in $\mathscr{C}^{\infty}(\R^n \times \R^+; \R^n)$. That is, the nonlinear function $\Nl$ is a smooth function in its arguments. Moreover, we require
+\begin{enumerate}
+\item $\Nl(0;\mu) = 0$ for all $\mu$.
+
+\item The derivative of $\Nl$ satisfies the generic condition 
+%\left(S_{cc}^\infty+ \widehat{J}_{cc}(0)\right)\frac{\partial^2}{\partial \mu \partial v_c}\tilde{\Nl}_c(0,0;0)+\left(S_{ch}^\infty+ \widehat{J}_{ch}(0)\right)\frac{\partial^2}{\partial \mu \partial v_c}\tilde{\Nl}_h(0,0;0) \neq 0,
+\begin{eqnarray}
+\alpha := \langle D_{\mu,U} \Nl(0;0)\mathcal{E}_0, \mathcal{E}_0^*\rangle > 0
+ \label{muvCoe}, \\ 
+\beta := \langle D_{U,U} \Nl(0;0)[\mathcal{E}_0,\mathcal{E}_0]\mathcal{E}_0, \mathcal{E}_0^*\rangle \neq 0  \label{QuadCoe}.
+\end{eqnarray}
+
+%\left(S_{cc}^\infty+ \widehat{J}_{cc}(0)\right)\frac{\partial^2}{\partial v_c^2}\tilde{\Nl}_c(0,0;0)+\left(S_{ch}^\infty+ \widehat{J}_{ch}(0)\right)\frac{\partial^2}{\partial v_c^2}\tilde{\Nl}_h(0,0;0) \neq 0,
+%where $S(0)$ is the matrix $S(\ell)$ constructed in lemma \ref{Lem1} evaluated at $\ell = 0$.
+
+\end{enumerate}
+
+\end{Hypothesis}
+
+Note that by the above hypothesis, using Sobolev embedding, the superposition operator $U(\cdot) \mapsto \Nl(U(\cdot);\mu)$ maps $H^2(\R;\R^n)$ into $H^2(\R;\R^n)$ and is smooth. Part $(ii)$ of our hypothesis is analogous to the generic transcritical bifurcation assumption (see chapter 6.6 of \cite{chow1982methods}), a typical example is $\Nl(U;\mu)=\mu U-U^2$ when $n=1$.
+
+
+We can now state our main result.
+ 
+\begin{theorem}\label{MainRes} Assume hypothesis (H1) and (H2). Then there exist a positive constant 
+$\mu_0$ sufficiently small, such that \eqref{system} has a family 
+of nontrivial solutions $U_*=U_*(\cdot;\mu) \in H_e^2(\R;\R^n)$ 
+parametrized by $\mu\in (0,\mu_0) $, with the expression 
+\begin{equation}\label{expan}
+U_*(x;\mu) =  v_c(x;\mu)\mathcal{E}_0 + v_{\perp}(x;\mu)
+\end{equation}
+Here, $v_{\perp}$ takes value in the complement of $\mathcal{E}_0$, and satisfies $\|v_{\perp}\|_{H^2(\R;\R^{n-1})} = \rmO(\mu^2)$ as $\mu \to 0$. $v_c$ is a scalar function of the form 
+$v_c(x; \mu)=-\frac{1}{\beta} (\alpha\mu)\left[ v_*(\sqrt{\alpha\mu}x)+w(\sqrt{\alpha\mu}x;\sqrt{\alpha\mu}) \right]$. Here $w(\cdot;\sqrt{\alpha\mu}) \in H^2_e$ is a corrector function with $\|w(\cdot;\sqrt{\alpha\mu})\|_{H^2} \to 0$ as $\mu \to 0$, and $v_*(\cdot)$ is the unique solution to the equation $dv^{''} -u+u^2 =0$ where $d = \frac{1}{2}\langle \widehat{\K}^{''}(0)\mathcal{E}_0,\mathcal{E}_0^*\rangle$, with the condition 
+$v_*(0)>0$ and $v_*(\pm\infty)=\lim_{\xi \to \infty} v(\xi)=0$.
+
+\end{theorem}
+\subsection{Normal form transformation}
+We transform the operator $I_n+\K \ast$ to a ``normal form'' via the following lemma.
+
+
+\begin{lemma}\label{Lem1} There exist invertible $m \times m$ matrices $P, Q$, and a $\ell$-dependent matrix $S(\ell)$, such that for all $\ell \in \R$, we have
+\[
+S(\ell)P[I_n+\widehat{\K}(\ell)]Q = \diag\{m(\ell),I_{n-1} \},
+\]
+where $m(\ell) = \dfrac{d\ell^2}{1+\ell^2}$ and $d = D\det(PQ) \neq 0$. Moreover, the entries of the matrix $S(\ell)$ are $\mathscr{C}^2(\R)$, and $S(\ell)$ decomposed as $S(\ell)=S_r(\ell)+S^\infty$, where $S^\infty$ is a constant matrix, and the entries of $S_r(\ell)$ are integrable.  
+\end{lemma}
+\begin{Proof}Set $\mathcal{T}(\ell) := I_n+\widehat{\K}(\ell)$, we divide our construction in 2 steps.
+
+\paragraph{Step 1.}
+ When $\ell = 0$, the rank of $\mathcal{T}(0)=I_n+\widehat{\K}(0)$ is equal to $n-1$ since it has a one dimensional kernel spanned by $\mathcal{E}_0$, it is standard (see for example \cite{roman2007advanced}) that there exist invertible matrices $P$ and $Q$ such that
+\[
+P\mathcal{T}(0)Q = \diag\{0,I_{n-1}\}.
+\]
+In order to do computations later, we include here a construction of the matrices $P$ and $Q$. Let $\mathcal{E}_1,\ldots,\mathcal{E}_{n-1}$ be a set of vectors which span the complement of $\ker \mathcal{T}(0)$. Set $\mathcal{F}_i = \mathcal{T}(0)\mathcal{E}_i$ for $i=1,\ldots,n-1$. Define $Q$ to be the matrix whose column vectors are $\mathcal{E}_0,\ldots,\mathcal{E}_{n-1}$ (with respect to the standard basis in $\R^n$), and $P$ so that the columns of $P^{-1}$ are given by $\mathcal{E}_0^*,\mathcal{F}_1,\ldots,\mathcal{F}_{n-1}$. By the Fredholm alternative, we know that $\mathcal{E}_0^*$ is orthogonal to the subspace spanned by $\mathcal{F}_i$, that is $\langle\mathcal{E}_0^*,\mathcal{F}_i\rangle = 0$ for $i=1,\ldots,n-1$. 
+
+ Then we have 
+\[
+P\mathcal{T}(0)Q = P\mathcal{T}(0)[\mathcal{E}_0,\ldots,\mathcal{E}_{n-1}] = P[0,\mathcal{F}_1,\ldots,\mathcal{F}_{n-1}]=\diag\{0,I_{n-1}\},
+\]
+which is the desired diagonalization.
+
+Recall that $\widehat{\K}(\ell)_{i,j}$ are $\mathscr{C}^4$ functions in $\ell$, since $\K$ is even, by Taylor's theorem, we have the expansion
+\[
+P\mathcal{T}(\ell)Q = P[I_n+\widehat{\K}(0)]Q+\frac{1}{2}P[I_n+\widehat{\K}''(0)]Q \ell^2 + \rmO(\ell^4) ,
+\]
+at $\ell =0 $. It then follows that near $\ell = 0$, we have
+\[
+P\mathcal{T}(\ell)Q = \begin{pmatrix}
+A(\ell)& B(\ell)\\
+C(\ell)& D(\ell) 
+\end{pmatrix},
+\]
+where $A(\ell) = d\ell^2+\rmO(\ell^4)$ for some constant $d$, $B(\ell), C(\ell)$ are $n-1$ sized row, column vectors respectively, both satisfies $B(\ell),C(\ell) =\rmO(\ell^2)$, and $D(\ell) =I_{n-1}+\rmO(\ell^2)$. Note that $d = \frac{1}{2}\langle \widehat{K}''(0)\mathcal{E}_0,\mathcal{E}_0^*\rangle$ verifying the claim in the statement of Theorem \ref{MainRes}.
+%\left(
+%\begin{array}{c|c}
+ % d\ell^2 +\rmO(\ell^4) & \cdots \rmO(\ell^2) \cdots\\ \hline
+ % \vdots & \raisebox{-15pt}{{\large\mbox{{$I_{n-1}+\rmO(\ell^2)$}}}} \\[-4ex]
+  %\rmO(\ell^2) & \\[-0.5ex]
+%  \vdots &
+%\end{array}
+%\right)
+
+Next we claim that $d\neq 0$, recall that the determinant of a block diagonal matrix of the form $\begin{pmatrix}
+A&B\\
+C&D
+\end{pmatrix}$ is given by the formula $\det(D)\det(A-BD^{-1}C)$ provided $D$ is invertible, which is the case for $\ell$ sufficiently close to $0$. We compute
+\begin{align*}
+\det P\mathcal{T}(\ell)Q &=\det (D(\ell))\det[A(\ell)-B(\ell)D(\ell)^{-1}C(\ell)] \\
+& = \det(D(\ell)) (A(\ell)- B(\ell)D(\ell)^{-1}C(\ell)\\
+& =(1+\rmO(\ell^2)) (d\ell^2 + \rmO(\ell^4)) = d\ell^2 +\rmO(\ell^4).
+\end{align*}
+By assumption, $\det P\mathcal{T}(\ell)Q = \det(PQ)\det(\mathcal{T}(\ell))=\det(PQ)(D\ell^2+\rmO(\ell^4))$ as $\ell \to 0$, hence $d = D\det(PQ)$, which is nonzero as claimed.
+
+
+\paragraph{Step 2.} Set $
+H(\ell) = \diag\{\frac{1+\ell^2}{d\ell^2}, I_{n-1}\}$ for $\ell \neq 0$. First we let $\tilde{S}(\ell) = P\mathcal{T}(\ell)Q H(\ell) $
+for $\ell \neq 0$. For $\ell = 0$, we compute
+\begin{align*}
+\lim_{\ell \to 0} P\mathcal{T}(\ell)QH(\ell) &=\lim_{\ell \to 0} \left(
+\begin{array}{c|c}
+  d\ell^2+\rmO(\ell^4) &  \cdots \rmO(\ell^2)\cdots \\ \hline
+  \vdots & \raisebox{-10pt}{{\Large\mbox{{$I_{n-1}+\rmO(\ell^2)$}}}} \\[-4ex]
+  \rmO(\ell^2) & \\[-0.5ex]
+  \vdots &
+\end{array}\right)\left(
+\begin{array}{c|c}
+  \frac{1+\ell^2}{d\ell^2} & 0 \cdots 0 \\ \hline
+  0 & \raisebox{-10pt}{{\Large\mbox{{$I_{n-1}$}}}} \\[-4ex]
+  \vdots & \\[-0.5ex]
+  0 &
+\end{array}\right)\\
+&=\lim_{\ell \to 0}\left(
+\begin{array}{c|c}
+  1+\ell^2+\rmO(\ell^4) &  \cdots \rmO(\ell^2)\cdots \\ \hline
+  \vdots & \raisebox{-10pt}{{\Large\mbox{{$I_{n-1}+\rmO(\ell^2)$}}}} \\[-4ex]
+  \ast & \\[-0.5ex]
+  \vdots &
+\end{array}\right)=\left(
+\begin{array}{c|c}
+  1 & 0 \cdots 0 \\ \hline
+  * & \raisebox{-10pt}{{\Large\mbox{{$I_{n-1}$}}}} \\[-4ex]
+  \vdots & \\[-0.5ex]
+  * &
+\end{array}\right),
+\end{align*} 
+which is an invertible matrix, and we define it to be $\tilde{S}(0)$.
+
+Next, we define $S(\ell)$ so that $S(\ell) = \tilde{S}(\ell)^{-1}$. For $\ell \neq 0$, $\tilde{S}(\ell) \in \mathscr{C}^4$ since $\mathcal{T} \in \mathscr{C}^4$. Near $\ell = 0$, we can write $P\mathcal{T}(\ell)Q = \begin{pmatrix}
+\ell^2\tilde{A}(\ell)&B(\ell)\\
+\ell^2\tilde{C}(\ell)&D(\ell)
+\end{pmatrix}$ such that $\tilde{A},\tilde{C}$ are of class $\mathscr{C}^2$ by Taylor's theorem. As a consequence $\tilde{S}(\ell)= PT(\ell)QH(\ell)$ is $\mathscr{C}^2$ near $\ell = 0$. Since $\tilde{S}^{-1}(0)$ is an invertible matrix, by the implicit function theorem, we conclude that the entries of $S$ are $\mathscr{C}^2$ functions in $\ell$.
+ 
+Hence, if we apply $S(\ell)$ to $P\mathcal{T}(\ell)Q$ from the left, it then yields
+ \[
+ S(\ell)P\mathcal{T}(\ell)Q = H(\ell)^{-1}[P\mathcal{T}(\ell)Q]^{-1}P\mathcal{T}(\ell)Q = M(\ell)^{-1}=\diag\{m(\ell),I_{n-1}\},
+ \]
+ which is as stated in the lemma.
+ The entries of $S(\ell)$ defined here are continuous for all $\ell \in \R$,  also, by definition, for $\ell\neq 0$, we have $S(\ell) = H(\ell)^{-1}[P\mathcal{T}(\ell)Q]^{-1} = H(\ell)^{-1}Q^{-1}\mathcal{T}(\ell)^{-1}P^{-1}$.
+ 
+By (H1), the entries of $\K$ are of class $W^{2,1}$, hence the Fourier transform $\widehat{\K}$ satisfies $\ell^2|\widehat{\K}_{i,j}(\ell)| \to 0$ as $\ell \to 0$ for $1\le i,j\le n$. Therefore $\ell^2(\mathcal{T}(\ell)-I_n)=\ell^2(\widehat{\K}(\ell))$ converges to the $0$ matrix as $\ell \to 
+\infty$. If we set $S^\infty := \diag\{d,I_{n-1}\}Q^{-1}P^{-1}$, which is an invertible matrix as $d\neq 0$, it then follows that $\ell^2(S(\ell)-S^\infty)\to 0$ as $\ell \to \infty$. 
+
+Therefore, set $S_r(\ell) = S(\ell)-S^{\infty}$. We have defined $S(\ell)$ so it is continuous at $\ell=0$, and it decays faster than $\ell^{-2}$ as $\ell \to \infty$. We conclude that the entries of $S_r(\ell)$ are integrable. 
+
+Finally, since $S(\ell)$ is invertible at $\ell =0$, and converges to the invertible matrix $S^\infty$ at $\ell =\infty$, we conclude that  $S(\ell)$ is invertible for all $\ell$, with uniform bounds on its inverse. This concludes the proof.
+ \end{Proof}
+
+
+Using Fourier inversion, $S_r(\ell)$ is induced by a convolution with a matrix kernel $J$ whose entries are integrable functions, that is, for a $\R^n$-valued function $U(x)$ defined for $x\in \R$, we have $\widehat{J \ast U} (\ell) = S_r(\ell)\widehat{U}(\ell)$,
+
+Therefore we set $V(x)=Q^{-1}U(x)$, with standard coordinates $V(x)=(v_c(x),v_2(x),\ldots,v_{n}(x))^T$. Define the multiplier operator $M$ through $\widehat{Mv}(\ell) = m(\ell)\widehat{v}(\ell)$ for $v\in L^2$. We then precondition \eqref{system} with the operator $L := S^{\infty}+J \ast$ whose symbol equals $S(\ell)$, to obtain a new equation
+\begin{equation}\label{TranEq}
+\diag(M, I_{n-1})V=(S^\infty+J \ast )P\Nl(QV;\mu).
+\end{equation}
+
+In the next subsection we shall further simplify \eqref{TranEq} by rescaling the variables, so that its behavior as $\mu \to 0$ will be revealed.
+
+\subsection{Change of coordinates and rescaling }
+% If $\mathcal{E}$ denotes the vector which spans the kernel of $\mathcal{T}(0)=I_n+\widehat{\K}(0)$, let $\mathcal{E}_2,\ldots,\mathcal{E}_{n-1}$ be a set of basis which spans the complement of $\ker \mathcal{T}(0)$, set $\mathcal{F}_i = \mathcal{T}(0)\mathcal{E}_i$, choose $\mathcal{E}_1^*$ such that $\langle \mathcal{E}_1^*,\mathcal{E}_1^*\rangle=1$ and $\langle \mathcal{E}_1^*, \mathcal{F}_i\rangle=0$ where $\langle \cdot,\cdot \rangle$ is the usual scalar product in $\R^n$.
+
+
+
+
+%\paragraph{Derivative of $\tilde{\Nl}$}
+%then we have $\frac{\partial^2}{\partial \mu \partial v_c}\tilde{\Nl}_c(0;0)$ is given by $\langle \mathcal{E}_1^*, D_{\mu,U} \Nl(0;0) \mathcal{E}_1\rangle$, and the $n-1$ components of $\frac{\partial^2}{\partial\mu \partial v_c}\tilde{\Nl}_h(0;0)$ is given by $\langle\mathcal{F}_i, D_{\mu,U} \Nl(0;0)\mathcal{E}_1\rangle$ for $i=2,\ldots,n-1$. Similarly, the second derivative in $U$ can be calculated as: $\frac{\partial^2}{\partial v_c^2}\tilde{\Nl_c}(0;0)=\langle\mathcal{E}_1^*, D_{U,U}\Nl(0;0)\mathcal{E}_1\rangle$ and $\frac{\partial^2}{\partial v_c^2}\tilde{\Nl_h}(0;0)=\langle\mathcal{F}_i, D_{U,U}\Nl(0;0)[\mathcal{E}_1,\mathcal{E}_1]\rangle$ for $i=2,\ldots,n-1$.
+
+
+\paragraph{Transformed equations.} 
+Write $v_h = (v_2,\ldots,v_{n})^T$ in the standard coordinate in $\R^{n-1}$. Set $\tilde{\Nl}(V;\mu) :=P\Nl(QV;\mu)$. Then with respect to the standard basis in $\R^n$, we define $\tilde{\Nl}_c(V;\mu)$ to be the first component of the nonlinearity $\tilde{\Nl}(V;\mu)$ and $\tilde{\Nl}_h(V;\mu)$ to be the remaining $n-1$ components of $\tilde{\Nl}(V;\mu)$. Then, also with respect to the usual basis, we write the matrix $S^\infty$ and the matrix convolution kernel $J$ in components
+\[
+S^{\infty} = \begin{pmatrix}
+S^{\infty}_{cc} & S^{\infty}_{ch}\\
+S^{\infty}_{hc} & S^{\infty}_{hh} 
+\end{pmatrix}, \hspace{0.2in}
+J\ast = \begin{pmatrix}
+J_{cc}\ast & J_{ch}\ast \\
+J_{hc}\ast & J_{hh}\ast 
+\end{pmatrix}, \hspace{0.2in}
+L  = S^\infty+J\ast = \begin{pmatrix}
+L_{cc}\ast & L_{ch}\ast \\
+L_{hc}\ast & L_{hh}\ast 
+\end{pmatrix},
+\]
+where terms with subscript $cc$ denote a scalar, terms with subscript $ch$ a $(n-1)$ dimensional row vector, terms with subscript $hc$ a $(n-1)$ dimensional column vector, terms with subscript $hh$ a $(n-1)\times (n-1)$ matrix.
+
+In this notation, system \eqref{system} becomes
+\begin{align}
+M v_c + L_{cc}\tilde{\Nl}_c(v_c,v_h;\mu) + L_{ch}\tilde{\Nl}_h(v_c,v_h;\mu)= 0\label{exeqnu0},\\
+v_h +  L_{hc}\tilde{\Nl}_c(v_c,v_h;\mu) + L_{hh}\tilde{\Nl}_h(v_c,v_h;\mu) = 0 \label{exeqnuh}.
+\end{align}
+
+
+By part $(i)$ of the hypothesis (H2), we may write the Taylor jet of $\tilde{\Nl}_j$ with $j=c,h$ as
+\begin{align*}
+\tilde{\Nl}_j(v_c,v_h;\mu) &=\left( a^j_{101} \mu v_c+a^j_{011}\mu v_h+a^j_{110}v_cv_h + a^j_{200}v_c^2+a^j_{020}[v_h,v_h] \right)+ \Rm_j(v_c,v_h;\mu)\\
+&:= \B_j(v_c,v_h;\mu)+\Rm_j(v_c,v_h;\mu),
+\end{align*}
+where $a^j_{lmn} = \frac{\partial^2 \tilde{\Nl}_j}{\partial v_c^l \partial v_h^m \partial \mu^n}(0,0;0), l+m+n=2, 0\le l,m,n\le 2$ are the partial derivatives of order $2$ at $(v_c,v_h;\mu)=(0,0;0)$, and the remainder $R_j$ satisfies 
+\begin{equation}\label{odR}
+|R_j(v_c,v_h;\mu)| = \rmO(v_c^2|v_h|,v_c|v_h|^2,v_c^3,|v_h|^3,\mu v_c^2, \mu |v_h|^2,\mu v_c|v_h|, \mu^2v_c, \mu^2|v_h|),
+\end{equation} 
+as $(v_c,v_h;\mu) \to (0,0;0)$.
+
+We are in particular interested in the coefficients of the term $\mu v_c$ and $v_c^2$. In equation \eqref{exeqnu0}, the coefficient of $\mu v_c$ is given by $L_{cc}a_{101}^c+L_{ch}a_{101}^h$, and the coefficient of $v_c^2$ is given by $L_{cc}a_{200}^c+L_{ch}a_{200}^h$. Using hypothesis (H2), we claim that
+\[
+\alpha = a_{101}^c =\widehat{L}_{cc}(0)a_{101}^c+\widehat{L}_{ch}(0)a_{101}^h , \hspace{0.1in}\text{ and }\hspace{0.1in}
+\beta =a_{200}^c =\widehat{L}_{cc}(0)a_{200}^c+\widehat{L}_{ch}(0)a_{200}^h .
+\]
+
+Indeed, to verify the first assertion, recall that by definition we have $\widehat{L}(0) = S(0)$. In particular, 
+$\widehat{L}_{cc}(0)=1$ and $\widehat{L}_{ch}(0)=(0,\ldots,0)$, thus verifying the second equality $a_{101}^c=\widehat{L}_cc(0)a_{101}^c+\widehat{L}_{ch}a_{101}^h$. 
+To compute the coefficient of $\mu v_c$ in terms of the 
+original function $\Nl$, let $e_1$ denote the standard coordinate vector $(1,0,\ldots,0)^T$, then the derivative 
+$a_{101}^c=\dfrac{\partial^2}{\partial \mu \partial v_c}  \tilde{\Nl}_c(0,0;0)$ is given by
+\[
+\langle D_{\mu,V}\tilde{\Nl}(0;0)e_1,e_1\rangle=\langle D_{\mu,U} P\Nl(0;0)Q e_1,e_1\rangle = \langle PD_{\mu,U}\Nl(0;0) \mathcal{E}_0,e_1\rangle  = \langle D_{\mu,U}\Nl(0;0)\mathcal{E}_0,\mathcal{E}_0^*\rangle = \alpha,
+\]
+which verifies the first equality $\alpha=a_{101}^c$. The computations for $\beta$ is similar.
+
+In the next paragraph, we shall make a series of rescalings to simplify the equation.
+
+\paragraph{Rescaling.} Define new variables $\tilde{v}_c,\tilde{v}_h, \tilde{\mu}$ through 
+\[
+\mu=\frac{1}{\alpha}\tilde{\mu}, \hspace{0.1in} v_c(\cdot)=\frac{-1}{\beta}\tilde{\mu}\tilde{v}_c(\sqrt{\tilde{\mu}} \cdot), \hspace{0.1in} v_h(\cdot)=\tilde{\mu} \tilde{v}_h(\sqrt{\tilde{\mu}} \cdot),
+\]
+since we assumed $\alpha >0$, $\tilde{\mu}$ is positive, and we shall write $\eps := \sqrt{\tilde{\mu}}$.
+
+We substitute these variables in equation \eqref{exeqnu0} and \eqref{exeqnuh}, divide the first equation by $(-1/\beta)\eps^4$, the second by $\eps^2$, and then obtain
+\begin{align}
+\eps^{-2}M^\eps \tilde{v}_c + L_{cc}^{\eps}(\tilde{\B}_c+\eps^{-4}\tilde{\Rm}_c) +L_{ch}^{\eps}(\tilde{\B}_h+\eps^{-4}\tilde{\Rm}_h) = 0,\label{rseqnu0}\\
+\tilde{v}_h + L_{hc}^{\eps}(\eps^2\tilde{\B}_c+\eps^{-2}\tilde{\Rm}_c) +L_{hh}^{\eps}(\eps^2\tilde{\B}_h+\eps^{-2}\tilde{\Rm}_h)= 0. \label{rseqnuh}
+\end{align}
+
+
+Here the nonlinear terms $\tilde{\B_j}, \tilde{\Rm_j}$ are defined through 
+\begin{align*}
+\tilde{\B}_j(\tilde{v}_c,\tilde{v}_h)&=\left(\frac{a^j_{101}}{\alpha}  \tilde{v}_c+\frac{a^j_{011}}{\alpha} \tilde{v}_h+a^j_{110}\tilde{v}_c\tilde{v}_h + \frac{a^j_{200}}{-\beta}\tilde{ v}_c^2+a^j_{020}(-\beta)\tilde{v}_h^2 \right),\\
+\tilde{R}_j ( \tilde{v}_c,\tilde{v}_h;\eps)&=\Rm_j \left(\frac{\eps^2\tilde{v}_c}{-\beta},\eps^2\tilde{v}_h;\frac{\eps^2}{\alpha}\right).
+\end{align*}
+ 
+Note that, by an application of the Taylor theorem with remainder, the terms $\tilde{\Rm}_j$, together with its derivatives, are of order $\rmO(\mu^3) =\rmO( \eps^6)$ for $\tilde{v}_c,\tilde{v}_h$ bounded as $\eps\to 0$. 
+
+The linear term $M^\eps $ is the operator with symbol $m(\eps \ell)$,  and $L_j^\eps = S^\infty_j+ J_j^\eps \ast$ denotes the rescaled version of $L_j$, where $J_j^\eps(\cdot)$ is the rescaled convolution kernel
+\[ 
+J_j^\eps(\cdot) = \eps^{-1}J_j(\eps^{-1}\cdot).
+\]
+Note that, since the $J_j$ are integrable, $J_j^\eps \ast u$ will converge to $\left(\int_\R J_j\right) u= \widehat{J}_j(0) u$ as $\eps \to 0$ in $L^p(\R)$ for any $u \in L^p(\R)$ with $p \in [1,\infty)$. Hence, in the limit $\eps \to 0$, $L^\eps_j$ converges to $\widehat{L}(0) = S(0)$. In particular, the coefficient of the term $\tilde{v}_c$ equals $ a_{101}^c/\alpha=1$, and the coefficient of $\tilde{v}_c^2$ equals $a_{200}^h/(-\beta)=\beta/(-\beta)=-1$ by the computation we have done in the previous step. As a consequence, we have 
+\[
+\tilde{B}_c(\tilde{v}_c,\tilde{v}_h) = \tilde{v}_c-\tilde{v}_c^2 + \rmO(|\tilde{v}_h|+|v_h|^2+v_c|v_h|),
+\] as $(v_c,v_h) \to (0,0)$. 
+To further ease notations, we drop the tildes, and still use $v_j,\B_j,\Rm_j$ for the same variables after the rescaling. We will prove our main result in the next subsection.
+
+
+
+\subsection{Lyapunov-Schmidt reduction and proof of the main result}
+In this subsection, we first solve \eqref{rseqnuh} to obtain $v_h$ as a function of $v_c$ by a fixed point argument. We then substitute this function back into equation \eqref{rseqnu0} to obtain a scalar equation for $v_c$ and $\eps$, which will be solved again using a fixed point argument.
+
+We write the left hand side of \eqref{rseqnuh} as $\G(v_h; v_c,\eps)$, so that
+\[
+\G(v;u,\eps) = v+L_{hc}^{\eps}\left( \eps^2\B_c+\eps^{-2}\Rm_c \right)
++L_{hh}^{\eps}\left( \eps^2\B_h+\eps^{-2}\Rm_h \right). \]
+In other words we are treating $v_c$ as an additional (Banach space-valued) parameter, and we have the following lemma.
+
+\begin{lemma}\label{Lemuh} Fix $r>0$ not necessarily small, and let $B_r$ denote the ball centered at $0$ with radius $r$ in $H^2$, there then exist $\eps_0>0$ sufficiently small and a map $\psi(u,\eps): B_r \times (-\eps_0,\eps_0) \to H^2(\R;\R^{n-1})$ such that $v = \psi(u, \eps)$ solves $\G(\psi(u,\eps);u,\eps) = 0$. Moreover, the map $u \mapsto \psi(u,\eps)$ is smooth for $u\in B_r$, and we have 
+\[
+\|\psi(u,\eps)\|_{H^2(\R,\R^{n-1})} = \rmO(\eps^2), \hspace{0.1in}\|D_u\psi(u,\eps)\|_{H^2 \to H^2(\R;\R^{n-1})} = \rmO(\eps^2),
+\] as 
+$\eps \to 0$, uniformly for $u\in B_r$ where $D_u\psi(u,\eps)$ denotes the Frechet derivative of $\psi$ with respect to $u$ at the point $(u,\eps)$.  \end{lemma}
+\begin{Proof}  Recall that by definition $\B_j(u,v)=\left(a^j_{101} u+a^j_{011} v+a^j_{110}uv + a^j_{200}u^2+a^j_{020}[v,v] \right)$ and $\Rm_j = \Nl_j-\eps^4\B_j$. Using the fact that $H^2$ is a multiplication algebra, it follows that for $u \in H^2, v \in H^2(\R;\R^{n-1})$ the estimates
+\begin{align*}
+&\|\B_c(u,v)\|_{H^2},\|\B_h(u,v)\|_{H^2(\R;\R^{n-1})} \\
+ &\le C\left(\|u\|_{H^2}+\|v\|_{H^2(\R;\R^{n-1})}+\|u\|_{H^2}\|v\|_{H^2(\R;\R^{n-1})} +\|u\|^2+\|v\|^2_{H^2(\R;\R^{n-1})}\right)
+\end{align*}
+hold for some constant $C$. We also have
+\[
+ \|\Rm_c(u,v;\eps)\|_{H^2},  \|\Rm_h(u,v;\eps)\|_{H^2(\R;\R^{n-1})} = \rmO(\eps^6), 
+\]
+and
+\[
+\|[D_v \Rm_c(u,v;\eps) w_1\|_{H^2}, \|[D_v \Rm_h(u,v;\eps) w_2\|_{H^2(\R;\R^{n-1})} = \rmO(\eps^6)
+\]
+for any $w_1 \in H^2, w_2 \in H^2(\R;\R^{n-1})$ with $\|w_1\|_{H^2}= \|w_2\|_{H^2(\R;\R^{n-1})}=1$ as $\eps \to 0$ from \eqref{odR}.
+
+
+Next, the norm of the linear operators $L^\eps_{cc} : H^2 \to H^2, L^\eps_{ch}:H^2(\R;\R^{n-1}) \to H^2, L^\eps_{hc}:H^2 \to H^2(\R;\R^{n-1}),$ and $L^\eps_{hh}:H^2(\R;\R^{n-1}) \to H^2(\R;\R^{n-1})$ are given by the supremum of their symbols $\widehat{L}^\epsilon_j (\ell)=\widehat{L}(\epsilon\ell)$. We conclude that these operators are bounded with uniform bounds in $\eps$.
+
+We will now solve $\G(v;u,\eps)=0$ using a Newton iteration scheme. For $u \in B_r$ and $\eps_0$ small, we claim the following properties hold for $\G$:
+\begin{enumerate}
+\item $\|\G(0;u,\eps)\|_{[H^2(\R;\R^{n-1})} = O(\eps^2),$ uniformly in $u\in B_r$ and $|\eps| < \eps_0$.
+\item $\G$ is smooth in $v$, and $D_v \G(0; u, \eps):H^2(\R;\R^{n-1}) \to H^2(\R;\R^{n-1})$ is invertible with uniform bounds on the inverse for $|\eps|<\eps_0$ and $u \in B_r$. 
+\end{enumerate}
+
+For $(i)$, we compute 
+\begin{align*}
+\|\G(0,u;\eps)\|_{H^2(\R;\R^{n-1})} &\le \eps^2\left(\| L_{hc}^\eps)\|_{H^2(\R;\R^{n-1}) \to H^2}+\| L_{hh}^\eps)\|_{H^2(\R;\R^{n-1}) \to H^2(\R;\R^{n-1})}\right)(C (\|u\|_{H^2}^2+\|u\|_{H^2})\\
+&+\eps^{-4}(\|\Rm_c(u,0;\eps)\|_{H^2}+\|\Rm_h(u,0;\eps)\|_{H^2(\R;\R^{n-1})}) = \rmO(\eps^2),
+\end{align*}
+uniformly for $u\in B_r$.
+
+For $(ii)$, $\G$ is smooth in $v$ because the nonlinearity $\Nl$ is smooth in its arguments, and $L_j^\eps$ are bounded linear operators. We compute the Frechet derivative of $\G$ to obtain
+\[ 
+D_v\G(0;u,\eps) w = w + \eps^2((L_{hc}^\eps a_{011}^c+L_{hh}^\eps a_{011}^h)w+(a_{110}^c+a_{110}^h)u w)+\eps^{-2}(D_v\Rm_j +D_v\Rm_h)w.
+\] 
+
+ We see $D_v\G(0; u, \eps)$ is an $\rmO(\eps^2)$ perturbation of the identity as an operator on $H^2(\R;\R^{n-1})$ uniformly for $u\in B_r$. Thus, if $\eps_0$ is small enough, then for all $\eps$ with $|\eps|<\eps_0$, we have that $D_v\G(0;u,\eps)$ is invertible with uniform bounds in $\eps$.
+
+
+After establishing these two points, fix $\delta>0$ and $u \in B_r$. Let $X=B_\delta$ denote the closed ball of radius $\delta$ around $0$ in $H^2(\R;\R^{n-1})$, we introduce a map $\cS(\cdot; u,\eps): X \to X$ as follows:
+\[
+\cS(v; u,\eps) = v - D_v\G(0;u, \eps)^{-1}[\G(v;u,\eps)].
+\]
+We then find
+\[
+\|\cS(0;u,\eps) \|_{H^2(\R;\R^{n-1})} \le \|D_v\G(0;u, \eps)^{-1}\| \|\G(0;u, \eps)\|_{H^2(\R;\R^{n-1})} = \rmO(\eps^2).
+\]
+
+Also, $D_v\cS(0;u,\eps) = 0$ by definition. We know that $\cS$ is smooth in $v$ by $(ii)$. Therefore, if $\delta$ is small and $v\in X$, it then follows that $\|D_vS(v;u,\eps)\|_{H^2\to H^2} \le C\delta$ for some constant $C$ independent of $\delta$.
+
+Then we start our iteration with $v_0 = 0$, $v_{n+1} = \cS(v_n;u,\eps)$, $n\ge 0$. Suppose by induction $v_k \in X$ for $1\le k \le n$, then
+\[
+\|v_{n+1}-v_n\|_{H^2(\R;\R^{n-1})} \le C\delta\|v_n-v_{n-1}\|_{H^2(\R;\R^{n-1})},
+\]
+by the mean value theorem. Therefore
+\[
+\|v_{n+1}\|_{H^2(\R;\R^{n-1})} \le \frac{C}{1-C\delta}\|v_1-v_0\|_{H^2(\R;\R^{n-1})} = \frac{C}{1-C\delta}\|\cS(0;u,\eps)\|_{H^2(\R;\R^{n-1})}.
+\]
+This implies that for $\eps$ small and $u \in B_r$, we have $v_{n+1} \in X$, and that $\cS$ is a contraction for $\delta$ sufficiently small. We then apply Banach's fixed point theorem to obtain $v = \psi(u,\eps)$ as a fixed point of $\cS$, so that $\psi(u,\eps)= \cS(\psi(u,\eps);u,\eps)$, and consequently $\G(\psi(u,\eps); u,\eps) = 0$. Note that we obtain the estimate $\|\psi\|_{H^2(\R;\R^{n-1})} = \rmO(\eps^2)$ from the iteration.
+
+The smooth dependence of $\psi(u,\eps)$ on $u$ is a consequence of the uniform contraction theorem: note $\G(v;u,\eps)$, and therefore the map $\cS$ is smooth in $u$ by assumptions on the nonlinearity, by choosing $\eps$ small, the contraction constant for $\cS$ can be chosen uniformly in $u \in B_r$, hence $\psi$ depends smoothly on $u$ as well.
+
+The estimate on the derivative $\|D_u\psi\|$ is obtained by differentiating the equation $0 = \G(\psi(u,\eps);u,\eps)$ in $u$ for $u\in B_r$, we see $D_u\psi = -[D_v\G]^{-1}D_u\G$, but $\| D_u \G (v;u,\eps)\|= \rmO(\eps^2)$ for $u \in B_r$, as it is given by a formula similar to that of $D_v\G$, and $D_vG$ is uniformly invertible for $\eps$ small and $v\in X$, hence $\|D_u\psi\|_{H^2(\R;\R^{n-1})\to H^2(\R;\R^{n-1})} = \rmO(\eps^2)$ as claimed. 
+\end{Proof}
+
+\begin{remark} Because of the dependence of the convolution operator $L_{hc}^\eps, L_{hh}^\eps$ on $\eps$ is not smooth at $\eps = 0$, we cannot use the usual implicit function theorem directly to solve the equation $\G(v;u,\eps) = 0$. We adopt the Newton iteration scheme as in \citep{faye2013existence} to circumvent this problem.
+\end{remark}
+
+Using lemma \ref{Lemuh}, we substitute $v_h = \psi(v_c,\eps)$ into equation \eqref{rseqnu0}. We obtain the following scalar equation
+
+\begin{equation} \label{1dnl}
+0 = \eps^{-2}m^\eps v_c + \sum_{j=c,h}L_{cj}^\eps\left[B_j(v_c,\psi(v_c,\eps))+\eps^{-4}\Rm_j(v_c,\psi(v_c,\eps);\eps)\right].
+\end{equation}
+
+
+It is now crucial to understand the behavior of the operator $M^\eps$ as $\eps \to 0$. Recall that by definition
+\[
+\widehat{M^\eps v}(\ell) = m(\eps \ell)\widehat{v}(\ell) = \frac{d(\eps\ell)^2}{1+(\eps\ell)^2} \widehat{v}(\ell), 
+\]
+for any $v\in L^2$. We then define a new operator $\mathcal{M}^\eps$ through 
+\[ 
+\widehat{\mathcal{M}^\eps v}(\ell) = \frac{m(\eps\ell)}{(\eps\ell)^2}\widehat{v}(\ell)=\frac{d}{1+(\eps\ell)^2} \widehat{v}(\ell). 
+\] 
+Note that $d/(1+(\eps \ell)^2)$ is a bounded function on $\R$, so $\M^\eps$ maps $L^2$ into itself. 
+
+For $v\in L^2$, $(\M^{\eps})^{-1}$ is defined through
+\[
+\widehat{(\M^{\eps})^{-1}v} (\ell) = \frac{(\eps\ell)^2}{m(\eps\ell)} \widehat{v}(\ell)= \frac{1+(\eps \ell)^2}{d} \widehat{v}(\ell),
+\]
+Moreover, for $v \in H^2$, we obtain:
+\begin{align*}
+\|((\M^\eps)^{-1}-d^{-1})v\|_{L^2} &=\left\| \left(\frac{(\eps\ell)^2(1+(\eps\ell)^2)}{d(\eps\ell)^2}-d^{-1}\right)\widehat{v}(\ell)\right\|_{L^2} \le 
+\\
+& \le \sup_{\ell} \left|\frac{(\eps\ell)^2}{1+\ell^2}\right| \|(1+\ell^2)\widehat{v}(\ell) \|_{L^2} \le \eps^2 \|v\|_{H^2}.
+\end{align*}
+
+Therefore, considered as an operator from $H^2$ to $L^2$, $(\M^\eps)^{-1}$ is well-defined, and $\|(\M^{\eps})^{-1}v - d^{-1}v\|_{L^2} \to 0$ as $\eps \to 0$ for $v \in H^2$. This simple observation is central to identifying the leading-order terms and  we state it as a lemma.
+
+
+\begin{lemma}\label{estmult}The multiplier operator $(\M^\eps)^{-1}$ with symbol $\dfrac{(\eps\ell)^2}{m(\eps\ell)}$ is well defined, maps from $H^2$ into $L^2$, and satisfies the estimate
+\[
+\|(\M^\eps)^{\-1}-d^{-1}I\|_{H^2 \to L^2} = \rmO(\eps^2).
+\]
+where $I$ denotes the identity operator that maps $H^2$ into $L^2$.
+\end{lemma}
+Our main result, Theorem \ref{MainRes}, will be proved by the following proposition, which solves the reduced bifurcation equation \eqref{1dnl} from the Lyapunov-Schmidt reduction in lemma \ref{Lemuh}.
+
+
+\begin{proposition}\label{prop} Let $v_*$ be the unique even solution to the ordinary differential equation $dv^{''} - v +v^2 = 0$ which satisfies $v(0)>0$, $\lim_{x\to \pm \infty} v(x) = 0$. If $\eps_1>0$ is sufficiently small, then for $0<|\eps|<\eps_1$, there exist a family of solutions to \eqref{1dnl} of the form $v_c(\cdot;\eps) = v_*(\cdot)+w(\cdot; \eps)$. Here $w=w(\cdot,\eps) \in H^2_{e}$ is a family of correctors parametrised by $\eps $ such that $\|w(\cdot,\eps)\|_{H^2} \to 0$ as $\eps \to 0$.
+\end{proposition}
+
+%First, by assumptions on $f$, the Taylor expansion for $f$ near $(u,\mu)=(0,0)$ is
+%\[
+%f(u,\mu) = A u\mu - B u^2 + O(\mu^2 u, \mu u^2, u^3)
+%\]
+%where $A = f_{u\mu}(0,0), B=-f_{uu}(0,0)$, for definiteness we assume here that $A,B>0$, then we rescale $u$ and $\mu$ by $u \mapsto su$ and $\mu \mapsto t\mu$, where $s,t$ are constants to be chosen, then we have
+%\[
+%-su + sK\ast u = Ast u\mu -Bs^2u^2 + O(\mu^2 u, \mu u^2,u^3)
+%\]
+%cancel out $s$, we see choose $s=1/B$ and $A=1/t$ lead to the following equation for $u$ %and $\mu$:
+%\[
+%-u+K\ast u=f(u; \mu) = \mu u - u^2 + O(\mu u^2,\mu^2u,u^3),
+%\] 
+%then we rescale $u(x) = \mu v(\sqrt{\mu}x)$, we have an equation in $v$: 
+%\begin{equation}  \label{scl nl}
+%-v(y) + K_\eps \ast v (y) = \eps^2(v-v^2)+O(\eps^4v)
+%where $\eps^2 = \mu$ and $K_\eps = \eps^{-1}K(\cdot/\eps)$, and $y =\eps x$. From this point we focus on $\eqref{scl nl}$.
+
+%Dividing by $\eps^2$, and take Fourier transform of both sides of the equation (we assume we are solving in $H^2(\R)$.)
+
+%\[
+%\frac{-1+\hat{K}_\eps(\ell)}{-\eps^2\ell^2}(-\ell^2)\hat{v}(\ell) = \widehat{v-v^2}(\ell) %+ O(\eps^2 \hat{v})
+%\] 
+
+%We define the operator $M_\eps$ so that the Fourier multiplier $\widehat{M}_\eps(\ell) = \frac{-1+\hat{K}_\eps(\ell)}{-\eps^2\ell^2}= \frac{-1+\hat{K}(\eps\ell)}{-\eps^2\ell^2}$, by assumptions on $K$, we 
+%know $M_\eps$ is bounded as an operator from $L^2$ to $L^2$, but $\sup |\widehat{M_\eps}(\ell)|$ does not necessarily go to zero as $\eps \to 0$.
+
+%We take inverse Fourier transform and get back the equation in physical space:
+%\begin{equation}\label{eq phy}
+%M_\eps v''(y) = v(y)-v^2(y) + O(\eps^2 v)
+%\end{equation}
+
+\begin{Proof}
+We substitute the ansatz $v_c = v_* + w$ into \eqref{1dnl}, where $v_*$ is as stated in the lemma and $w \in H^2$. We will determine an equation for $w$ and $\eps$ and show that it can be solved using Newton iteration scheme near $(w,\eps)=(0,0)$.
+First, for the term $\eps^{-2}M^\eps v_c$ with $v_c \in H^2$, we apply Fourier transform to obtain
+\[
+\eps^{-2}m(\eps\ell)\widehat{v}_c(\ell) = -\frac{m(\eps\ell)}{(\eps\ell)^2}(-\ell^2)\widehat{v}_c(\ell) = \widehat{-\M^\eps v_c^{''}},
+\]
+and equation \eqref{1dnl} becomes
+\[
+0 = -\M^\eps v_c^{''} + \left(L_{cc}^\eps a_{101}^c+L_{ch}^\eps a_{101}^h\right)v_c+\left(L_{cc}^\eps a_{110}^c+L_{ch}^\eps a_{110}^h\right)v_c^2 + \Rm(v_c,\psi;\eps),
+\]
+where $\Rm(v_c,\psi;\eps)$ contains all the terms of order $\eps^2$ and higher,
+\[
+\Rm(v_c,\psi;\eps) =\sum_{j=c,h} L_{cj}^\eps\left[ a_{011}^j\psi+a_{200}^j v_c\psi+a_{020}^j [\psi,\psi]+\eps^{-4}\Rm_j(v_c,\psi;\eps)\right].
+\]
+Indeed, for $w$ with $\|w\|_{H^2}$ close to $0$ and $\eps$ small, $\Rm$ satisfies the estimate $\|\Rm\|_{H^2} = \rmO(\eps^2)$.  To see this, we apply Lemma \ref{Lemuh} with $r = 2\|v_*\|_{H^2}$, which is finite since $v_*(x)$ is exponentially decreasing to $0$ as $x\to \infty$.  We then obtain $\psi = \psi(v_*+w,\eps)$ which satisfies $\|\psi(v_*+w,\eps)\|_{H^2(\R;\R^{n-1})} = \rmO(\eps^2)$ as $\eps \to 0$.
+
+The linear operators $L_{cc}^\eps, L_{ch}^\eps$ are uniformly bounded in $\eps$, so that we have
+\[
+\left\|\sum_{j=c,h} L_{cj}^\eps\left( a_{011}^j\psi+a_{200}^j v_c\psi+a_{020}^j [\psi,\psi]\right)\right\|_{H^2} \le C(\|\psi\|_{H^2(\R;\R^{n-1})}+\|\psi\|_{H^2(\R;\R^{n-1})}^2) = \rmO(\eps^2).
+\]
+
+On the other hand, the remainders $\Rm_c$ and $\Rm_h$ satisfy $\|\Rm_c\|_{H^2}= \rmO(\eps^6), \|\Rm_h\|_{H^2(\R;\R^{n-1})} = \rmO(\eps^6)$ uniformly for $v_*$ and $w$ such that $v_* +w \in B_r$ as $\eps \to 0$ by Lemma \ref{Lemuh}. Therefore we conclude that $\|\Rm(v_c,\psi;\eps)\|_{H^2} = \rmO(\eps^2)$ as $\eps \to 0$ for $v_c=v_*+w$.
+ 
+Next, add the equation $dv_*^{''}-v_*+v_*^2 =0$ to the right hand side of \eqref{1dnl} and precondition with the operator $(\M^{\eps})^{-1}$. Set $\alpha^\eps = L_{cc}^\eps a_{101}^c+L_{ch}^\eps a_{101}^h, \beta^\eps=L_{cc}^\eps a_{110}^c+L_{ch}^\eps a_{110}^h$ and we find
+\begin{align}
+0 &=(\M^\eps)^{-1}\left[ (d-\M^\eps)v_*^{''} -\M^\eps w^{''}+\alpha^\eps(v_*+w)-v_*+\beta^\eps(v_*+w)^2+v_*^2 + \Rm \right] \nonumber\\
+&=[(\M^{\eps})^{-1}-d^{-1}]\M^\eps dv_*^{''}-w^{''}+(\M^{\eps})^{-1}\left((\alpha^\eps-1)v_*+\alpha^\eps w)+(\beta^\eps+1)v_*^2+\beta^\eps(2v_*w+w^2) +\Rm\right), \label{splfy nl}
+\end{align}
+
+
+We denote the right hand side of \eqref{splfy nl} as $ F(w,\eps)$. Our goal is to set up a Newton iteration scheme to solve $ F(w,\eps) =0$ for $w$ in terms of $\eps$ as a fixed point problem.
+
+Following the strategy of Lemma \ref{Lemuh}, we shall show
+\begin{enumerate}
+\item $\|F(0,\eps)\|_{L^2} \to 0$ as $\eps \to 0$.
+\item $F(w,\eps)$ is continuously differentiable in $w$ and $D_wF(0,\eps): H^2_{e} \to L^{2}_{e}$ is uniformly invertible in $\eps$.
+\end{enumerate}
+For $(i)$, we compute
+\[
+F(0,\eps) = [(\M^{\eps})^{-1}-d^{-1}]\M^\eps dv_*^{''}+(\M^\eps)^{-1}[(\alpha^\eps-1)v_*+(\beta^\eps+1)v_*^2+\Rm(v_*,\psi;\eps)].
+\]
+
+By Lemma \ref{estmult}, $\|\left((\M^\eps)^{-1} - d^{-1}\right)v\|_{L^2} \le \eps^2\|v\|_{H^2}$ for any $v\in H^2$. Note that $v_*^{''}(x)$ is smooth and decays to $0$ exponentially as $x\to \infty$, while $\M^\eps : H^2 \to H^2$ is bounded since its symbol is a bounded function. We find $\M^\eps dv_*^{''} \in H^2$ and, consequently $\|(\M^{\eps})^{-1}-d^{-1}]\M^\eps dv_*^{''}\|_{L^2} = \rmO(\eps^2)$.
+
+Moreover, by our rescaling, $\alpha^\eps v \to \alpha v= v$ and $\beta^\eps v\to \beta v=-v$ for any $v \in H^2$, and the remainder $\Rm=\Rm(v_*,\psi;\eps)$ satisfies $\|\Rm\|_{H^2} = \rmO(\eps^2)$ as proved earlier. Hence, we have 
+\begin{align*}
+&\|(\M^\eps)^{-1}[(\alpha^\eps-1)v_*+(\beta^\eps+1)v_*^2+\Rm(v_*,\psi;\eps)]\|_{L^2} \le \\
+\le & \|d^{-1}(\alpha^\eps-1)v_*+d^{-1}(\beta^*+1)v_*^2\|_{L^2} + \|d^{-1} \Rm\|_{H^2} + \rmO(\eps^2).
+\end{align*}
+Therefore we conclude that $\|F(0,\eps)\|_{L^2} \to 0$ as $\eps \to 0$.
+
+For $(ii)$, we first verify that $F$ is continuously differentiable in $w$ from $H^2$ to $L^2$. Indeed, fix $w_0\in H^2$, for $h \in H^2$ we observe that $D_wF(w_0,\eps)h:H^2 \to L^2$ is given by
+\[
+D_wF(w_0,\eps)h = -h^{''}+(\M^\eps)^{-1}\left[(a^\eps h)+2v_*\beta^\eps h + 2w_0h)+D_w\Rm h\right].
+\]
+Recall that the nonlinear function $\Nl$ is smooth in its arguments, so  that$D_wF(w_0,\eps)$ is actually smooth in the variable $w_0$.
+
+Now, at $w_0 = 0$, we see that, $D_wF(0,\eps)h \to -h^{''}+d^{-1}[h-2v_*h]$ in $L^2$ as $\eps \to 0$ for $h \in H^2$, because $\|D_w\Rm h\|_{H^2} = \rmO(\eps^2)$ as remarked earlier. By lemma \ref{Nondegen} in the Appendix, the operator $\cL : H^2_e \to L^2_e$, given by 
+\[
+\cL h = -h^{''}+d^{-1}[h-2v_*h],
+\] is bounded invertible. We notice that $D_wF(0,\eps)$ is a small perturbation of $\cL$, therefore invertible with uniform bounds on the inverse for $\eps$ small enough.
+
+We now set up the Newton iteration scheme, define $\tilde{\cS}: H^2 \to L^2$ through
+\[\tilde{\cS}(w,\eps) = w-D_wF(0,\eps)^{-1}[F(w,\eps)].\]
+As in \ref{Lemuh}, we obtain $w=w(\eps)$ which solves $F(w(\eps),\eps) = 0$ for $\eps $ small enough and satisfies $\|w(\eps)\|_{H^2} \to 0$ as $\eps \to 0$.
+\end{Proof}
+
+Finally, we prove Theorem \ref{MainRes}.
+\begin{Proof}[ of Theorem 2.1.] We now write the tildes for the rescaled variables. From proposition \ref{prop}, we know that \eqref{1dnl} has a solution of the form $\tilde{v}_c(\cdot) = v_*(\cdot)+w(\cdot;\eps)$. Together with $\tilde{v}_h = \psi(\tilde{v}_c,\eps)$, reverting the rescaling, we obtain $v_c(\cdot) = -\frac{\alpha}{\beta}\mu \tilde{v}_c(\sqrt{\alpha\mu }\cdot)$ and $v_h(\cdot) = \alpha\mu \tilde{v}_h(\sqrt{\alpha\mu}\cdot)$ as solutions to \eqref{exeqnu0} and \eqref{exeqnuh}.
+
+ Now, recall that $V=(v_c,v_h)^T$ and the original variable $U$ are related by $U= QV$ where $Q$ is defined in the proof of Lemma \ref{Lem1}. We conclude that $U(\cdot)=v_c(\cdot)\mathcal{E}_0+v_{\perp}(\cdot)$, where $v_{\perp}$ takes values in the complement of $\mathcal{E}_0$. The behavior of $v_c,v_{\perp}$ as $\mu \to 0$ is a direct consequence of Lemma \ref{Lemuh} and Proposition \ref{prop}.
+\end{Proof}
+\section{Discussion}
+In this section we make remarks on our results, and discuss possible continuations.
+\paragraph{Exponential localization.}
+The convolution kernel $\K$ in our assumption is in general not exponentially localized. Therefore, the solution we obtained will not be exponentially localized in general. Consider the scalar equation $-u+K\ast u=\mu u -u^2$ to which our assumptions apply. If $u$ is an exponentially localized solution, then $u+\mu u-u^2 = K\ast u$ will also be exponentially localized, however, this is not possible since $K$ has merely algebraic decay.
+
+\paragraph{Extension to higher spatial dimensions.}
+As is clear from the proof, we did not use $ x\in \R$. We could then consider in general the case $x\in \R^k$, assuming a radially symmetric kernel. Using the model equation $\Delta u = \mu u -u^p$, where existence, uniqueness and nondegenracy of a radial ground state is well known for $1<p<\frac{k+2}{k-2}$ (e.g. see the appendix in \cite{wei2013mathematical}), we should be able to show similar results hold. 
+
+
+\paragraph{Stability of the bifurcating branches.}
+If we consider evolution equation of the form \[U_t = U+\K\ast U-\Nl(U;\mu), \hspace{0.1in}\text{ or }\hspace{0.1in} U_{tt} =U+\K\ast U-\Nl(U;\mu),\] then a natural continuation is to study the stability properties of the solutions bifurcated from the trivial state. The generic condition \eqref{muvCoe} and \eqref{QuadCoe} resembles the condition for a transcritical bifurcation in the equation $u^{''}=\mu u-u^2$, although we only assumed $\mu>0$ in this paper, a similar argument can be used to show nontrivial solutions bifurcate from $U=0$ as $\mu$ becomes negative, 
+\section*{Appendix}
+In this appendix we prove the following result.
+\begin{lemma}\label{Nondegen}
+The operator $\cL : H^2_e \to L^2_e$ defined by  $\cL h =  h''-d^{-1}[h-2v_*h]$ is bounded invertible.
+\end{lemma}
+\begin{Proof}
+The kernel of $\cL$ consists of bounded solutions of the differential equation $dh^{''}-h+2v_* h = 0$. This equation is satisfied by the function $v'_*(x)$, we claim that it is the unique element which spans the kernel of $\cL$ in $H^2$, to see this, we rewrite the equation as a nonautonomous linear first order system 
+
+\[
+\dot{Y}(x) = A(x)Y(x), \text{ wtih }Y(x) = \begin{pmatrix}
+h(x)\\
+h'(x)
+\end{pmatrix} \text{ and } A(x) = \begin{pmatrix}
+0&1\\
+d^{-1}(1-2u_*(x))&0
+\end{pmatrix}.
+\]
+
+Now, as $A(x)$ converges to the hyperbolic matrix $A_{\infty}=\begin{pmatrix}
+0&1\\
+d^{-1}&0
+\end{pmatrix}$ as $x \to \pm \infty$, by the robustness of exponential dichotomy, we see $A(x)$ possess an exponential dichotomy on $\R^+$ and $\R-$, let $E_+^s$ denote the image of the stable projection of the exponential dichotomy on $\R^+$ and $E_-^u$ denote the unstable projection of the exponential dichotomy on $\R^-$. The kernel of $L$ is isomorphic to $E_+^s \cap E_-^u$, but $E_-^u$ and $E_+^s$ are one-dimensional since the stable and unstable eigenspace of $A_{\infty}$ are both $1$, hence the kernel is at most one-dimensional, since $u_*'$ already lies in the kernel, we see the dimension of the kernel is exactly one.
+
+Next we show that $\cL$ is Fredholm with index zero from $H^2$ to $L^{2}$ by writing it as the compact perturbation of an invertible operator. For $h \in H^2$, define operators $\cL_1$ and $\cL_2$ by
+\[
+\cL_1h = (dh''-h), \hspace{0.2in} \cL_2 h = (2v_*)h.
+\] 
+
+We first show $\cL_2: H^2 \to L^2$ is compact. Fix an integer $k>0$, let $\chi_k$ be a positive smooth cutoff function which equals $1$ on the interval $[-k,k]$ and vanishes outside of $[-2k,2k]$. Consider the sequence of operators $\cL_2^{(k)} : H^2 \to L^2$ defined by $\cL_2^{(k)} h = \chi_k (2v_*)h$. We claim that $\cL_2^{(k)}$ are compact operators for each $k$ and converges to $\cL_2$ in the operator norm.
+
+To see $\cL_2^{(k)}$ are compact for each $k$, let $\{h_i\}_{i=1}^{\infty}$ be a bounded sequence of functions in $H^2$ with $\|h_i\|_{H^2} \le 1$. We want to show that there exist a subsequence $h_{i'}$ so that $\cL_2^{(k)} h_{i'} = \chi_k (2v_*)h_{i'}$ is convergent in $L^2$. From the Sobolev embedding $H^2 \to \mathscr{C}^1$, the $h_i$ and their derivatives are uniformly bounded on $\R$. Therefore, $\cL_2^{(k)}h_i = \chi_k(2v_*)h_i$ is a sequence of functions that is uniformly bounded and equicontinuous on the compact interval $[-2k,2k]$, we conclude from the Arzela-Ascoli theorem that there exist a subsequence $i'$ such that $\cL_2^{(k)}h_{i'}$ converges uniformly on $[-2k,2k]$. Since $\cL_2^{(k)}h_{i'}$ are continuous and have a common compact support $[-2k,2k]$, it is an convergent sequence in $L^2$ as well. Therefore $\cL_2^{(k)}$ is compact for each $k$.
+
+To see $\cL_2^{(k)} \to \cL_2$ in the operator norm, fix $h \in H^2$ with $\|h\|_{H^2} =1$, we have
+\[
+\|(\cL_2^{(k)}-\cL_2)h\|_{L^2} = \|(\chi_k-1)(2v_*)h\|_{L^2}\le  \sup_{x\in \R}(\chi_k(x)-1)(2v_*(x)) \|h\|_{L^2}.
+\]
+
+Since $\chi_k = 1$ on $[-k,k]$ and $v_*(x) \to 0$ as $x\to \pm \infty$, it follows that $\displaystyle \sup_{x\in \R}(\chi_k(x)-1)(2v_*(x)) \to 0$ as $k \to \infty$. Thus $\|\cL_2^{(k)} - \cL_2\|_{H^2 \to L^2} \to 0$ and we conclude that $\cL_2:H^2 \to L^2$ is compact.
+
+
+Next we show that the second order differential operator $\cL_1 h = dh'' - h$ is invertible as an operator from the space $H^2_{e} \to L^{2}_{e}$. Fix $f \in L^2$, using Fourier transform, we obtain
+\[
+-(1+d\ell^2)\widehat{h}(\ell) = \widehat{f}(\ell).
+\]
+As a consequence $h = \mathcal{F}^{-1} \{-(1+d\ell^2)^{-1}\widehat{f}\}$, the inverse for $\cL_2$ is given by the operator with symbol $(1+d\ell^2)^{-1}$, so it is an bounded operator from $L^2$ to $H^2$.
+
+Therefore, we conclude that $\cL$ is Fredholm with index zero from $H^2$ to $L^{2}$, since the kernel is spanned by the odd function $v_*'$, it is invertible from $H^2_{e}$ to $L^{2}_{e}$.
+\end{Proof}
+\bibliographystyle{plain}
+\bibliography{nlBfCs}
+
+
+\end{document}

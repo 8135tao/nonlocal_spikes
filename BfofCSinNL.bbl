@@ -1,0 +1,66 @@
+\begin{thebibliography}{10}
+
+\bibitem{KPP}
+I.~G.~Petrovskii A.~N.~Kolmogorov and N.~S. Piskunov.
+\newblock Etude de l'{\'e}quations de la diffusion avec croissance de la
+  quantite de matiere et son application a un probleme biologique.
+\newblock {\em Bjul. Moskov. Gos. Univ.}, 1:1--25, 1937.
+
+\bibitem{Bates1997}
+Peter~W. Bates, Paul~C. Fife, Xiaofeng Ren, and Xuefeng Wang.
+\newblock Traveling waves in a convolution model for phase transitions.
+\newblock {\em Archive for Rational Mechanics and Analysis}, 138(2):105--136,
+  1997.
+
+\bibitem{chen1997existence}
+Xinfu Chen et~al.
+\newblock Existence, uniqueness, and asymptotic stability of traveling waves in
+  nonlocal evolution equations.
+\newblock {\em Advances in Differential Equations}, 2(1):125--160, 1997.
+
+\bibitem{chow1982methods}
+S.N. Chow and J.K. Hale.
+\newblock {\em Methods of bifurcation theory}.
+\newblock Grundlehren der mathematischen Wissenschaften. Springer-Verlag, 1982.
+
+\bibitem{faye2013existence}
+Gr{\'e}gory Faye.
+\newblock Existence and stability of traveling pulses in a neural field
+  equation with synaptic depression.
+\newblock {\em SIAM Journal on Applied Dynamical Systems}, 12(4):2032--2067,
+  2013.
+
+\bibitem{faye2013localized}
+Gr{\'e}gory Faye, James Rankin, and Pascal Chossat.
+\newblock Localized states in an unbounded neural field equation with smooth
+  firing rate function: a multi-parameter analysis.
+\newblock {\em Journal of mathematical biology}, 66(6):1303--1338, 2013.
+
+\bibitem{pulseNLFHN}
+Gr{\'e}gory Faye and Arnd Scheel.
+\newblock Existence of pulses in excitable media with nonlocal coupling.
+\newblock {\em Advances in Mathematics}, 270:400--456, 1 2015.
+
+\bibitem{haragus2010local}
+Mariana Haragus and G{\'e}rard Iooss.
+\newblock {\em Local bifurcations, center manifolds, and normal forms in
+  infinite-dimensional dynamical systems}.
+\newblock Springer Science \& Business Media, 2010.
+
+\bibitem{laing2003pde}
+Carlo~R Laing and William~C Troy.
+\newblock Pde methods for nonlocal models.
+\newblock {\em SIAM Journal on Applied Dynamical Systems}, 2(3):487--516, 2003.
+
+\bibitem{roman2007advanced}
+S.~Roman.
+\newblock {\em Advanced Linear Algebra}.
+\newblock Graduate Texts in Mathematics. Springer New York, 2007.
+
+\bibitem{wei2013mathematical}
+J.~Wei and M.~Winter.
+\newblock {\em Mathematical Aspects of Pattern Formation in Biological
+  Systems}.
+\newblock Applied Mathematical Sciences. Springer London, 2013.
+
+\end{thebibliography}

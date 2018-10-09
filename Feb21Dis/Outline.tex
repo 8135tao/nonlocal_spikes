@@ -1,0 +1,160 @@
+ \documentclass[letterpaper,11pt]{article}
+
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{dsfont}
+\usepackage{amssymb}
+\usepackage{amsmath,mathrsfs}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{stmaryrd}
+\usepackage{fullpage}
+\usepackage{ifthen}
+\usepackage{subfigure}
+\usepackage{epic}
+\usepackage{authblk}
+\usepackage{textcomp}
+\usepackage[small]{caption}
+%\usepackage{mathtools}
+
+
+\usepackage[hypertexnames=false,colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage[numbers,comma,square,sort&compress]{natbib}
+\usepackage[letterpaper,text={7in,9in},centering]{geometry}
+
+
+\usepackage{color}
+\usepackage{titlesec}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{1.0ex plus0.2ex minus0.2ex}
+\renewcommand{\baselinestretch}{1.1}
+\graphicspath{{eps/}{pdf/}}
+%\setcaptionmargin{0.25in}
+\def\captionfont{\itshape\small}
+\def\captionlabelfont{\upshape\small}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\newcommand{\bqq}{\begin{equation}}
+\newcommand{\eqq}{\end{equation}}
+\newcommand{\bqs}{\begin{equation*}}
+\newcommand{\eqs}{\end{equation*}}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}} 
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\rme}{\mathrm{e}}
+\newcommand{\rmi}{\mathrm{i}}
+\newcommand{\rmd}{\mathrm{d}}
+\newcommand{\rmo}{{\scriptstyle\mathcal{O}}}
+\newcommand{\rmO}{\mathcal{O}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Rm}{\mathcal{R}}
+\newcommand{\Nl}{\mathcal{N}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cL}{\mathcal{L}}
+
+\newcommand{\diag}{\operatorname{diag}}
+
+
+\numberwithin{equation}{section}
+
+\newenvironment{Hypothesis}[1]%
+  {\begin{trivlist}\item[]{\bf Hypothesis #1 }\em}{\end{trivlist}}
+
+\renewcommand{\arraystretch}{1.25}
+
+
+% Define Theorem Styles ----------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{main}[theorem]{Main Result}
+\newtheorem{rmk}[theorem]{rmk}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\etal}{\textit{et al.}\ }
+
+\newcommand{\greg}[1]{%
+  {\color{blue}\textbf{Greg:} #1}%
+ }
+ 
+\newcommand{\arnd}[1]{%
+  {\color{red}\textbf{Arnd:} #1}%
+ }
+
+\newenvironment{Proof}[1][.]%
+ {\begin{trivlist}\item[]\textbf{Proof#1 }}%
+ {\hspace*{\fill}$\rule{0.3\baselineskip}{0.35\baselineskip}$\end{trivlist}}
+
+\renewcommand\labelitemi{$\bullet$}
+
+
+\title{Multi-D case}
+\author{discussion}
+\date{2017}
+\begin{document}
+\maketitle
+
+Outlines for multi-Dimensions
+
+We consider
+\begin{equation}
+u+\K \ast u = \Nl(u;\mu)
+\end{equation}
+
+with $u=u(x):\R^n \to \R^p$, $n<6$, need ($\frac{n+2}{n-2}>2$). 
+
+
+
+\begin{enumerate}
+
+\item Linear assumptions on matrix convolution operator $\K$ requires it to be \textbf{radially symmetric}, similar to 1-d case, $W^{2,1}$ with finite $4$th moment. By symmetry and smoothness, the Fourier transform $\widehat{u}(\xi)$ is a radially symmetric function of class $\mathscr{C}^4(\R^n;\R^p)$. Write $|\xi|=s$ for the radial variable, then $\widehat{\K}(\xi) = k(s)$ with $k(s) = k(0)+(k''(0)/2) s^2 + o(s^2)$ as $s\to 0$. Similarly define $\mathcal{D}(s) = \det(I_p+k(s))$, require $\cD(0)=0, \cD''(0) \neq 0$. We then get $\mathcal{E}_0,\mathcal{E}_0^*$ as before. Set $d=\langle \frac{1}{2}k''(0)\mathcal{E}_0,\mathcal{E}_0^*\rangle$.
+
+\item Nonlinear assumptions is unaffected by considering $x\in \R^n$. Except that I now need to work with $H^\ell(\R^n;\R^p)$ with $\ell > n/2$ in order to take advantage of the Banach algebra property and embedding results. I think I should add a short proof (maybe in the appendix) of the fact that the superposition operator $\tilde{\Nl}$ defined by $\tilde{\Nl}(u)(\cdot) = \Nl(u(\cdot);\mu)$ takes $H^\ell$ into itself and is as smooth as $\Nl$ is, provided $\Nl(0;\mu)=0$. In particular, $\alpha,\beta$ can be computed using the same formula.
+
+
+\item We then construct $S(s),P,Q$ that brings $I_n+k(s)$ into the diagonal form $\displaystyle \diag\left(\frac{ds^2}{1+s^2},I_{p-1}\right)$ exactly as before. Define new variable $v$ by $Qv = u$, write $v=(v_c,v_h)$ in the standard coordinates. Use the same scaling $v(\cdot) \to \mu v(\sqrt{\mu} \cdot) $, write $\eps = \sqrt{\mu}$. We need to solve the two equation
+\begin{eqnarray}
+\eps^{-2}M^{\eps}v_c &= (L\Nl)_c,\\
+v_h  &= (L\Nl)_h
+\end{eqnarray}
+with $\widehat{L} = S(s)$ and $M^\eps$ has symbol $m(\eps s)=d(\eps s)^2/(1+(\eps s)^2)$.
+
+\item We may solve $v_h = \psi(v_c,\eps)$ with $\|\psi\|_{H^2}, \|D_u\psi\|$ of order $\eps^2$. The proof is unchanged. We get the scalar equation
+\begin{equation}
+\eps^{-2}M^\eps v_c = (L\Nl(v_c,\psi(v_c,\eps);\eps)_c
+\end{equation}
+Set $\mathcal{M}^\eps $ so that $\widehat{\mathcal{M}^\eps v} = \frac{d}{1+(\eps s)^2}\widehat{v} (\xi) = \frac{d}{1+(\eps|\xi|)^2}\widehat{v}(\xi)$. Fix $\ell > n/2$, then 
+\[
+\|(\M^\eps)^{-1}v-d^{-1}v\|_{H^\ell} \le \eps^2\|v\|_{H^{\ell+2}}
+\]
+we then substitute the ansatz $v_c = v_* + w$ where now $v_*=v_*(x)$ is the unique ``ground state'' solution to the equation $\Delta v = v-v^2$. The existence, uniqueness and nondegenracy of ground state to equation $\Delta v = v - v^q$ need $q$ lies in the range $1<q<\frac{n+2}{n-2}$, so we require $n<6$. These results say also that $v_*$ is radial, decays to $0$ as $|x|\to \infty$ exponentially fast and smooth. After precondition with $(\M^\eps)^{-1}$, we have
+\[
+0 = -\Delta w+ d^{-1}[\alpha^\eps w+\beta^\eps(2v_* w+w^2)]+\mathcal{R}(w,\eps) := F(w,\eps)
+\]
+with $\|\mathcal{R}\|_{H^{\ell+2}} \to 0$. We need to show $F(w,\eps):H^{\ell+2} \to H^\ell$ satisfy
+\begin{itemize}
+\item $F(0,0) = 0$ (continuity at $\eps = 0$);
+\item $D_wF(0,0) = -\Delta +d^{-1}[1-2v_*]$ is Fredholm with index $0$ from $H^{\ell+2} \to H^{\ell}$, and its kernel is spanned by the $n$ partial derivatives of $v_*$, this comes from the nondegenracy of $v_*$.
+\end{itemize}
+If we then denote $X,Y$ to be the subspace of $H^{\ell+2}, H^\ell$ that is orthogonal to $\partial_{x_i} v_*$, $i=1,\ldots,n$. We apply implicit function theorem/Newton iteration on $X,Y$ to solve for $F(w(\eps),\eps)=0$ for $\eps$ small.
+\end{enumerate}
+
+
+\end{document}

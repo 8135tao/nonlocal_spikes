@@ -1,0 +1,361 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Jacobs Landscape Poster
+% LaTeX Template
+% Version 1.0 (29/03/13)
+%
+% Created by:
+% Computational Physics and Biophysics Group, Jacobs University
+% https://teamwork.jacobs-university.de:8443/confluence/display/CoPandBiG/LaTeX+Poster
+% 
+% Further modified by:
+% Nathaniel Johnston (nathaniel@njohnston.ca)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[final]{beamer}
+
+\usepackage[scale=1.24]{beamerposter} % Use the beamerposter package for laying out the poster
+
+\usetheme{confposter} % Use the confposter theme supplied with this template
+
+\setbeamercolor{block title}{fg=ngreen,bg=white} % Colors of the block titles
+\setbeamercolor{block body}{fg=black,bg=white} % Colors of the body of blocks
+\setbeamercolor{block alerted title}{fg=white,bg=dblue!70} % Colors of the highlighted block titles
+\setbeamercolor{block alerted body}{fg=black,bg=dblue!10} % Colors of the body of highlighted blocks
+% Many more colors are available for use in beamerthemeconfposter.sty
+
+%-----------------------------------------------------------
+% Define the column widths and overall poster size
+% To set effective sepwid, onecolwid and twocolwid values, first choose how many columns you want and how much separation you want between columns
+% In this template, the separation width chosen is 0.024 of the paper width and a 4-column layout
+% onecolwid should therefore be (1-(# of columns+1)*sepwid)/# of columns e.g. (1-(4+1)*0.024)/4 = 0.22
+% Set twocolwid to be (2*onecolwid)+sepwid = 0.464
+% Set threecolwid to be (3*onecolwid)+2*sepwid = 0.708
+
+\newlength{\sepwid}
+\newlength{\onecolwid}
+\newlength{\twocolwid}
+\newlength{\threecolwid}
+\setlength{\paperwidth}{48in} % A0 width: 46.8in
+\setlength{\paperheight}{36in} % A0 height: 33.1in
+\setlength{\sepwid}{0.024\paperwidth} % Separation width (white space) between columns
+\setlength{\onecolwid}{0.22\paperwidth} % Width of one column
+\setlength{\twocolwid}{0.464\paperwidth} % Width of two columns
+\setlength{\threecolwid}{0.708\paperwidth} % Width of three columns
+\setlength{\topmargin}{-0.5in} % Reduce the top margin size
+%-----------------------------------------------------------
+
+\usepackage{graphicx}  % Required for including images
+
+\usepackage{booktabs} % Top and bottom rules for tables
+\usepackage{grffile}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath,amsthm, amssymb, latexsym,bm}
+
+
+\usepackage{array,booktabs,tabularx}
+\usepackage{graphicx}  % Required for including images
+\usepackage{booktabs} % Top and bottom rules for tables
+
+\newcommand{\sech}{\operatorname{sech}}
+\newcommand{\diag}{\operatorname{diag}}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION 
+%----------------------------------------------------------------------------------------
+\title{Bifurcation of coherent structures in nonlocally coupled system} % Poster title
+
+\author{Arnd Scheel \& Tianyu Tao} % Author(s)
+
+\institute{University of Minnesota} % Institution(s)
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\addtobeamertemplate{block end}{}{\vspace*{2ex}} % White space under blocks
+\addtobeamertemplate{block alerted end}{}{\vspace*{2ex}} % White space under highlighted (alert) blocks
+
+\setlength{\belowcaptionskip}{2ex} % White space under figures
+\setlength\belowdisplayshortskip{2ex} % White space under equations
+
+\begin{frame}[t] % The whole poster is enclosed in one beamer frame
+
+\begin{columns}[t] % The whole poster consists of three major columns, the second of which is split into two columns twice - the [t] option aligns each column's content to the top
+
+\begin{column}{\sepwid}\end{column} % Empty spacer column
+
+\begin{column}{\onecolwid} % The first column
+
+%----------------------------------------------------------------------------------------
+%	OBJECTIVES
+%----------------------------------------------------------------------------------------
+
+
+\begin{block}{Coherent structures}
+\begin{enumerate}
+\item spikes, fronts, wave trains... (Maybe some pictures?)
+\end{enumerate}
+\end{block}
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{placeholder.jpg}
+\caption{Figure caption}
+\end{figure}
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Reaction-Diffusion Models}
+Bifurcation to coherent structures in RD system
+\[
+U_t = D\Delta_x U + F(U; \mu).
+\]
+Assume
+\begin{itemize}
+\item $U=U(x) \in \mathbb{R}^k, x\in \mathbb{R}^n$;
+\item $\mu \in \mathbb{R}^p$ parameter, nonlinearity $N$ satisfies $N(0;\mu)=0$.
+\end{itemize}
+Radially symmetric patterns are studied in \cite{srad} using spatial dynamic techniques.
+\begin{enumerate}
+\item rewrite the stationary equation as a nonautonomous system of ODE; 
+\item carefully construct a center manifold; 
+\item study reduced dynamics on the center manifold, get complete classification of small bounded solutions.
+\end{enumerate}
+\end{block}
+
+\begin{block}{Nonlocal Model Equations}
+Nonlocal diffusion are ubiquitous in modeling of natural phenomenas \cite{neuralfieldrev}
+\begin{enumerate}
+\item neural field models: $u_t = \int K\ast S(u)$, 
+\item water wave equations: $u_t = (Mu-u^2)_x$.
+\end{enumerate}
+
+Can we find similar patterns in these models? will they have different properties due to nonlocality?
+\end{block}
+%------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of the first column
+
+\begin{column}{\sepwid}\end{column} % Empty spacer column
+
+\begin{column}{\twocolwid} % Begin a column which is two columns wide (column 2)
+
+\begin{columns}[t,totalwidth=\twocolwid] % Split up the two columns wide column
+
+\begin{column}{\onecolwid}\vspace{-.6in} % The first column within column 2 (column 2.1)
+
+%----------------------------------------------------------------------------------------
+%	MATERIALS
+%----------------------------------------------------------------------------------------
+\begin{block}{A Bifurcation Problem}
+
+We study the following system of equations for $U(x)\in \mathbb{R}^k$ with $x\in \mathbb{R}^n$
+ \begin{equation}
+ \large \bm{U+K\ast U - N(U;\mu)=0}.
+ \end{equation}
+
+\textbf{Effective linear diffusive coupling (L)}:
+\begin{itemize}
+\item $K$ is a matrix of convolution kernel with finite second moments $K(x), |x|^2K(x) \in L^1(\mathbb{R}^n)$
+\item $K$ is symmetric, $K(\gamma x) = K(x)$ for all $\gamma \in \Gamma \subset O(n)$. The fixed point set of $\Gamma$ is $\{0\}$ only.
+\item the Fourier determinant $D(\xi)=\det(I+\widehat{K}(\xi))$ has $D(0)=0, D'(0)=0, D''(0)\neq 0$.
+\end{itemize}
+Let $e$ span the kernel of $I+\widehat{K}(0)$, choose $e^*$ span the cokernel.
+\end{block}
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of column 2.1
+
+\begin{column}{\onecolwid}\vspace{-.6in} % The second column within column 2 (column 2.2)
+
+%----------------------------------------------------------------------------------------
+%	METHODS
+%----------------------------------------------------------------------------------------
+
+\begin{block}{A Bifurcation Problem-Continued}
+
+\textbf{Transcritical bifurcation in kinetics (TC)}:
+\begin{itemize}
+\item We assume a transcritical bifurcation scenario: \begin{align*}
+N(0;\mu)&=0,\\ 
+\langle e^*, D_{u\mu} N(0;0)e \rangle &\neq 0,\\ 
+\langle e^*, D_{uu}N(0;0)[e,e] \rangle &\neq 0
+\end{align*}
+
+\item $N$ is smooth, so the superposition operator $U(\cdot) \mapsto N(U(\cdot))$ is smooth.
+\end{itemize}
+We then find a pseudo-differential operator $L$ and invertible matrix $P,Q$ so that \[LP(I+K\ast)Q=\diag(M,I_{k-1}),\] with $M=(1-\Delta)^{-1}\Delta$ and system decouples into two equations for a scalar function $v_c$ and a $\mathbb{R}^{k-1}$ valued function $v_h$.
+
+\end{block}
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of column 2.2
+
+\end{columns} % End of the split of column 2 - any content after this will now take up 2 columns width
+
+%----------------------------------------------------------------------------------------
+%	IMPORTANT RESULT
+%----------------------------------------------------------------------------------------
+
+\begin{alertblock}{Main Result}
+Fix $n<6$ and $\ell>n/2$.  Assume Hypotheses (L) and (TC), a solution of the form 
+\begin{equation*}
+\large \bm{U(x;\mu) = -\beta^{-1}\alpha\mu [v_*(\sqrt{\alpha\mu} x)+w(x;\mu)] e+ v_{\perp}(x;\mu)}
+\end{equation*}
+where $v_*$ is the unique positive ground state of $\Delta v -v+v^2 =0$, $w\in H^\ell(\mathbb{R}^n)$ is a corrector which converges to $0$ as $\mu \to 0$, lastly, $v_{\perp}$ satisfy $\langle e,v_{\perp} \rangle = 0$ and $\|v_{\perp}\|=O(\mu^2)$.
+\end{alertblock} 
+
+%----------------------------------------------------------------------------------------
+
+\begin{columns}[t,totalwidth=\twocolwid] % Split up the two columns wide column again
+
+\begin{column}{\onecolwid} % The first column within column 2 (column 2.1)
+
+%----------------------------------------------------------------------------------------
+%	MATHEMATICAL SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{block}{ Sketch of Proof} 
+\begin{itemize}
+\item Work with function space
+\[
+H^\ell_{\Gamma} = \{u\in H^\ell, u(\gamma x)=u(x), \gamma\in \Gamma\};
+\]
+\item Set $\varepsilon = \sqrt{\alpha \mu}$, then \textbf{rescale} by $v_c =-\beta^{-1} \varepsilon^2 \tilde{v}_c(\varepsilon x)$, $v_h = \varepsilon^2 \tilde{v}_h(\varepsilon x)$, reduce equation
+\begin{align}
+\varepsilon^{-2}m^{\varepsilon} \Delta\tilde{v}_c &= \tilde{v}_c-\tilde{v}_c^2 + O(\varepsilon^2)\label{cent}\\ 
+\tilde{v}_h &= O(\varepsilon^2) \label{hyp}
+\end{align}
+with $m^\varepsilon$ the rescaled pseudo-differential operator, with symbol $(1+\varepsilon^2 |\xi|^2)^{-1}$;
+\item  solve \eqref{hyp} to express $\tilde{v}_h$ in terms of $\tilde{v}_c$ by a fixed point argument. Get a reduced scalar bifurcation equation;
+\item substitute the ansatz $\tilde{v}_c = v_* + w$, get an equation in $w$.
+\end{itemize}
+\end{block}
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of column 2.1
+
+\begin{column}{\onecolwid} % The second column within column 2 (column 2.2)
+
+%----------------------------------------------------------------------------------------
+%	RESULTS
+%----------------------------------------------------------------------------------------
+
+\begin{block}{ Sketch of Proof-Continued}
+\begin{itemize}
+
+\item Observe $(m^{\varepsilon})^{-1}: H^\ell \to H^{\ell-2}$ is well-defined, with $\|(m^{\varepsilon})^{-1}-1\| =O(\varepsilon^2) $ as $\varepsilon \to 0$;
+
+\item \textbf{precondition} equation $\tilde{v}_c$ by the operator $(m^\varepsilon)^{-1}$, simplify, get
+\begin{align} 
+0 &= \Delta w-(w-2v_*w-w^2)\nonumber\\
+  &-((m^\varepsilon)^{-1}-1)(w-2v_*w-w^2+\Delta v_*)+O(\varepsilon^2)\label{redmain}
+\end{align}
+denote the right hand of \eqref{redmain} by $F(w;\varepsilon)$, note $F(w;\varepsilon) \to 0$ in $L^2$ as $(w;\varepsilon) \to (0;0)$, also, $D_wF$ is continuous near $(0,0)$, with $$D_wF(0;0)=\Delta-1+2v_*,$$ which is nondegenerate and invertible from $H^\ell_{\Gamma}$ to $H^{\ell-2}_{\Gamma}$ (\cite{gs}), these facts allow the set up of an Newton iteration scheme to continue $F(w;\varepsilon)=0$ from $H^\ell_{\Gamma}$ to $H^{\ell-2}_{\Gamma}$ near $(0;0)$.
+\end{itemize}
+\end{block}
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of column 2.2
+
+\end{columns} % End of the split of column 2
+
+\end{column} % End of the second column
+
+\begin{column}{\sepwid}\end{column} % Empty spacer column
+
+\begin{column}{\onecolwid} % The third column
+
+%----------------------------------------------------------------------------------------
+%	CONCLUSION
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Properties of the Spike}
+\begin{enumerate}
+\item  The spikes constructed here are not necessarily exponentially localized, it depends on the localization of the convolution kernel $K$, for $K$ algebraically localized we get algebraically localized spikes due to the corrector $w$.
+\item Typical examples of $\Gamma$ can be all of $O(n)$ or subgroups generated by reflection across a hyperplane invariant under the action of $\Gamma$. Generalize the studies on radial symmetry in the local case.
+\end{enumerate}
+\end{block}
+
+%----------------------------------------------------------------------------------------
+%	ADDITIONAL INFORMATION
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Further Directions}
+
+\begin{enumerate}
+\item Stability: probably unstable, notice no Evans function techniques available due to nonlocality. It is possible to use the information on the spectrum of the ground state and a perturbative argument.
+
+
+\item Transition to large $\mu ?$: For $\mu$ large, in some examples it can be shown many discontinuous solutions exist by implicit function theorem. How do things look in between large $\mu$ and small $\mu$?
+\end{enumerate}
+
+\end{block}
+
+%----------------------------------------------------------------------------------------
+%	REFERENCES
+%----------------------------------------------------------------------------------------
+
+\begin{block}{References}
+
+\nocite{*} % Insert publications even if they are not cited in the poster
+\small{\bibliographystyle{unsrt}
+\bibliography{nonlocal_spikes_ref_msc}\vspace{0.75in}}
+
+\end{block}
+
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+\setbeamercolor{block title}{fg=red,bg=white} % Change the block title color
+
+%----------------------------------------------------------------------------------------
+%	CONTACT INFORMATION
+%----------------------------------------------------------------------------------------
+
+%\setbeamercolor{block alerted title}{fg=black,bg=norange} % Change the alert block title colors
+%\setbeamercolor{block alerted body}{fg=black,bg=white} % Change the alert block body colors
+
+%\begin{alertblock}{Contact Information}
+
+%\begin{itemize}
+%\item Web: \href{http://www.university.edu/smithlab}{http://www.university.edu/smithlab}
+%\item Email: \href{mailto:john@smith.com}{john@smith.com}
+%\item Phone: +1 (000) 111 1111
+%\end{itemize}
+
+%\end{alertblock}
+
+%\begin{center}
+%\begin{tabular}{ccc}
+%\includegraphics[width=0.4\linewidth]{logo.png} & \hfill & \includegraphics[width=0.4\linewidth]{logo.png}
+%\end{tabular}
+%\end{center}
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of the third column
+
+\end{columns} % End of all the columns in the poster
+
+\end{frame} % End of the enclosing frame
+
+\end{document}
